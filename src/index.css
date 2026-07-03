@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Double+Ink:wght@100..900&family=Bitcount:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Mozilla+Headline:wght@200..700&family=Qahiri&family=Unica+One&display=swap');
+
+@import "tailwindcss";
+
+/* =========================
+   Faqt Design System (Tailwind v4)
+   ========================= */
+
+.unica-one-regular {
+  font-family: "Unica One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.lora-regular {
+  font-family: "Lora", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* 🎨 Theme Tokens (used by Tailwind utilities) */
+@theme {
+  --color-accent: #3EC7C4;  /* Faqt green → buttons, links, highlights */
+  --color-bg: #f5f6f8;      /* App background (soft grey) */
+  --color-text: #0f172a;    /* Main text (charcoal black) */
+  --color-muted: #6b7280;   /* Secondary text */
+  --color-border: #e5e7eb;  /* Borders / dividers */
+  --color-card: #ffffff;    /* Cards / surfaces */
+
+  --font-unica: "Unica One", sans-serif; /* Main font for headings */
+  --font-heading: "Mozilla Headline", sans-serif;
+  --font-body: "Lora", serif;
+  --font-mono: "Bitcount", monospace;
+}
+
+/* =========================
+   FONT UTILITIES
+   ========================= */
+
+.font-unica {
+  font-family: var(--font-unica);
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* =========================
+   GLOBAL PAGE STYLES
+   ========================= */
+
+body {
+  margin: 0;
+
+  /* Background + text driven from theme */
+  background: var(--color-bg);
+  color: var(--color-text);
+
+  font-family: system-ui, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Smooth text rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection highlight (uses brand accent) */
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
