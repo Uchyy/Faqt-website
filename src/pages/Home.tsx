@@ -2,6 +2,7 @@ import Navbar from "../components/navbar";
 import Hero from "../components/Hero";
 import HowItWorks from "../components/HowItWorks";
 import Footer from "../components/Footer";
+import BuiltFor from "../components/BuiltFor";
 
 function Home() {
   return (
@@ -13,8 +14,10 @@ function Home() {
       <HowItWorks />
       <br /> <br /> 
 
-      <Footer />
-      
+      <BuiltFor /> <br />  <br /> 
+
+      <Footer /> 
+            
     </>
   );
 }
