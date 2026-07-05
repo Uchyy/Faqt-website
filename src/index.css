@@ -30,18 +30,53 @@
   }
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.5s ease-out;
+}
+
 .animate-marquee {
   animation: marquee 25s linear infinite;
 }
 
 /* 🎨 Theme Tokens (used by Tailwind utilities) */
 @theme {
-  --color-accent: #3EC7C4;  /* Faqt green → buttons, links, highlights */
-  --color-bg: #f5f6f8;      /* App background (soft grey) */
-  --color-text: #0f172a;    /* Main text (charcoal black) */
-  --color-muted: #6b7280;   /* Secondary text */
-  --color-border: #e5e7eb;  /* Borders / dividers */
-  --color-card: #ffffff;    /* Cards / surfaces */
+  --color-accent: #3EC7C4;  /* FAQT green */
+
+  /* Backgrounds */
+  --color-bg: #f5f6f8;      /* main app background (light grey) */
+  --color-surface: #ffffff; /* cards / sections */
+  --color-dark: #0b0f14;    /* black mode / deep sections */
+
+  /* Text */
+  --color-text: #0f172a;    /* primary text */
+  --color-muted: #6b7280;   /* secondary text */
+
+  /* UI */
+  --color-border: #e5e7eb;  /* Cards / surfaces */
 
   --font-unica: "Unica One", sans-serif; /* Main font for headings */
   --font-heading: "Mozilla Headline", sans-serif;

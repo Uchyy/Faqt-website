@@ -1,4 +1,4 @@
-import howitworks from "../assets/howitworks.png";
+import howitworks from "../../assets/howitworks.png";
 
 function HowItWorks() {
   return (

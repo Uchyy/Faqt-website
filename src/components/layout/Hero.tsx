@@ -1,3 +1,5 @@
+import Button from "../ui/Button";
+
 function Hero() {
   return (
     <section className="mx-auto max-w-4xl px-6 pt-20 text-center">
@@ -17,7 +19,7 @@ function Hero() {
       </p>
 
       {/* Search box */}
-      <div className="mt-10 flex items-center gap-3 rounded-2xl border border-border bg-card p-2 shadow-sm">
+      <div className="mt-10 flex items-center gap-3 rounded-2xl bg-white border border-border bg-card p-2 shadow-sm">
         
         <input
           type="text"
@@ -25,9 +27,9 @@ function Hero() {
           className="w-full bg-transparent px-4 py-3 text-text outline-none"
         />
 
-        <button className="rounded-2xl bg-accent px-6 py-3 text-sm font-medium text-white transition hover:opacity-90">
+        <Button color="accent">
           Search
-        </button>
+        </Button>
       </div>
 
     </section>
