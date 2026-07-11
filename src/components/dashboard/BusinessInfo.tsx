@@ -1,9 +1,10 @@
 import CollapsibleSection from "../ui/CollapsibleSection";
 import Input from "../ui/Input";
-import { useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import Button from "../ui/Button";
 import {FolderPen, MapPin, Tag, FileText} from "lucide-react"
-import { useNavigate } from "@tanstack/react-router";
+import { PageContext } from "../../context/PageContext";
+import { stringifyPage } from "../../model/Page";
 
 export default function BusinessInfo() {
 
@@ -13,6 +14,19 @@ export default function BusinessInfo() {
   const [address, setAddress] = useState("");
   const [tagline, setTagline] = useState("");
   const [errors, setErrors] = useState<{ businessName?: string; shortDescription?: string,  address?: string, tagline?: string }>({});
+
+  const context = useContext(PageContext);
+
+  useEffect(() => {
+    if (!context?.page) return;
+
+    setBusinessName(context.page.businessName);
+    setShortDescription(context.page.shortDescription);
+    setLongDescription(context.page.longDescription);
+    setAddress(context.page.address);
+    setTagline(context.page.tagline);
+
+  }, [context?.page]);
 
   const validate = () => {
     const newErrors: { businessName?: string; shortDescription?: string,  address?: string, tagline?: string  } = {};
@@ -40,11 +54,18 @@ export default function BusinessInfo() {
 
   const handleSave = () => {
     if (!validate()) return;
-
     console.log("Form valid:", { businessName, address, tagline, shortDescription });
+    const updatedPage = context?.updatePage({ businessName, address, tagline, shortDescription, longDescription });
 
+    if (!context) {
+      console.log("No PageContext available");
+      return;
+    }
 
-    // later: auth logic here
+    console.log("UPDATED PAGE:", updatedPage);
+    if(updatedPage){
+      console.log( "Page updated:", stringifyPage(updatedPage) );
+    } 
   };
 
   return (
@@ -56,7 +77,7 @@ export default function BusinessInfo() {
 
         <Input
           label="BUSINESS NAME"
-          placeholder="What should we call you?"
+          placeholder="Bean & Brew Coffee"
           value={businessName}
           onChange={setBusinessName}
           icon= {<FolderPen size={18} />}
@@ -69,7 +90,7 @@ export default function BusinessInfo() {
 
         <Input
           label="ADDRESS"
-          placeholder="Where can we find you?"
+          placeholder="25 High Street, Portsmouth PO1 3AB"
           value={address}
           icon= {<MapPin size={18} />}
           iconPosition="right"
@@ -82,7 +103,7 @@ export default function BusinessInfo() {
 
         <Input
           label="SHORT DESCRIPTION"
-          placeholder="Tell your customers what you do in one sentence"
+          placeholder="Specialty coffee, homemade pastries, and a cosy space to work or catch up with friends."
           value={shortDescription}
           onChange={setShortDescription}
           icon= {<FileText size={18} />}
@@ -96,21 +117,21 @@ export default function BusinessInfo() {
 
         <Input
           label="TAGLINE"
-          placeholder="What makes you memorable?"
+          placeholder="Where every cup feels like home."
           maxLength={60}
           value={tagline}
           icon= {<Tag size={18} />}
           iconPosition="right"
-          error={errors.shortDescription}
+          error={errors.tagline}
           onClearError={() =>
-            setErrors((prev) => ({ ...prev, shortDescription: undefined }))
+            setErrors((prev) => ({ ...prev, tagline: undefined }))
           }
           onChange={setTagline}
         />
 
         <Input
           label="LONG DESCRIPTION"
-          placeholder="Share your story, services, and what customers can expect."
+          placeholder="Bean & Brew is an independent coffee shop serving freshly roasted coffee, homemade cakes, breakfast, and light lunches. Whether you're grabbing a quick takeaway or relaxing with friends, we're here to make every visit memorable."
           value={longDescription}
           onChange={setLongDescription}
           icon= {<FileText size={18} />}
@@ -122,7 +143,7 @@ export default function BusinessInfo() {
         <div></div> <div></div>
 
         <Button onClick={handleSave}>
-            Save
+            Save changes
         </Button>
 
       </div>

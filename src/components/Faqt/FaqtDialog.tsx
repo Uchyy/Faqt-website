@@ -21,7 +21,7 @@ export default function FaqtDialog({
   errors,
   onClearError,
   onSave,
-  open = false,
+  open,
   onOpenChange,
   trigger,
 }: Readonly<FaqtDialogProps>) {
@@ -33,11 +33,9 @@ export default function FaqtDialog({
       onOpenChange={onOpenChange}
       title={mode === "add" ? "Add Faqt" : "Edit Faqt"}
       actionText="Save"
-      onAction={onSave}
-    >
+      onAction={onSave}>
 
       <div className="space-y-4">
-
         <Input
           label="QUESTION"
           placeholder="Do I need to book an appointment?"

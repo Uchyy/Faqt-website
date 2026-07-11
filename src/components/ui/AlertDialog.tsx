@@ -30,8 +30,7 @@ export default function AlertDialog({
   return (
     <AlertDialogPrimitive.Root
       open={open}
-      onOpenChange={onOpenChange}
-    >
+      onOpenChange={onOpenChange}>
 
       {trigger && (
         <AlertDialogPrimitive.Trigger asChild>
@@ -56,23 +55,20 @@ export default function AlertDialog({
             max-h-[85vh]
             overflow-hidden
             ${stickyFooter ? "flex flex-col" : ""}
-          `}
-        >
+          `}>
 
           <AlertDialogPrimitive.Title
             className="
               font-heading text-xl font-semibold text-text
               pl-6 pt-4 pb-4 bg-accent/10
-            "
-          >
+            ">
             {title}
           </AlertDialogPrimitive.Title>
 
 
           {description && (
             <AlertDialogPrimitive.Description
-              className="mt-2 text-sm text-muted-foreground"
-            >
+              className="mt-2 text-sm text-muted-foreground">
               {description}
             </AlertDialogPrimitive.Description>
           )}

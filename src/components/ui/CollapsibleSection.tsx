@@ -6,6 +6,7 @@ type Props = {
   label?: string;
   button?: React.ReactNode;
   children: React.ReactNode;
+  bgColor?: string
 };
 
 export default function CollapsibleSection({
@@ -13,28 +14,30 @@ export default function CollapsibleSection({
   label,
   button = null,
   children,
+  bgColor = "white"
 }: Readonly<Props>) {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-border rounded-2xl bg-white p-6 m-6 ">
+    <div className="border border-border rounded-2xl p-6 m-6"
+      style={{ backgroundColor: bgColor }}>
 
       <div className="flex justify-between items-start px-4 py-3">
       <button
         onClick={() => setOpen(!open)}
         className="flex-1 text-left"  >
-      {/* LEFT SIDE */}
-      <div className="flex flex-col items-start text-left">
-        <span className="font-semibold text-text font-heading text-2xl">
-        {title.toLocaleUpperCase()}
-        </span>
+        {/* LEFT SIDE */}
+        <div className="flex flex-col items-start text-left">
+          <span className="font-semibold text-text font-heading text-2xl">
+          {title.toLocaleUpperCase()}
+          </span>
 
-        {label && (
-        <span className="text-sm text-accent font-unica font-bold mt-1 tracking-3">
-          {label}
-        </span>
-        )}
-      </div>
+          {label && (
+          <span className="text-sm text-accent font-unica font-bold mt-1 tracking-3">
+            {label}
+          </span>
+          )}
+        </div>
       </button>
 
       <div className="flex items-center gap-3">

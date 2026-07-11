@@ -1,20 +1,33 @@
 import CollapsibleSection from "../ui/CollapsibleSection";
 import Input from "../ui/Input";
-import { useState } from "react"
+import validator from "validator";
+import { useContext, useEffect, useState } from "react"
 import Button from "../ui/Button";
 import {Globe, Mail} from "lucide-react"
 import PhoneInput from "../ui/PhoneInput";
 import { isValidPhoneNumber } from "libphonenumber-js";
+import { PageContext } from "../../context/PageContext";
 
 
 export default function ContactsSection() {
+
+  const context = useContext(PageContext);
 
   const [website, setWebsite] = useState("");
   const [phone, setPhone] = useState("");
   const [whatsApp, setwhatsApp] = useState("");
   const [email, setEmail] = useState("");
-
   const [errors, setErrors] = useState<{ phone?: string; email?: string }>({});
+
+  useEffect(() => {
+    if (!context?.page) return;
+
+    setEmail(context.page.email);
+    setPhone(context.page.phone);
+    setWebsite(context.page.website);
+    setwhatsApp(context.page.whatsapp);
+
+  }, [context?.page]);
 
   const validate = () => {
     const newErrors: { phone?: string; email?: string  } = {};
@@ -30,7 +43,7 @@ export default function ContactsSection() {
     
     if (!email) {
       newErrors.email = "Email is required";
-    } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+    } else if (!validator.isEmail(email)) {
       newErrors.email = "Please enter a valid email address";
     }
 
@@ -42,8 +55,9 @@ export default function ContactsSection() {
   const handleSave = () => {
     if (!validate()) return;
 
-    console.log("Form valid:", { phone, email });
-
+    console.log("Form valid:", { phone, email, website, whatsApp });
+    const updatedPage = context?.updatePage({  phone, email, website, whatsapp: whatsApp});
+    console.log("UPDATED PAGE:", updatedPage);
 
     // later: auth logic here
   };
@@ -96,7 +110,7 @@ export default function ContactsSection() {
         <div></div>
 
         <Button onClick={handleSave}>
-            Save
+            Save changes
         </Button>
 
       </div>

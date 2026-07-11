@@ -3,9 +3,12 @@ import { createRouter, createRoute, createRootRoute, Outlet } from "@tanstack/re
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import { PageProvider } from "./context/PageContext";
 
 const rootRoute = createRootRoute({
-  component: () => <Outlet />,
+  component: () =>  <PageProvider>
+      <Outlet />
+    </PageProvider>,
 });
 
 // 🏠 Home

@@ -1,15 +1,46 @@
 import CollapsibleSection from "../ui/CollapsibleSection";
 import Input from "../ui/Input";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { SocialIcon } from 'react-social-icons'
 import Button from "../ui/Button";
+import { stringifyPage } from "../../model/Page";
+import { PageContext } from "../../context/PageContext";
 
 export default function SocialMedia() {
-  const [instagram, setInstagram] = useState("");
-  const [facebook, setFacebook] = useState("");
-  const [tiktok, setTiktok] = useState("");
-  const [twitter, setTwitter] = useState("");
-  const [youTube, setYouTube] = useState("");
+    const [instagram, setInstagram] = useState("");
+    const [facebook, setFacebook] = useState("");
+    const [tiktok, setTiktok] = useState("");
+    const [twitter, setTwitter] = useState("");
+    const [youTube, setYouTube] = useState("");
+  
+    const context = useContext(PageContext);
+  
+    useEffect(() => {
+      if (!context?.page) return;
+  
+      setInstagram(context.page.instagram);
+      setFacebook(context.page.facebook);
+      setTiktok(context.page.tiktok);
+      setTwitter(context.page.x);
+      setYouTube(context.page.youtube);
+  
+    }, [context?.page]);
+  
+  
+    const handleSave = () => {
+      const updatedPage = context?.updatePage({ instagram, facebook, tiktok, x: twitter, youtube: youTube });
+  
+      if (!context) {
+        console.log("No PageContext available");
+        return;
+      }
+  
+      console.log("UPDATED PAGE:", updatedPage);
+      if(updatedPage){
+        console.log( "Page updated:", stringifyPage(updatedPage) );
+      } 
+    };
+  
 
   return (
     <CollapsibleSection
@@ -66,8 +97,8 @@ export default function SocialMedia() {
 
         <div></div> <div></div>
 
-        <Button >
-            Save
+        <Button onClick={handleSave}>
+            Save changes
         </Button>
 
       </div>

@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { PageContext } from "../../context/PageContext";
+import { stringifyPage } from "../../model/Page";
 import CollapsibleSection from "../ui/CollapsibleSection";
 import Button from "../ui/Button";
 import Input from "../ui/Input";
@@ -24,14 +26,42 @@ const styles = [
 ];
 
 export default function PageStyle() {
-  const [selected, setSelected] = useState("minimal");
+  const [selectedStyle, setSelectedStyle] = useState("minimal");
   const [color, setColor] = useState("#3EC7C4");
   const [open, setOpen] = useState(false);
 
   const [logo, setLogo] = useState<File | null>(null);
   const [coverImage, setCoverImage] = useState<File | null>(null);
   const [gallery, setGallery] = useState<File[]>([]);
-
+  
+    const context = useContext(PageContext);
+  
+    useEffect(() => {
+      if (!context?.page) return;
+  
+      setSelectedStyle(context.page.selectedStyle);
+      setColor(context.page.brandColor);
+      setLogo(context.page.logo);
+      setGallery(context.page.gallery);
+      setCoverImage(context.page.coverImage);
+  
+    }, [context?.page]);
+  
+  
+    const handleSave = () => {
+      const updatedPage = context?.updatePage({ selectedStyle, coverImage, brandColor: color, gallery, logo });
+  
+      if (!context) {
+        console.log("No PageContext available");
+        return;
+      }
+  
+      console.log("UPDATED PAGE:", updatedPage);
+      if(updatedPage){
+        console.log( "Page updated:", stringifyPage(updatedPage) );
+      } 
+    };
+  
   return (
     <CollapsibleSection
       title="PAGE STYLE"
@@ -43,11 +73,11 @@ export default function PageStyle() {
         {styles.map((style) => (
           <button
             key={style.id}
-            onClick={() => setSelected(style.id)}
+            onClick={() => setSelectedStyle(style.id)}
             className={`
               text-left rounded-2xl border p-5 transition mb-4
               ${
-                selected === style.id
+                selectedStyle === style.id
                   ? "border-accent ring-2 ring-accent/30"
                   : "border-border hover:border-accent"
               }
@@ -110,12 +140,13 @@ export default function PageStyle() {
 
 
         {/* Logo */}
-        <FileInput
+        <FileInput 
           label="LOGO"
           value={logo}
           onChange={setLogo}
           accept="image/png,image/jpeg,image/webp"
           maxFiles={1}
+          multiple={false}
         />
 
         {/* Cover Image */}
@@ -125,6 +156,7 @@ export default function PageStyle() {
           onChange={setCoverImage}
           accept="image/png,image/jpeg,image/webp"
           maxFiles={1}
+          multiple={false}
         />
 
         <FileInput
@@ -140,8 +172,8 @@ export default function PageStyle() {
         <div></div>
 
 
-        <Button className="mt-4">
-          Save
+        <Button onClick={handleSave} className="mt-4">
+          Save changes
         </Button>
 
       </div>  
