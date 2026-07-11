@@ -1,6 +1,7 @@
 import CollapsibleSection from "../ui/CollapsibleSection";
 import Input from "../ui/Input";
 import { useState } from "react";
+import { SocialIcon } from 'react-social-icons'
 import Button from "../ui/Button";
 
 export default function SocialMedia() {
@@ -8,6 +9,7 @@ export default function SocialMedia() {
   const [facebook, setFacebook] = useState("");
   const [tiktok, setTiktok] = useState("");
   const [twitter, setTwitter] = useState("");
+  const [youTube, setYouTube] = useState("");
 
   return (
     <CollapsibleSection
@@ -21,6 +23,9 @@ export default function SocialMedia() {
           placeholder="@mybusiness"
           value={instagram}
           onChange={setInstagram}
+          icon={<SocialIcon  bgColor="none" fgColor="#833AB4" network="instagram" />}
+          iconPosition="right"
+
         />
 
         <Input
@@ -28,6 +33,8 @@ export default function SocialMedia() {
           placeholder="Page name or url..."
           value={facebook}
           onChange={setFacebook}
+          icon={<SocialIcon bgColor="none" fgColor="#1877F2" network="facebook" />}
+          iconPosition="right"
         />
 
         <Input
@@ -35,14 +42,29 @@ export default function SocialMedia() {
           placeholder="@handle or url"
           value={tiktok}
           onChange={setTiktok}
+          icon={<SocialIcon bgColor="none" fgColor="black" network="tiktok" />}
+          iconPosition="right"
         />
 
         <Input
           label="X / TWITTER"
-          placeholder="@handl or url.."
+          placeholder="@handle or url.."
           value={twitter}
           onChange={setTwitter}
+          icon={<SocialIcon bgColor="none" fgColor="black" network="twitter" />}
+          iconPosition="right"
         />
+
+        <Input
+          label="YOUTUBE"
+          placeholder="@channel or url.."
+          value={youTube}
+          onChange={setYouTube}
+          icon={<SocialIcon bgColor="none" fgColor="#FF0000" network="youtube" />}
+          iconPosition="right"
+        />
+
+        <div></div> <div></div>
 
         <Button >
             Save

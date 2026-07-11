@@ -129,3 +129,30 @@ html {
   background: var(--color-accent);
   color: white;
 }
+
+.react-international-phone-input-container {
+  width: 100%;
+  border-radius: 1rem;
+  border: none !important;
+}
+
+.react-international-phone-country-selector-button {
+  border: none !important;
+  border-right: 1px solid black !important;
+  border-radius: 0 !important;
+  background: white;
+}
+
+.react-international-phone-input {
+  width: 100%;
+  flex: 1;
+  font-size: larger;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0.5rem;
+  background: white;
+}
+
+.react-international-phone-input:focus {
+  outline: none;
+}

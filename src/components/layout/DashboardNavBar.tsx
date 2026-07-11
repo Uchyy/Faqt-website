@@ -2,27 +2,24 @@ import logo from "../../assets/faqt.png";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import Button from "../ui/Button";
-import { Rocket, LogOut } from "lucide-react";
+import { Rocket, CircleUserRound, ChevronDown, Settings, CircleHelp, LogOut, Eye } from "lucide-react";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
 
 function DashboardNavBar() {
   const navigate = useNavigate();
   const [animating, setAnimating] = useState(false);
-
-  const goToAuth = () => {
-    setAnimating(true);
-
-    setTimeout(() => {
-      navigate({ to: "/auth" });
-    }, 300);
-  };
 
   const openPreview = () => {
     window.open("/preview", "_blank"); // or your public page route
   };
 
   const signOut = () => {
-    // later: clear auth/session
-    navigate({ to: "/auth" });
+    setAnimating(true);
+
+    setTimeout(() => {
+      navigate({ to: "/auth" });
+    }, 300);
   };
 
   const goToHome = () => {
@@ -56,15 +53,86 @@ function DashboardNavBar() {
 
               {/* Preview (external feel but no Button change) */}
               <Button onClick={openPreview} className="flex items-center gap-2">
-                Publish
-                <Rocket size={16} className="opacity-70" />
+                <Rocket size={20} className="opacity-70" />
               </Button>
 
-              {/* Sign out */}
-              <button className="bg-black/10 hover:bg-white/20 transition rounded-lg p-2"
-                onClick={signOut}>
-                <LogOut size={20} className="text-whhite/80" />
-              </button>
+              <Button onClick={openPreview} className="flex items-center gap-2">
+                <Eye size={20} className="opacity-70" />
+              </Button>
+
+              <DropdownMenu.Root>
+                <DropdownMenu.Trigger asChild>
+                  <button className="bg-black/10 hover:bg-black/20 transition rounded-3xl p-3">
+                    <div className="flex items-center gap-1">
+                      <CircleUserRound size={20} className="text-black/80" />
+                      <ChevronDown size={15} className="text-black/80" />
+                    </div>
+                  </button>
+                </DropdownMenu.Trigger>
+
+                <DropdownMenu.Content
+                  className="w-56 rounded-xl border border-border bg-white shadow-lg p-2 mt-2" align="end">
+
+                  {/* Account */}
+                  <DropdownMenu.Item
+                    className="
+                      flex items-center gap-3 rounded-lg px-3 py-2 
+                      cursor-pointer outline-none
+                      hover:bg-accent/20 ">
+                    <CircleUserRound size={18} />
+                    <span className="text-sm font-medium">
+                      Profile
+                    </span>
+                  </DropdownMenu.Item>
+
+
+                  {/* Settings */}
+                  <DropdownMenu.Item
+                    className="
+                      flex items-center gap-3 rounded-lg px-3 py-2 
+                      cursor-pointer outline-none
+                      hover:bg-accent/20 ">
+                    <Settings size={18} />
+                    <span className="text-sm font-medium">
+                      Settings
+                    </span>
+                  </DropdownMenu.Item>
+
+
+                  {/* Help */}
+                  <DropdownMenu.Item
+                    className="
+                      flex items-center gap-3 rounded-lg px-3 py-2 
+                      cursor-pointer outline-none
+                      hover:bg-accent/20 ">
+                    <CircleHelp size={18} />
+                    <span className="text-sm font-medium">
+                      Help & Support
+                    </span>
+                  </DropdownMenu.Item>
+
+
+                  {/* Divider */}
+                  <DropdownMenu.Separator className="my-2 h-px bg-border" />
+
+
+                  {/* Logout */}
+                  <DropdownMenu.Item
+                    onClick={signOut}
+                    className="
+                      flex items-center gap-3 rounded-lg px-3 py-2
+                      cursor-pointer outline-none
+                      text-red-500
+                      hover:bg-red-50">
+                    <LogOut size={18} />
+                    <span className="text-sm font-medium">
+                      Sign out
+                    </span>
+                  </DropdownMenu.Item>
+
+
+                </DropdownMenu.Content>
+              </DropdownMenu.Root>          
            
             </div>
           </nav>
@@ -72,8 +140,7 @@ function DashboardNavBar() {
       </header>
 
       {/* transition overlay */}
-      <div
-        className={`fixed inset-0 bg-white transition-opacity duration-300 z-[999] ${
+      <div className={`fixed inset-0 bg-white transition-opacity duration-300 z-[999] ${
           animating ? "opacity-100" : "opacity-0 pointer-events-none"
         }`}
       />

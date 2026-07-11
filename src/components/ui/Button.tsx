@@ -1,12 +1,14 @@
 import { ReactNode } from "react";
 
 type ButtonProps = {
-  children: ReactNode;
+  children?: ReactNode;
   onClick?: () => void;
   type?: "button" | "submit";
   variant?: "solid" | "outline" | "ghost";
   color?: "black" | "white" | "accent";
   className?: string;
+  icon?: ReactNode;
+  iconPosition?: "left" | "right";
 };
 
 export default function Button({
@@ -16,9 +18,12 @@ export default function Button({
   variant = "solid",
   color = "black",
   className = "",
-}: ButtonProps) {
+  icon,
+  iconPosition = "left",
+}: Readonly<ButtonProps>) {
+
   const base =
-    "px-4 py-2 rounded-lg text-sm font-medium transition";
+    "px-4 py-2 rounded-3xl text-sm font-medium transition inline-flex items-center justify-center gap-2";
 
   const styles = {
     black: {
@@ -46,7 +51,21 @@ export default function Button({
       onClick={onClick}
       className={`${base} ${styles[color][variant]} ${className}`}
     >
+
+      {icon && iconPosition === "left" && (
+        <span>
+          {icon}
+        </span>
+      )}
+
       {children}
+
+      {icon && iconPosition === "right" && (
+        <span>
+          {icon}
+        </span>
+      )}
+
     </button>
   );
 }

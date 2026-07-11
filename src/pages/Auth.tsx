@@ -4,6 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { FcGoogle } from "react-icons/fc";
 import Button from "../components/ui/Button";
 import Input from "../components/ui/Input";
+import { LockKeyhole, Mail } from "lucide-react";
 
 
 export default function Auth() {
@@ -65,7 +66,7 @@ export default function Auth() {
             navigate({ to: "/" });
           }, 300);
         }}
-        className="absolute left-6 top-6 p-2 rounded-full text-black/80 hover:text-white hover:bg-white/10 transition">
+        className="absolute left-6 top-6 p-2 rounded-full text-black/80 hover:bg-black/10 transition">
         <ArrowLeft size={20} />
       </button>
 
@@ -77,13 +78,13 @@ export default function Auth() {
           </h2>
 
           <p className="mb-6 text-sm text-muted-foreground">
-            {isSignIn ? "Get started with your free account and manage your FAQs efficiently." :  "Pick up where you left off and keep your FAQs up to date in seconds."}
+            {isSignIn ? "Get started with your free account and manage your Faqts efficiently." :  "Pick up where you left off and keep your FAQs up to date in seconds."}
           </p>
 
           <button
             type="button"
             onClick={handleContinueWithGoogle}
-            className="w-full flex items-center justify-center gap-3 border py-3 rounded-2xl bg-card hover:bg-gray-50 transition mb-4"
+            className="w-full flex items-center justify-center gap-3 border py-3 rounded-2xl bg-white hover:bg-gray-50 transition mb-4"
           >
             <FcGoogle size={20} />
             CONTINUE WITH GOOGLE
@@ -104,6 +105,8 @@ export default function Auth() {
             placeholder="Email"
             error={errors.email}
             onChange={setEmail}
+            icon= {<Mail size={18} />}
+            shadow = {true}
             onClearError={() =>
               setErrors((prev) => ({ ...prev, email: undefined }))
             }
@@ -116,6 +119,8 @@ export default function Auth() {
             placeholder="Password"
             error={errors.password}
             onChange={setPassword}
+            icon= {<LockKeyhole size={18} />}
+            shadow = {true}
             onClearError={() =>
               setErrors((prev) => ({ ...prev, password: undefined }))
             }
@@ -125,7 +130,7 @@ export default function Auth() {
             <button
               type="button"
               onClick={() => navigate({ to: "/forgot-password" })}
-              className="text-sm font-bold text-muted-foreground italic hover:underline transition mb-4 font-unica " >
+              className="text-sm font-bold text-muted-foreground italic hover:underline transition mb-6 font-unica " >
               Forgot password?
             </button>
           </div>
