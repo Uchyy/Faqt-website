@@ -49,6 +49,7 @@ export type Page = {
 
   createdAt: Date;
   updatedAt: Date;
+
 };
 
 
@@ -95,6 +96,7 @@ export const emptyPage: Page = {
       type: "info",
       showUntil: null
     },
+
 };
 
 // Helper for debugging / sending data

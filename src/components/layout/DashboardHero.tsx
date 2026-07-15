@@ -1,65 +1,119 @@
 import Container from "../ui/Container";
+import { CheckCircle2 } from "lucide-react";
 
 function DashboardHero() {
-  const name = "User";
+    const name = "User";
+    const completion = 72;
 
-  const stats = [
-    { label: "Views", value: 347 },
-    { label: "FAQs", value: 12 },
-    { label: "Status", value: "Live" },
-  ];
+    const stats = [
+        { label: "Views", value: 347 },
+        { label: "FAQTs", value: 12 },
+    ];
 
-  return (
-    <section className="bg-gradient-to-r from-accent/15 to-accent py-12">
-      <Container>
+    return (
+        <section className="py-8">
+            <Container>
+                <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-accent/20 via-white to-accent/40 p-6 md:p-8">
 
-        {/* Layout */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+                    {/* Decorative */}
+                    <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-accent/20 blur-3xl" />
+                    <div className="absolute -left-10 -bottom-10 h-32 w-32 rounded-full bg-accent/20 blur-3xl" />
 
-          {/* Left */}
-          <div className="max-w-md justify-center md:justify-start text-center md:text-left">
-            <h1 className="text-3xl font-bold text-text font-heading">
-              Welcome back, {name}
-            </h1>
 
-            <p className="text-sm text-muted-foreground mt-2 leading-relaxed mx-auto md:mx-0">
-              Manage your FAQ page — update answers and keep everything ready to share instantly.
-            </p>
-          </div>
+                    <div className="relative flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
 
-          {/* Centered Stats */}
-          <div className="flex flex-1 justify-center">
-            <div className="flex items-end gap-10">
 
-              {stats.map((stat, i) => (
-                <div key={i} className="text-center relative">
+                        {/* Welcome */}
+                        <div>
+                            <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                                Dashboard
+                            </p>
 
-                  {/* BIG VALUE */}
-                  <p className="text-3xl font-bold text-text font-unica leading-none">
-                    {stat.value}
-                  </p>
+                            <h1 className="mt-2 text-3xl font-bold font-heading text-text">
+                                Welcome back, {name}
+                            </h1>
 
-                  {/* LABEL */}
-                  <p className="text-xs text-muted-foreground mt-2 uppercase tracking-widest">
-                    {stat.label}
-                  </p>
+                            <p className="mt-2 max-w-sm text-sm text-muted-foreground">
+                                Manage your FAQTs and keep your information ready to share.
+                            </p>
+                        </div>
 
-                  {/* divider */}
-                  {i !== stats.length - 1 && (
-                    <span className="absolute right-[-20px] top-1/2 -translate-y-1/2 h-6 w-px bg-accent" />
-                  )}
+
+
+                        {/* Progress + Stats */}
+                        <div className="flex items-center gap-4">
+
+
+                            {/* Completion */}
+                            <div className="relative flex h-28 w-28 items-center justify-center rounded-full bg-white shadow-sm">
+
+                                <div
+                                    className="absolute inset-2 rounded-full border-[8px] border-accent/20"
+                                />
+
+                                <div
+                                    className="absolute inset-2 rounded-full border-[8px] border-accent"
+                                    style={{
+                                        clipPath: `inset(${100 - completion}% 0 0 0)`
+                                    }}
+                                />
+
+
+                                <div className="relative text-center">
+                                    <p className="text-2xl font-bold font-unica">
+                                        {completion}%
+                                    </p>
+
+                                    <p className="text-[10px] uppercase text-muted-foreground">
+                                        Ready
+                                    </p>
+                                </div>
+
+                            </div>
+
+
+
+                            {/* Stats */}
+                            <div className="grid grid-cols-2 gap-3">
+
+                                {stats.map((stat) => (
+                                    <div
+                                        key={stat.label}
+                                        className="
+                                            rounded-2xl
+                                            bg-white/80
+                                            px-5
+                                            py-4
+                                            min-w-[100px]
+                                            shadow-sm
+                                        "
+                                    >
+
+                                        <p className="text-2xl font-bold font-unica text-text">
+                                            {stat.value}
+                                        </p>
+
+                                        <p className="mt-1 text-xs uppercase tracking-wide text-muted-foreground">
+                                            {stat.label}
+                                        </p>
+
+                                    </div>
+                                ))}
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
 
                 </div>
-              ))}
-
-            </div>
-          </div>
-
-        </div>
-
-      </Container>
-    </section>
-  );
+            </Container>
+        </section>
+    );
 }
 
 export default DashboardHero;

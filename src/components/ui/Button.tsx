@@ -9,6 +9,7 @@ type ButtonProps = {
   className?: string;
   icon?: ReactNode;
   iconPosition?: "left" | "right";
+  disabled?: boolean;
 };
 
 export default function Button({
@@ -19,6 +20,7 @@ export default function Button({
   color = "black",
   className = "",
   icon,
+  disabled = false,
   iconPosition = "left",
 }: Readonly<ButtonProps>) {
 
@@ -46,7 +48,8 @@ export default function Button({
   };
 
   return (
-    <button
+    <button 
+      disabled={disabled}
       type={type}
       onClick={onClick}
       className={`${base} ${styles[color][variant]} ${className}`}

@@ -1,5 +1,6 @@
 import { createContext, useState, useMemo, useCallback, type ReactNode } from "react";
 import { emptyPage, type Page } from "../model/Page";
+import { canPublish, getPageCompletion } from "../utils/pageCompletion";
 
 
 type PageContextType = {
@@ -10,9 +11,10 @@ type PageContextType = {
 
 
 export const PageContext = createContext<PageContextType | null>(null);
-
 export function PageProvider({ children }: Readonly<{ children: ReactNode }>) {
   const [page, setPage] = useState<Page>(emptyPage);
+  const completion = getPageCompletion(page);
+  const shouldPublish = canPublish(page);
 
   const updatePage = useCallback((data: Partial<Page>): Page => {
     const updatedPage: Page = { ...page, ...data, updatedAt: new Date() };
@@ -29,6 +31,8 @@ export function PageProvider({ children }: Readonly<{ children: ReactNode }>) {
       page,
       updatePage,
       resetPage,
+      completion: getPageCompletion(page),
+      canPublish: canPublish(page)
     }),
     [page, updatePage, resetPage],
   );

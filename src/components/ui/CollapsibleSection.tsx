@@ -19,7 +19,7 @@ export default function CollapsibleSection({
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="border border-border rounded-2xl p-6 m-6"
+    <div className="border border-border rounded-2xl p-4 m-1 mb-6"
       style={{ backgroundColor: bgColor }}>
 
       <div className="flex justify-between items-start px-4 py-3">

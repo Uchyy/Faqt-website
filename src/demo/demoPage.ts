@@ -69,5 +69,5 @@ export const demoPage: Page = {
   qrCodeUrl: "",
 
   createdAt: new Date(),
-  updatedAt: new Date()
+  updatedAt: new Date(),
 };
