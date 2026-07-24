@@ -5,98 +5,111 @@ import { FaqtItem } from "./FaqtItem";
 export type Page = {
   id: string;
 
-  // Business information
-  businessName: string;
+  business: BusinessSection;
+  branding: BrandingSection;
+  banner?: Banner;
+  contact: ContactSection;
+  social: SocialSection;
+  faqts: FaqtItem[];
+  documents: BusinessDocument[];
+  publishing: PublishingSection;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+export type BusinessSection = {
+  name: string;
   tagline: string;
   shortDescription: string;
   longDescription: string;
   address: string;
+};
 
-  // Branding
+export type BrandingSection = {
   selectedStyle: string;
-  logo: File | null;
-  coverImage: File | null;
+  logo: string;
+  coverImage: string;
   brandColor: string;
-  documents: BusinessDocument[];
-  gallery: File[];
+  gallery: string[];
+};
 
-  //Banner
-  banner?: Banner;
-
-  // Contact links
+export type ContactSection = {
   phone: string;
   email: string;
   website: string;
   whatsapp: string;
+};
 
-  // Social media
+
+export type SocialSection = {
   instagram: string;
   facebook: string;
   x: string;
   tiktok: string;
   youtube: string;
+};
 
-  //Faqts
-  faqts: FaqtItem[]
-
-  // Publishing
+export type PublishingSection = {
   isPublished: boolean;
-
-  // Generated after publishing
   slug: string;
   publicUrl: string;
   qrCodeUrl: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-
 };
 
 
 export const emptyPage: Page = {
-    id: crypto.randomUUID(),
+  id: crypto.randomUUID(),
 
-    businessName: "",
+  business: {
+    name: "",
     tagline: "",
     shortDescription: "",
     longDescription: "",
     address: "",
+  },
+
+  branding: {
     selectedStyle: "minimal",
-
-    logo: null,
-    coverImage: null,
+    logo: "",
+    coverImage: "",
     brandColor: "#3EC7C4",
-    documents: [],
     gallery: [],
+  },
 
+  contact: {
     phone: "",
     email: "",
     website: "",
     whatsapp: "",
+  },
 
+  social: {
     instagram: "",
     facebook: "",
     x: "",
     tiktok: "",
     youtube: "",
+  },
 
+  faqts: [],
+  documents: [],
+
+  banner: {
+    enabled: false,
+    message: "",
+    type: "info",
+    showUntil: null,
+  },
+
+  publishing: {
     isPublished: false,
-
     slug: "",
     publicUrl: "",
     qrCodeUrl: "",
+  },
 
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    faqts: [],
-
-    banner: {
-      enabled: false,
-      message: "",
-      type: "info",
-      showUntil: null
-    },
-
+  createdAt: new Date(),
+  updatedAt: new Date(),
 };
 
 // Helper for debugging / sending data

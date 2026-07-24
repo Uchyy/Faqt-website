@@ -1,37 +1,38 @@
-import CollapsibleSection from "../ui/CollapsibleSection";
-import Button from "../ui/Button";
+import CollapsibleSection from "../../../ui/CollapsibleSection";
+import Button from "../../../ui/Button";
 import { useContext, useState } from "react";
-import { PageContext } from "../../context/PageContext";
-import { generatePageDetails } from "../../utils/generatePageDetails";
+import { PageContext } from "../../../../context/PageContext";
+import { generatePageDetails } from "../../../../utils/generatePageDetails";
 import QRCode from "react-qr-code";
 import { Copy, Download, ExternalLink } from "lucide-react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import { demoPage } from "../../demo/demoPage";
+import { demoPageBold } from "../../../../demo/demoPage";
 
 export default function SharePageSection() {
 
   const context = useContext(PageContext);
   //const page = context?.page;
-  const page = demoPage;
+  const page = demoPageBold;
   const [copied, setCopied] = useState(false);
 
 
   const publishPage = () => {
 
     if (!page) return;
-
-    const { slug, publicUrl } =
-      generatePageDetails(page.businessName);
-
+    const { slug, publicUrl } = generatePageDetails(page.business.name);
     context?.updatePage({
-      slug,
-      publicUrl,
-      isPublished: true
+      publishing: {
+        ...context.page.publishing,
+        slug,
+        publicUrl,
+        isPublished: true,
+      },
     });
+    
   };
 
 
-  if (!page?.isPublished) {
+  if (!page.publishing?.isPublished) {
 
     return (
       <CollapsibleSection
@@ -63,7 +64,7 @@ export default function SharePageSection() {
   return (
     <CollapsibleSection
       title="Share your Page"
-      label={page.businessName}
+      label={page.business.name}
       bgColor="#3EC7E2"
     >
 
@@ -81,7 +82,7 @@ export default function SharePageSection() {
         ">
 
           <QRCode
-            value={page.publicUrl}
+            value={page.publishing.publicUrl}
             size={220}
           />
 
@@ -94,12 +95,12 @@ export default function SharePageSection() {
         <div className="  flex   items-center   gap-3  rounded-xl  bg-white  border  border-border  px-4  py-3">
 
           <p className=" text-sm  text-muted-foreground break-all">
-            {page.publicUrl}
+            {page.publishing.publicUrl}
           </p>
 
 
           <CopyToClipboard
-            text={page.publicUrl}
+            text={page.publishing.publicUrl}
             onCopy={() => {
               setCopied(true);
 

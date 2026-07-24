@@ -1,17 +1,19 @@
-import CollapsibleSection from "../ui/CollapsibleSection";
-import Input from "../ui/Input";
 import validator from "validator";
 import { useContext, useEffect, useState } from "react"
-import Button from "../ui/Button";
 import {Globe, Mail} from "lucide-react"
-import PhoneInput from "../ui/PhoneInput";
 import { isValidPhoneNumber } from "libphonenumber-js";
-import { PageContext } from "../../context/PageContext";
+import { PageContext } from "../../../../context/PageContext";
+import CollapsibleSection from "../../../ui/CollapsibleSection";
+import Input from "../../../ui/Input";
+import FaqtPhoneInput from "../../../ui/PhoneInput";
+import Button from "../../../ui/Button";
+import { useNotification } from "../../../../context/NotificationContext";
 
 
 export default function ContactsSection() {
 
   const context = useContext(PageContext);
+  const {showNotification}=useNotification();
 
   const [website, setWebsite] = useState("");
   const [phone, setPhone] = useState("");
@@ -22,10 +24,10 @@ export default function ContactsSection() {
   useEffect(() => {
     if (!context?.page) return;
 
-    setEmail(context.page.email);
-    setPhone(context.page.phone);
-    setWebsite(context.page.website);
-    setwhatsApp(context.page.whatsapp);
+    setEmail(context.page.contact.email);
+    setPhone(context.page.contact.phone);
+    setWebsite(context.page.contact.website);
+    setwhatsApp(context.page.contact.whatsapp);
 
   }, [context?.page]);
 
@@ -56,8 +58,13 @@ export default function ContactsSection() {
     if (!validate()) return;
 
     console.log("Form valid:", { phone, email, website, whatsApp });
-    const updatedPage = context?.updatePage({  phone, email, website, whatsapp: whatsApp});
+    const updatedPage = context?.updatePage({  contact:{...context.page.contact, email, website, whatsapp: whatsApp},});
     console.log("UPDATED PAGE:", updatedPage);
+
+    showNotification({
+        message:"Please complete all fields",
+        type:"error"
+    });
 
     // later: auth logic here
   };
@@ -67,7 +74,7 @@ export default function ContactsSection() {
       title="Contact Info"
       label="Let your customers reach you"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
 
         <Input
           label="WEBSITE"
@@ -91,7 +98,7 @@ export default function ContactsSection() {
           }
         />
 
-        <PhoneInput
+        <FaqtPhoneInput
           label="PHONE"
           value={phone}
           onChange={setPhone}
@@ -101,7 +108,7 @@ export default function ContactsSection() {
           }
         />
 
-        <PhoneInput
+        <FaqtPhoneInput
           label="WHATSAPP"
           value={whatsApp}
           onChange={setwhatsApp}
@@ -111,6 +118,7 @@ export default function ContactsSection() {
 
         <Button onClick={handleSave}>
             Save changes
+            
         </Button>
 
       </div>

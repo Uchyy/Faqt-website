@@ -20,6 +20,13 @@
   font-style: normal;
 }
 
+.black-ops-one-regular {
+  font-family: "Black Ops One", system-ui;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -28,6 +35,7 @@
   to {
     transform: translateX(-50%);
   }
+  
 }
 
 @keyframes fadeIn {
@@ -62,6 +70,21 @@
   animation: marquee 25s linear infinite;
 }
 
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.animate-toast {
+  animation: toast-in .25s ease-out;
+}
+
 /* 🎨 Theme Tokens (used by Tailwind utilities) */
 @theme {
   --color-accent: #3EC7C4;  /* FAQT green */
@@ -82,6 +105,10 @@
   --font-heading: "Mozilla Headline", sans-serif;
   --font-body: "Lora", serif;
   --font-mono: "Bitcount", monospace;
+  --font-blackOps: "Black Ops One", sans-serif;
+  --font-cinzel: "Cinzel", serif;
+  --font-qahiri: "Qahiri", serif;
+  --font-griffy: "Griffy", serif;
 }
 
 /* =========================
@@ -102,6 +129,10 @@
 
 .font-mono {
   font-family: var(--font-mono);
+}
+
+.font-blackOps {
+  font-family:  var( --font-blackOps);
 }
 
 /* =========================

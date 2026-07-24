@@ -1,12 +1,12 @@
-import CollapsibleSection from "../ui/CollapsibleSection";
-import Button from "../ui/Button";
+import CollapsibleSection from "../../../ui/CollapsibleSection";
+import Button from "../../../ui/Button";
 import { Plus, Trash2, Pencil, BadgeQuestionMark } from "lucide-react";
 import { useContext, useState } from "react";
-import { emptyFaqtItem } from "../../model/FaqtItem";
-import type { FaqtItem } from "../../model/FaqtItem";
-import FaqtDialog from "../Faqt/FaqtDialog";
-import { PageContext } from "../../context/PageContext";
-import { stringifyPage } from "../../model/Page";
+import { emptyFaqtItem } from "../../../../model/FaqtItem";
+import type { FaqtItem } from "../../../../model/FaqtItem";
+import { PageContext } from "../../../../context/PageContext";
+import { stringifyPage } from "../../../../model/Page";
+import FaqtDialog from "../../../ui/FaqtDialog";
 
 export default function FaqSection() {
   const context = useContext(PageContext);

@@ -1,6 +1,6 @@
 import type { FaqtItem } from "../../model/FaqtItem";
-import AlertDialog from "../ui/AlertDialog";
-import Input from "../ui/Input";
+import AlertDialog from "./AlertDialog";
+import Input from "./Input";
 
 type FaqtDialogProps = {
   mode: "add" | "edit";

@@ -3,6 +3,7 @@ import { createRouter, createRoute, createRootRoute, Outlet } from "@tanstack/re
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
+import PublicPage from "./components/page/PublicPage"
 import { PageProvider } from "./context/PageContext";
 
 const rootRoute = createRootRoute({
@@ -32,7 +33,14 @@ const dashboardRoute = createRoute({
   component: Dashboard,
 });
 
-const routeTree = rootRoute.addChildren([indexRoute, authRoute, dashboardRoute]);
+//Public Page
+const publicRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/$slug",
+  component: PublicPage,
+});
+
+const routeTree = rootRoute.addChildren([indexRoute, authRoute, dashboardRoute, publicRoute]);
 
 export const router = createRouter({
   routeTree,

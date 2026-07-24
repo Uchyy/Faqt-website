@@ -1,8 +1,8 @@
-import CollapsibleSection from "../ui/CollapsibleSection";
-import Input from "../ui/Input";
-import Button from "../ui/Button";
+import CollapsibleSection from "../../../ui/CollapsibleSection";
+import Input from "../../../ui/Input";
+import Button from "../../../ui/Button";
 import { useContext, useState } from "react";
-import { PageContext } from "../../context/PageContext";
+import { PageContext } from "../../../../context/PageContext";
 
 export default function BannerSection() {
 

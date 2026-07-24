@@ -1,4 +1,4 @@
-import SharePageSection from "../dashboard/SharePageSection";
+import SharePageSection from "./SharePageSection";
 
 export default function ShareSection() {
   return (

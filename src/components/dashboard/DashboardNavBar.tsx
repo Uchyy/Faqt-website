@@ -1,39 +1,40 @@
-import logo from "../../assets/faqt.png";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import Button from "../ui/Button";
 import { Rocket, Eye, Menu, } from "lucide-react";
 import { useDashboardUI } from "../../context/DashboardUIContext";
+import FaqtLogo from "../ui/FaqtLogo";
 
 function DashboardNavBar() {
     const navigate = useNavigate();
-    const { toggleMenu } = useDashboardUI();
-    const [animating, setAnimating] = useState(false);
+    const [animating,] = useState(false);
+    const { sidebarMode, openMenu } = useDashboardUI();
 
     const openPreview = () => window.open("/preview", "_blank");
     const publishPage = () => console.log("publish");
     const goHome = () => navigate({ to: "/" });
-    const signOut = () => {
-      setAnimating(true);
-
-      setTimeout(() => {
-        navigate({ to: "/auth" });
-      }, 300);
-    };
+    
 
     return (
         <>
             <header className="sticky top-0 z-50">
-                <nav className="flex items-center justify-between rounded-2xl bg-card/80 backdrop-blur-md border border-border shadow-sm px-4 py-3">
+                <nav className={` flex items-center justify-between bg-white/80 backdrop-blur-md border border-border shadow-sm  ${sidebarMode === "mobile" ? "px-4 py-3 rounded-bl-2xl rounded-br-2xl " : "p-4 "}`}>
 
                     <div className="flex items-center gap-3">
-                        <button onClick={toggleMenu} className="h-10 w-10 rounded-xl bg-black/5 hover:bg-black/10 transition flex items-center justify-center">
+                        {sidebarMode === "mobile" && (
+                        <button  onClick={openMenu} className="rounded-xl p-2 hover:bg-black/5">
                             <Menu size={22}/>
                         </button>
+                        )}
 
-                        <button onClick={goHome} className="h-10 w-10 rounded-xl bg-accent p-2">
-                            <img src={logo} alt="Faqt" className="h-full w-full object-contain"/>
+                        { sidebarMode === "mobile" ?
+                        <button onClick={goHome} >
+                           <FaqtLogo/>
                         </button>
+                        : <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
+                                Dashboard
+                            </p>
+                        }
 
                     </div>
 

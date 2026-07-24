@@ -39,9 +39,8 @@ export default function FaqtPhoneInput({
           ${shadow ? "shadow-sm" : ""}
           ${borderStyle}
           ${error ? "border-red-500 focus-within:ring-red-300" : ""}
-          focus-within:ring-2 transition
-        `}
-      >
+          focus-within:ring-2 transition`}>
+            
         <PhoneInput
           className= "!w-full"
           defaultCountry="gb"

@@ -1,10 +1,10 @@
-import CollapsibleSection from "../ui/CollapsibleSection";
-import Input from "../ui/Input";
 import { useContext, useState, useEffect } from "react";
-import Button from "../ui/Button";
 import {FolderPen, MapPin, Tag, FileText} from "lucide-react"
-import { PageContext } from "../../context/PageContext";
-import { stringifyPage } from "../../model/Page";
+import { PageContext } from "../../../../context/PageContext";
+import { stringifyPage } from "../../../../model/Page";
+import CollapsibleSection from "../../../ui/CollapsibleSection";
+import Input from "../../../ui/Input";
+import Button from "../../../ui/Button";
 
 export default function BusinessInfo() {
 
@@ -20,11 +20,11 @@ export default function BusinessInfo() {
   useEffect(() => {
     if (!context?.page) return;
 
-    setBusinessName(context.page.businessName);
-    setShortDescription(context.page.shortDescription);
-    setLongDescription(context.page.longDescription);
-    setAddress(context.page.address);
-    setTagline(context.page.tagline);
+    setBusinessName(context.page.business.name);
+    setShortDescription(context.page.business.shortDescription);
+    setLongDescription(context.page.business.longDescription);
+    setAddress(context.page.business.address);
+    setTagline(context.page.business.tagline);
 
   }, [context?.page]);
 
@@ -55,7 +55,15 @@ export default function BusinessInfo() {
   const handleSave = () => {
     if (!validate()) return;
     console.log("Form valid:", { businessName, address, tagline, shortDescription });
-    const updatedPage = context?.updatePage({ businessName, address, tagline, shortDescription, longDescription });
+    const updatedPage = context?.updatePage({
+      business: {
+        ...context.page.business,
+        address,
+        tagline,
+        shortDescription,
+        longDescription,
+      },
+    });
 
     if (!context) {
       console.log("No PageContext available");
@@ -73,7 +81,7 @@ export default function BusinessInfo() {
       title="Business Info"
       label="LET YOUR CUSTOMERS KNOW YOU"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
 
         <Input
           label="BUSINESS NAME"

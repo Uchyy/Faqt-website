@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { BusinessDocument } from "../../model/BusinessDocument";
-import FileUpload from "./upload/FileUpload";
-import UploadedFile from "./upload/UploadedFile";
-
+import FileUpload from "./FileUpload";
+import UploadedFile from "./UploadedFile";
+import { BusinessDocument } from "../../../model/BusinessDocument";
 
 
 type Props = {

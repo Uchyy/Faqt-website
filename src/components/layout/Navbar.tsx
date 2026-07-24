@@ -1,7 +1,7 @@
-import logo from "../../assets/faqt.png";
 import { useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import Button from "../ui/Button";
+import FaqtLogo from "../ui/FaqtLogo";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -23,9 +23,7 @@ function Navbar() {
 
             {/* Logo */}
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-accent p-2 transition hover:opacity-90">
-                <img src={logo} alt="FAQT Logo" className="h-full w-full object-contain" />
-              </div>
+              {<FaqtLogo/>}
 
               <span className="text-2xl font-bold tracking-tight text-text font-unica">
                 Faqt

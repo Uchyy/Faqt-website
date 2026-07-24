@@ -1,13 +1,13 @@
 import { useDashboardUI } from "../../context/DashboardUIContext";
-
-import BusinessInfo from "../dashboard/BusinessInfo";
-import SocialMedia from "../dashboard/SocialLinksSection";
-import ContactsSection from "../dashboard/ContactsSection";
-import PageStyleSection from "../dashboard/PageStyleSection";
-import MediaSection from "../dashboard/MediaSection" ;
-import FaqSection from "../dashboard/FaqtSection";
-import BannerSection from "../dashboard/BannerSection";
-import SharePageSection from "../dashboard/SharePageSection";
+import PageStyleSection from "./sections/appearance/PageStyleSection";
+import MediaSection from "./sections/content/MediaSection" ;
+import FaqSection from "./sections/content/FaqtSection";
+import BannerSection from "./sections/content/BannerSection";
+import SharePageSection from "./sections/share/SharePageSection";
+import ContentMedia from "./sections/appearance/ContentMedia";
+import SocialMedia from "./sections/information/SocialLinksSection";
+import ContactsSection from "./sections/information/ContactsSection";
+import BusinessInfo from "./sections/information/BusinessInfo";
 
 
 export default function DashboardContent(){
@@ -24,14 +24,13 @@ export default function DashboardContent(){
                 </div>
             );
 
-
         case "appearance":
             return (
                 <div className="space-y-6">
                     <PageStyleSection />
+                    <ContentMedia />
                 </div>
             );
-
 
         case "content":
             return (
@@ -42,7 +41,6 @@ export default function DashboardContent(){
                 </div>
             );
 
-
         case "share":
             return (
                 <div className="space-y-6">
@@ -50,8 +48,6 @@ export default function DashboardContent(){
                 </div>
             );
 
-
-        default:
-            return null;
+        default: return null;
     }
 }
