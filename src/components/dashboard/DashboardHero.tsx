@@ -1,13 +1,21 @@
+import { useContext } from "react";
 import { useDashboardUI } from "../../context/DashboardUIContext";
 import Container from "../ui/Container";
+import { PageContext } from "../../context/PageContext";
 
 function DashboardHero() {
     const name = "User";
+     const context = useContext(PageContext);
+    
+      if (!context) {
+        throw new Error("PublicPage must be used inside PageProvider");
+      }
+    const { page } = context;
 
     const stats = [
-        { label: "FAQTs", value: 12 },
+        { label: "FAQTs", value: page.faqts.length },
         { label: "Views", value: 347 },
-        { label: "Completion", value: "72%" },
+        { label: "Completion", value: context.completion },
     ];
 
     const { sidebarMode } = useDashboardUI();

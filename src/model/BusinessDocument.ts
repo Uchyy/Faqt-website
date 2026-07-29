@@ -1,5 +1,5 @@
 export type BusinessDocument = {
   id: string;
-  file: File;
+  url: string;
   title: string;
 };

@@ -37,8 +37,7 @@ export default function SharePageSection() {
     return (
       <CollapsibleSection
         title="Share your Page"
-        bgColor="#3EC7E2"
-      >
+        bgColor="#3EC7E2">
 
         <div className="flex flex-col items-center gap-6 py-8">
 
@@ -48,9 +47,7 @@ export default function SharePageSection() {
           </p>
 
 
-          <Button
-            onClick={publishPage}
-          >
+          <Button  onClick={publishPage}>
             Publish Page
           </Button>
 
@@ -65,11 +62,9 @@ export default function SharePageSection() {
     <CollapsibleSection
       title="Share your Page"
       label={page.business.name}
-      bgColor="#3EC7E2"
-    >
+      bgColor="#3EC7E2">
 
       <div className="flex flex-col items-center gap-6 py-6">
-
 
         {/* QR CODE CARD */}
         <div className="

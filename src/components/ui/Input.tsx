@@ -90,12 +90,11 @@ export default function Input({
               className={`
                 ${shadow ? "shadow-sm" : ""}
                 w-full rounded-2xl border bg-white py-2
-                ${
-                  icon && iconPosition === "left"
+                ${ icon && iconPosition === "left"
                     ? "pl-16 pr-4"
                     : icon && iconPosition === "right"
-                    ? "pl-4 pr-16"
-                    : "px-4"
+                      ? "pl-4 pr-16"
+                      : "px-4"
                 }
                 focus:outline-none focus:ring-2 transition
                 ${borderStyle}

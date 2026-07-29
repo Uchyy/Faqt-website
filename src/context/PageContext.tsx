@@ -2,39 +2,63 @@ import { createContext, useState, useMemo, useCallback, type ReactNode } from "r
 import { emptyPage, type Page } from "../model/Page";
 import { canPublish, getPageCompletion } from "../utils/pageCompletion";
 
-
 type PageContextType = {
   page: Page;
   updatePage: (data: Partial<Page>) => Page;
   resetPage: () => void;
+  completion: ReturnType<typeof getPageCompletion>;
+  canPublish: boolean;
 };
 
+type PageProviderProps = {
+  children: ReactNode;
+  initialPage?: Page | null;
+};
 
 export const PageContext = createContext<PageContextType | null>(null);
-export function PageProvider({ children }: Readonly<{ children: ReactNode }>) {
-  const [page, setPage] = useState<Page>(emptyPage);
-  const completion = getPageCompletion(page);
-  const shouldPublish = canPublish(page);
+
+export function PageProvider({ children, initialPage = null,}: Readonly<PageProviderProps>) {
+  const [page, setPage] = useState<Page>(() => initialPage ?? emptyPage);
 
   const updatePage = useCallback((data: Partial<Page>): Page => {
-    const updatedPage: Page = { ...page, ...data, updatedAt: new Date() };
-    setPage(updatedPage);
-    return updatedPage;
-  }, [page]);
+    let updatedPage: Page;
+
+    setPage((currentPage) => {
+      updatedPage = {
+        ...currentPage,
+        ...data,
+        updatedAt: new Date(),
+      };
+
+      return updatedPage;
+    });
+
+    return updatedPage!;
+  }, []);
 
   const resetPage = useCallback(() => {
     setPage(emptyPage);
   }, []);
+
+  const completion = useMemo(
+    () => getPageCompletion(page),
+    [page]
+  );
+
+  const publishable = useMemo(
+    () => canPublish(page),
+    [page]
+  );
 
   const value = useMemo(
     () => ({
       page,
       updatePage,
       resetPage,
-      completion: getPageCompletion(page),
-      canPublish: canPublish(page)
+      completion,
+      canPublish: publishable,
     }),
-    [page, updatePage, resetPage],
+    [page, updatePage, resetPage, completion, publishable]
   );
 
   return (

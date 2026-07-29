@@ -1,13 +1,14 @@
-import { Banner } from "./Banner";
+import type { Banner } from "./Banner";
 import { BusinessDocument } from "./BusinessDocument";
 import { FaqtItem } from "./FaqtItem";
+import { Styles } from "./Styles";
 
 export type Page = {
   id: string;
 
   business: BusinessSection;
   branding: BrandingSection;
-  banner?: Banner;
+  banner?: Banner | null;
   contact: ContactSection;
   social: SocialSection;
   faqts: FaqtItem[];
@@ -26,7 +27,7 @@ export type BusinessSection = {
 };
 
 export type BrandingSection = {
-  selectedStyle: string;
+  selectedStyle: Styles;
   logo: string;
   coverImage: string;
   brandColor: string;
@@ -134,3 +135,5 @@ export const stringifyPage = (page: Page) => {
     2
   );
 };
+
+export { Banner };

@@ -3,13 +3,16 @@ import { createRouter, createRoute, createRootRoute, Outlet } from "@tanstack/re
 import Home from "./pages/Home";
 import Auth from "./pages/Auth";
 import Dashboard from "./pages/Dashboard";
-import PublicPage from "./components/page/PublicPage"
 import { PageProvider } from "./context/PageContext";
+import PublicPage from "./publicpage/PublicPage";
+import { demoPageBold, demoPageLight } from "./demo/demoPage";
 
 const rootRoute = createRootRoute({
-  component: () =>  <PageProvider>
+  component: () => (
+    <PageProvider initialPage={demoPageBold}>
       <Outlet />
-    </PageProvider>,
+    </PageProvider>
+  ),
 });
 
 // 🏠 Home
@@ -36,7 +39,7 @@ const dashboardRoute = createRoute({
 //Public Page
 const publicRoute = createRoute({
   getParentRoute: () => rootRoute,
-  path: "/$slug",
+  path: "page/$slug",
   component: PublicPage,
 });
 

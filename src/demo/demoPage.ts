@@ -9,12 +9,34 @@ export const demoPageBold = createDemoPage({
     address: "25 High Street, Portsmouth PO1 3AB",
   },
 
+  documents: [
+    {
+      id: "doc-1",
+      title: "Sample Business Document",
+      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    },
+    {
+      id: "doc-2",
+      title: "Sample PDF Guide",
+      url: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
+    },
+  ],
+
   branding: {
     selectedStyle: "bold",
     logo: "",
     coverImage: "",
     brandColor: "#6B8E5A",
-    gallery: []
+    gallery: [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+    ],
   },
 
   contact: {
@@ -83,7 +105,16 @@ export const demoPageMinimal = createDemoPage({
     brandColor: "#1E3A5F",
     logo: "",
     coverImage: "",
-    gallery: []
+    gallery: [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+    ],
   },
 
   contact: {
@@ -92,6 +123,19 @@ export const demoPageMinimal = createDemoPage({
     website: "https://harrisonlegal.co.uk",
     whatsapp: ""
   },
+
+  documents: [
+    {
+      id: "doc-1",
+      title: "Sample Business Document",
+      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    },
+    {
+      id: "doc-2",
+      title: "Sample PDF Guide",
+      url: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
+    },
+  ],
 
  faqts: [
     {
@@ -148,10 +192,32 @@ export const demoPageCard = createDemoPage({
   branding: {
     selectedStyle: "card",
     brandColor: "#A52A2A",
-    logo: "",
-    coverImage: "",
-    gallery: []
+    logo: "https://images.unsplash.com/photo-1561070791-36c11767b26a?w=400",
+    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+    ],
   },
+
+  documents: [
+    {
+      id: "doc-1",
+      title: "Sample Business Document",
+      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    },
+    {
+      id: "doc-2",
+      title: "Sample PDF Guide",
+      url: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
+    },
+  ],
 
   contact: {
     phone: "+442392987654",
@@ -213,5 +279,136 @@ export const demoPageCard = createDemoPage({
     publicUrl: "https://faqt.app/casa-milano",
     isPublished: false,
     qrCodeUrl: ""
+  },
+});
+
+export const demoPageLight = createDemoPage({
+  business: {
+    name: "Willow & Bloom Studio",
+    tagline: "Beautiful moments, thoughtfully designed",
+    shortDescription: "A creative floral studio crafting bespoke arrangements and event styling.",
+    longDescription:
+      "Willow & Bloom creates elegant floral designs for weddings, celebrations, and everyday moments. Every arrangement is handcrafted with seasonal flowers and a personal touch.",
+    address: "14 Castle Road, Southsea PO5 3AY",
+  },
+
+  branding: {
+    selectedStyle: "card",
+    logo: "",
+    coverImage:
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
+    brandColor: "#D8B4FE",
+    gallery: [
+      "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=1200",
+      "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=1200",
+      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200",
+      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
+      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=1200",
+    ],
+  },
+
+  contact: {
+    phone: "+447700123456",
+    email: "hello@willowandbloom.co.uk",
+    website: "https://willowandbloom.co.uk",
+    whatsapp: "+447700123456",
+  },
+
+  social: {
+    instagram: "willowandbloomstudio",
+    facebook: "willowandbloomstudio",
+    x: "",
+    tiktok: "willowandbloomstudio",
+    youtube: "",
+  },
+
+  documents: [
+    {
+      id: "doc-1",
+      title: "Wedding Floral Packages",
+      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    },
+    {
+      id: "doc-2",
+      title: "Event Styling Guide",
+      url: "https://mozilla.github.io/pdf.js/web/compressed.tracemonkey-pldi-09.pdf",
+    },
+  ],
+
+  faqts: [
+  {
+    id: "1",
+    question: "What are your opening hours?",
+    answer: "We are open Monday to Saturday from 9am to 5pm. Our opening hours may vary on bank holidays and special occasions.",
+    isPublished: true,
+  },
+  {
+    id: "2",
+    question: "Do you offer same-day flower delivery?",
+    answer: "Yes. Same-day delivery is available for orders placed before our daily cut-off time, subject to availability.",
+    isPublished: true,
+  },
+  {
+    id: "3",
+    question: "Can I customise a bouquet?",
+    answer: "Absolutely. We can create personalised bouquets based on your preferred colours, flowers, occasion, and budget.",
+    isPublished: true,
+  },
+  {
+    id: "4",
+    question: "How long do fresh flowers last?",
+    answer: "With proper care, most fresh flowers can last between 5 and 10 days. We provide care advice with every arrangement.",
+    isPublished: true,
+  },
+  {
+    id: "5",
+    question: "Do you provide wedding flowers?",
+    answer: "Yes. We create bespoke wedding bouquets, buttonholes, table arrangements, and venue decorations tailored to your special day.",
+    isPublished: true,
+  },
+  {
+    id: "6",
+    question: "Can I order flowers for special occasions?",
+    answer: "Yes. We create arrangements for birthdays, anniversaries, sympathy, thank you gifts, celebrations, and other special moments.",
+    isPublished: true,
+  },
+  {
+    id: "7",
+    question: "Do you offer plant gifts?",
+    answer: "Yes. We offer a selection of indoor plants, planters, and green gifts suitable for homes, offices, and special occasions.",
+    isPublished: true,
+  },
+  {
+    id: "8",
+    question: "How do I care for my flowers?",
+    answer: "Keep flowers in fresh water, trim the stems regularly, remove wilted petals, and keep them away from direct sunlight and heat sources.",
+    isPublished: true,
+  },
+  {
+    id: "9",
+    question: "Do you deliver locally?",
+    answer: "Yes. We provide local delivery services within our delivery area. Please contact us with your address to confirm availability.",
+    isPublished: true,
+  },
+  {
+    id: "10",
+    question: "Can I visit your shop?",
+    answer: "Yes. You are welcome to visit our shop and explore our seasonal flowers, plants, and gift collections.",
+    isPublished: true,
+  },
+],
+
+  banner: {
+    enabled: true,
+    message: "Spring collection now available.",
+    type: "success",
+    showUntil: new Date("2026-09-01"),
+  },
+
+  publishing: {
+    slug: "willow-and-bloom",
+    publicUrl: "https://faqt.app/willow-and-bloom",
+    isPublished: false,
+    qrCodeUrl: "",
   },
 });

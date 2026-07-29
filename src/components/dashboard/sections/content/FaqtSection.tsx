@@ -144,7 +144,7 @@ export default function FaqSection() {
             </div>
           ) : (
 
-            <div className="space-y-4 mt-4">
+            <div className="mt-4 max-h-[60vh] space-y-4 overflow-y-auto pr-2">
                 {faqts.map((faqt, index) => (
                     <div
                     key={faqt.id}

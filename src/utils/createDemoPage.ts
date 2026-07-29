@@ -4,7 +4,7 @@ const now = new Date();
 
  export const createDemoPage = (page: Partial<Page>): Page => ({
   id: crypto.randomUUID(),
-  documents: [],
+  documents: page.documents ?? [],
   business: {
     name: "",
     tagline: "",
@@ -16,8 +16,8 @@ const now = new Date();
 
   branding: {
     selectedStyle: "minimal",
-    logo: null,
-    coverImage: null,
+    logo: "",
+    coverImage: "",
     brandColor: "#3EC7C4",
     gallery: [],
     ...page.branding,
@@ -42,12 +42,7 @@ const now = new Date();
 
   faqts: page.faqts ?? [],
 
-  banner: page.banner ?? {
-    enabled: false,
-    message: "",
-    type: "info",
-    showUntil: null,
-  },
+  banner: page.banner ?? null,
 
   publishing: {
     isPublished: true,

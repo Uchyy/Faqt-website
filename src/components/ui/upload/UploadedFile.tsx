@@ -2,7 +2,7 @@ import { FileText, X } from "lucide-react";
 
 type UploadedFileProps = {
     name:string;
-    size:number;
+    size?:number;
     onDelete:()=>void;
 };
 
@@ -22,9 +22,9 @@ export default function UploadedFile({ name, size, onDelete, }:Readonly<Uploaded
                         {name}
                     </p>
 
-                    <p className="text-xs text-muted-foreground">
-                        {(size / 1024).toFixed(1)} KB
-                    </p>
+                    {size !== undefined && (
+                        <span>{(size / 1024 / 1024).toFixed(2)} MB</span>
+                    )}
                 </div>
 
             </div>

@@ -1,10 +1,10 @@
 import CollapsibleSection from "../../../ui/CollapsibleSection";
 import { useContext, useEffect, useState } from "react";
 import Button from "../../../ui/Button";
-import DocumentUpload from "../../../ui/DocumentUpload";
 import { PageContext } from "../../../../context/PageContext";
 import { stringifyPage } from "../../../../model/Page";
 import { BusinessDocument } from "../../../../model/BusinessDocument";
+import DocumentUpload from "../../../ui/upload/DocumentUpload";
 
 export default function BusinessInfo() {
 
