@@ -5,18 +5,17 @@ type Props = {
     icon: React.ReactNode;
     active?: boolean;
     children: React.ReactNode;
+    backgroundColor?: string;
 };
 
-export default function SidebarPopoverGroup({ title, icon, active = false, children, }: Readonly<Props>) {
+export default function SidebarPopoverGroup({ title, icon, active = false, children, backgroundColor = "bg-black"    }: Readonly<Props>) {
 
     return (
         <Popover.Root>
             <Popover.Trigger asChild>
                 <button
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl transition ${
-                        active
-                            ? "bg-accent/10 text-accent"
-                            : "text-muted-foreground hover:bg-black/5"
+                    className={`flex h-12 w-12 m-2 items-center justify-center rounded-2xl transition hover:bg-accent/20 ${
+                        active  ? "bg-accent/10 "  : ""
                     }`} >
                     {icon}
                 </button>
@@ -27,14 +26,16 @@ export default function SidebarPopoverGroup({ title, icon, active = false, child
                     side="right"
                     align="start"
                     sideOffset={12}
-                    className="w-64 rounded-2xl border border-border bg-white p-3 shadow-xl">
-                    <h3 className="mb-3 text-xs font-bold uppercase text-muted-foreground">
-                        {title}
-                    </h3>
+                    className={`w-fit rounded-2xl border border-border ${backgroundColor} px-6 py-4 shadow-xl`}>
+                        <h3 className="mb-3 text-sm font-bold uppercase font-unica uppercase text-white tracking-[0.2rem]">
+                            {title}
+                        </h3>
 
-                    <div className="space-y-1">
-                        {children}
-                    </div>
+                        <div className="border-t border-border mb-4"></div>
+
+                        <div className="space-y-3">
+                            {children}
+                        </div>
                 </Popover.Content>
             </Popover.Portal>
         </Popover.Root>

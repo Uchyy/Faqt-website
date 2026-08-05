@@ -2,56 +2,85 @@ import { Page } from "../model/Page";
 
 const now = new Date();
 
- export const createDemoPage = (page: Partial<Page>): Page => ({
-  id: crypto.randomUUID(),
-  documents: page.documents ?? [],
-  business: {
-    name: "",
-    tagline: "",
-    shortDescription: "",
-    longDescription: "",
-    address: "",
-    ...page.business,
-  },
+export const createDemoPage = (page: Partial<Page>): Page => ({
+    id: page.id ?? crypto.randomUUID(),
 
-  branding: {
-    selectedStyle: "minimal",
-    logo: "",
-    coverImage: "",
-    brandColor: "#3EC7C4",
-    gallery: [],
-    ...page.branding,
-  },
+    view: page.view ?? "0",
 
-  contact: {
-    phone: "",
-    email: "",
-    website: "",
-    whatsapp: "",
-    ...page.contact,
-  },
+    business: {
+        name: "",
+        tagline: "",
+        shortDescription: "",
+        longDescription: "",
+        address: "",
+        updatedAt: now,
+        ...page.business,
+    },
 
-  social: {
-    instagram: "",
-    facebook: "",
-    x: "",
-    tiktok: "",
-    youtube: "",
-    ...page.social,
-  },
+    branding: {
+        selectedStyle: "minimal",
+        logo: "",
+        coverImage: "",
+        brandColor: "#3EC7C4",
+        gallery: [],
+        updatedAt: now,
+        ...page.branding,
+    },
 
-  faqts: page.faqts ?? [],
+    contact: {
+        phone: "",
+        email: "",
+        website: "",
+        whatsapp: "",
+        updatedAt: now,
+        ...page.contact,
+    },
 
-  banner: page.banner ?? null,
+    social: {
+        instagram: "",
+        facebook: "",
+        x: "",
+        tiktok: "",
+        youtube: "",
+        updatedAt: now,
+        ...page.social,
+    },
 
-  publishing: {
-    isPublished: true,
-    slug: "",
-    publicUrl: "",
-    qrCodeUrl: "",
-    ...page.publishing,
-  },
+    faqts: page.faqts ?? [],
 
-  createdAt: now,
-  updatedAt: now,
+    documents: page.documents ?? [],
+
+    tools: {
+        openingHours: false,
+        banner: false,
+        enquiries: false,
+        services: false,
+        ...page.tools,
+    },
+
+    openingHours: {
+        enabled: false,
+        schedule: [],
+        updatedAt: now,
+        ...page.openingHours,
+    },
+
+    enquiries: page.enquiries ?? [],
+
+    services: page.services ?? [],
+
+    banner: page.banner ?? null,
+
+    publishing: {
+        isPublished: true,
+        slug: "",
+        publicUrl: "",
+        qrCodeUrl: "",
+        publishedAt: now,
+        updatedAt: now,
+        ...page.publishing,
+    },
+
+    createdAt: page.createdAt ?? now,
+    updatedAt: page.updatedAt ?? now,
 });

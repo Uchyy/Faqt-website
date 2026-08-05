@@ -1,4 +1,4 @@
-import { X, Settings, CircleHelp, LogOut, ChevronDown, Building2, Palette, FileText, Share2, CircleUserRound, UserCog } from "lucide-react";
+import { X, Settings, CircleHelp, LogOut, ChevronDown, Building2, Palette, FileText, Share2, CircleUserRound, UserCog, Home, Wrench } from "lucide-react";
 import { DashboardSection, DashboardSubSection, useDashboardUI } from "../../context/DashboardUIContext";
 import { useEffect, useState } from "react";
 import FaqtLogoText from "../ui/FaqtLogoText";
@@ -7,7 +7,6 @@ import { useNavigate } from "@tanstack/react-router";
 import { useMediaQuery } from "../../utils/useScreenSize";
 import FaqtLogo from "../ui/FaqtLogo";
 import PopOver from "../ui/PopOver";
-import { Tooltip } from 'react-tooltip'
 
 export default function DashboardMenu(){
     const isDesktop = useMediaQuery("(min-width:1024px)");
@@ -48,49 +47,62 @@ export default function DashboardMenu(){
     return (
         <div className={` ${sidebarMode === "mobile" ? "fixed inset-0 z-[100]" : "relative"}`}>
 
-            {sidebarMode === "mobile" && (  <button aria-label="Close menu" onClick={closeMenu} className="absolute inset-0 bg-black/30"/>
+            {sidebarMode === "mobile" && (  <button aria-label="Close menu" color="white" onClick={closeMenu} className="absolute inset-0 bg-black/30 "/>
             )}
 
             <aside className={`
-                sticky top-0 h-screen h-screen bg-white border-r rounded-br-4xl border-border shadow-xl p-6 flex flex-col
+                sticky top-0 h-screen h-screen bg-black border-r rounded-br-4xl border-border shadow-xl p-6 flex flex-col
                 transition-all duration-300
                 ${sidebarMode === "expanded" && "w-80"}
                 ${sidebarMode === "collapsed" && "w-30 p-4"}
                 ${sidebarMode === "mobile" && "absolute left-0 top-0 w-80"}`}>
 
-                <div className="flex items-center justify-between border-b border-border pb-4">
+                <div className={`flex items-center ${sidebarMode === "collapsed" ? "justify-center" : "justify-between"} border-b border-border pb-4`}>
                     {sidebarMode === "collapsed" ? ( <FaqtLogo/> ) : (  <FaqtLogoText /> )}
                     {sidebarMode === "mobile" && (
                         <button onClick={closeMenu} className="rounded-xl p-2 hover:bg-black/5">
-                            <X size={20}/>
+                            <X size={20} color="#ffffff"/>
                         </button>
                     )}
                 </div>
 
                 <nav className="mt-8 flex-1 overflow-y-auto space-y-3 pr-2">
-                    <MenuGroup title="Information" icon={<Building2 size={18}/>} active={activeSection==="information"} collapsed={collapsed}>
+                    
+                    <OverviewButton
+                        active={activeSection === "home"}
+                        collapsed={collapsed}
+                        onClick={() => navigateSection("home", "home")}
+                    />
+
+                    <MenuGroup title="Information" icon={<Building2 size={18} color="#3EC7C4"/>} active={activeSection==="information"} collapsed={collapsed}>
                         <MenuButton active={activeSubSection==="business"} onClick={()=>navigateSection("information","business")}>Business Information</MenuButton>
                         <MenuButton active={activeSubSection==="contact"} onClick={()=>navigateSection("information","contact")}>Contact Information</MenuButton>
                         <MenuButton active={activeSubSection==="socials"} onClick={()=>navigateSection("information","socials")}>Social Media</MenuButton>
                     </MenuGroup>
 
 
-                    <MenuGroup title="Appearance" icon={<Palette size={18}/>} active={activeSection==="appearance"} collapsed={collapsed}>
+                    <MenuGroup title="Appearance" icon={<Palette size={18} color="#3EC7C4"/>} active={activeSection==="appearance"} collapsed={collapsed}>
                         <MenuButton active={activeSubSection==="theme"} onClick={()=>navigateSection("appearance","theme")}>Themes</MenuButton>
 
-                        <MenuButton active={activeSubSection==="media-content"} onClick={()=>navigateSection("appearance","media-content")}>Media content</MenuButton>
+                        <MenuButton active={activeSubSection==="media-content"} onClick={()=>navigateSection("appearance","media-content")}>Media</MenuButton>
                     </MenuGroup>
 
 
-                    <MenuGroup title="Content" icon={<FileText size={18}/>} active={activeSection==="content"} collapsed={collapsed}>
-                        <MenuButton active={activeSubSection==="banner"} onClick={()=>navigateSection("content","banner")}>Banner</MenuButton>
-                        <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("content","media")}>Resources & Media</MenuButton>
-                        <MenuButton active={activeSubSection==="faqt"} onClick={()=>navigateSection("content","faqt")}>Faqt Section</MenuButton>
+                    <MenuGroup title="Content" icon={<FileText size={18} color="#3EC7C4"/>} active={activeSection==="content"} collapsed={collapsed}>
+                        <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("content","media")}>Resources</MenuButton>
+                        <MenuButton active={activeSubSection==="faqt"} onClick={()=>navigateSection("content","faqt")}>Faqt </MenuButton>
                     </MenuGroup>
 
 
-                    <MenuGroup title="Share" icon={<Share2 size={18}/>} active={activeSection==="share"} collapsed={collapsed} last>
+                    <MenuGroup title="Share" icon={<Share2 size={18} color="#3EC7C4"/>} active={activeSection==="share"} collapsed={collapsed} last>
                         <MenuButton active={activeSubSection==="share"} onClick={()=>navigateSection("share","share")}>Share Page</MenuButton>
+                    </MenuGroup>
+
+                    <MenuGroup title="Tools" icon={<Wrench size={18} color="#3EC7C4"/>} active={activeSection==="tools"} collapsed={collapsed}>
+                        <MenuButton active={activeSubSection==="openingHours"} onClick={()=>navigateSection("tools","openingHours")}>Opening Hours </MenuButton>
+                        <MenuButton active={activeSubSection==="services"} onClick={()=>navigateSection("home","services")}>Services</MenuButton>
+                        <MenuButton active={activeSubSection==="enquiry"} onClick={()=>navigateSection("home","enquiry")}>Enquiry</MenuButton>
+                        <MenuButton active={activeSubSection==="banner"} onClick={()=>navigateSection("home","banner")}>Banner</MenuButton>
                     </MenuGroup>
 
                 </nav>
@@ -98,34 +110,34 @@ export default function DashboardMenu(){
                     <DropdownMenu.Trigger asChild>
                         {collapsed ? (
                             <button className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/10 hover:bg-black/20 transition">
-                                <UserCog size={20}/>
+                                <UserCog size={20} color="#3EC7C4"/>
                             </button>
                         ) : (
                             <button className="flex items-center justify-between w-full rounded-2xl bg-black/10 hover:bg-black/20 transition p-3">
                                 <div className="flex items-center gap-3">
-                                    <UserCog size={20}/>
-                                    <span className="text-sm font-medium">Account & Settings</span>
+                                    <UserCog size={20} color="#3EC7C4"/>
+                                    <span className="text-sm font-unica uppercase font-bold tracking-[0.2rem] text-white">Account & Settings</span>
                                 </div>
-                                <ChevronDown size={16}/>
+                                <ChevronDown size={16} color="#3EC7C4"/>
                             </button>
                         )}
                     </DropdownMenu.Trigger>
 
-                    <DropdownMenu.Content className="w-56 rounded-xl border border-border bg-white shadow-lg p-2 mt-2" align="end">
+                    <DropdownMenu.Content className="w-56 rounded-xl border border-border bg-black shadow-lg p-2 mt-2" align="end">
 
                         <DropdownMenu.Item className="flex items-center gap-3 rounded-lg px-3 py-2 cursor-pointer outline-none hover:bg-accent/20">
-                            <CircleUserRound size={18}/>
-                            <span className="text-sm font-medium">Profile</span>
+                            <CircleUserRound size={18} color="#3EC7C4"/>
+                            <span className="text-sm font-medium tracking-[0.2rem] text-white">Profile</span>
                         </DropdownMenu.Item>
 
                         <DropdownMenu.Item className="flex items-center gap-3 rounded-lg px-3 py-2 cursor-pointer outline-none hover:bg-accent/20">
-                            <Settings size={18}/>
-                            <span className="text-sm font-medium">Settings</span>
+                            <Settings size={18} color="#3EC7C4"/>
+                            <span className="text-sm font-medium tracking-[0.2rem] text-white">Settings</span>
                         </DropdownMenu.Item>
 
                         <DropdownMenu.Item className="flex items-center gap-3 rounded-lg px-3 py-2 cursor-pointer outline-none hover:bg-accent/20">
-                            <CircleHelp size={18}/>
-                            <span className="text-sm font-medium">Help & Support</span>
+                            <CircleHelp size={18} color="#3EC7C4"/>
+                            <span className="text-sm font-medium tracking-[0.2rem] text-white">Help & Support</span>
                         </DropdownMenu.Item>
 
                         <DropdownMenu.Separator className="my-2 h-px bg-border"/>
@@ -133,8 +145,8 @@ export default function DashboardMenu(){
                         <DropdownMenu.Item
                             onClick={signOut}
                             className="flex items-center gap-3 rounded-lg px-3 py-2 cursor-pointer outline-none text-red-500 hover:bg-red-50" >
-                            <LogOut size={18}/>
-                            <span className="text-sm font-medium">Sign out</span>
+                            <LogOut size={18} color="red"/>
+                            <span className="text-sm font-medium tracking-[0.2rem] text-white">Sign out</span>
                         </DropdownMenu.Item>
 
                     </DropdownMenu.Content>
@@ -148,7 +160,7 @@ export default function DashboardMenu(){
 
 
 function MenuGroup({title,children,active=false,icon,last=false,collapsed=false, onClick}:Readonly<{
-    title:string;  children:React.ReactNode; active?:boolean; icon:React.ReactNode, collapsed?:boolean; last?:boolean;  onClick?:()=>void; }>){
+    title:string;  children:React.ReactNode ; active?:boolean; icon:React.ReactNode, collapsed?:boolean; last?:boolean;  onClick?:()=>void; }>){
     const [open,setOpen] = useState(active);
 
     useEffect(()=>{
@@ -157,7 +169,6 @@ function MenuGroup({title,children,active=false,icon,last=false,collapsed=false,
 
    if (collapsed) {
     return (
-        <>
             <PopOver
                 title={title}
                 icon={
@@ -168,13 +179,11 @@ function MenuGroup({title,children,active=false,icon,last=false,collapsed=false,
                 active={active} >
                 {children}
             </PopOver>
-            <Tooltip id="sidebar-tooltip" place="right" />
-        </>
-    );
-}
+        );
+    }
 
     return (
-        <div className={`rounded-2xl p-3 transition ${active ? "bg-accent/10" : "bg-black/[0.03]"} ${last ? "mb-6" : "mb-2"}`}>
+        <div className={`rounded-2xl p-3 transition ${active ? "bg-accent/10" : "bg-black"} ${last ? "mb-6" : "mb-2"}`}>
 
             <button onClick={
                 ()=>setOpen(v=>!v)
@@ -182,14 +191,14 @@ function MenuGroup({title,children,active=false,icon,last=false,collapsed=false,
                 className="flex items-center justify-between w-full">
                 <div className="flex items-center gap-3">
                     {icon}
-                    <span className={`text-xs font-bold uppercase ${active ? "text-accent" : "text-muted-foreground"}`}>
+                    <span className={`text-sm font-bold uppercase font-unica tracking-[0.2rem] text-white ${active ? "text-white" : ""}`}>
                         {title}
                     </span>
                 </div>
-                <ChevronDown size={16} className={`transition ${open ? "rotate-180" : ""}`}/>
+                <ChevronDown size={16} color="#3EC7C4" className={`transition ${open ? "rotate-180" : ""}`}/>
             </button>
 
-            <div className={`overflow-hidden transition-all duration-300 ${open ? "max-96 mt-3 space-y-1" : "max-h-0"}`}>
+            <div className={`overflow-hidden transition-all duration-300 ${open ? "max-96 mt-3 space-y-4" : "max-h-0"}`}>   
                 {children}
             </div>
 
@@ -204,9 +213,37 @@ function MenuButton({children,onClick,active=false,className=""}:Readonly<{
     return (
         <button
             onClick={onClick}
-            className={`flex items-center gap-3 w-full px-3 py-2.5 transition hover:bg-accent/10 ${active ? "border-l-4 border-accent font-semibold text-text" : "text-muted-foreground"} ${className}`}>
+            className={`flex items-center font-sm gap-3 w-full px-3 py-2.5 transition text-white hover:bg-accent/10 font-cinzel tracking-[0.02rem] ${active ? "border-l-4 border-accent text-accent font-bold " : ""} ${className}`}>
             {children}
         </button>
     );
-}    
+}  
+
+
+
+function OverviewButton({ active, collapsed, onClick,}: Readonly<{ active: boolean; collapsed: boolean; onClick: () => void;}>) {
+
+    return (
+        <div className={`rounded-2xl p-3 mb-2 transition ${ active ? "bg-accent/10" : "bg-black" }`}>
+            {collapsed ? (
+                <button
+                    onClick={onClick}
+                    data-tooltip-id="sidebar-tooltip"
+                    data-tooltip-content="Overview"
+                    className="flex items-center justify-center w-full">
+                    <Home size={18} color="#3EC7C4" />
+                </button>
+            ) : (
+                <button onClick={onClick} className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-3">
+                        <Home size={18} color="#3EC7C4" />
+                        <span className="text-sm font-bold uppercase font-unica tracking-[0.2rem] text-white">
+                            Overview
+                        </span>
+                    </div>
+                </button>
+            )}
+        </div>
+    );
+}
 

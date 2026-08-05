@@ -9,13 +9,7 @@ type Props = {
   bgColor?: string
 };
 
-export default function CollapsibleSection({
-  title,
-  label,
-  button = null,
-  children,
-  bgColor = "white"
-}: Readonly<Props>) {
+export default function CollapsibleSection({ title, label, button = null, children, bgColor = "white"}: Readonly<Props>) {
   const [open, setOpen] = useState(false);
 
   return (

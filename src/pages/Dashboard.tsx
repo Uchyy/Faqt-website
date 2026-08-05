@@ -4,13 +4,16 @@ import DashboardMenu from "../components/dashboard/DashBoardMenu";
 import DashboardContent from "../components/dashboard/DashboardContent";
 import { DashboardUIProvider, useDashboardUI } from "../context/DashboardUIContext";
 import { NotificationProvider } from "../context/NotificationContext";
+import { DashboardDataProvider } from "../context/DashBoardDataContext";
 
 
 function Dashboard(){
     return (
         <NotificationProvider>
             <DashboardUIProvider>
-                <DashboardLayout/>
+                <DashboardDataProvider>
+                    <DashboardLayout/>
+                </DashboardDataProvider>
             </DashboardUIProvider>
         </NotificationProvider>
     );
@@ -27,9 +30,8 @@ function DashboardLayout(){
                 ${sidebarMode === "mobile" ? "w-full" : ""} `}>
 
                 <DashboardNavbar />
-                <main className="w-full px-6 justify-center">
-                    <DashboardHero />
-                    <section className="max-w-5xl px-6 py-6 ">
+                <main className="w-full px-2 justify-center">
+                    <section className="w-full px-4 py-6 ">
                         <DashboardContent />
                     </section>
                 </main>

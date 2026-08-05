@@ -1,12 +1,94 @@
 import { createDemoPage } from "../utils/createDemoPage";
 
 export const demoPageBold = createDemoPage({
+  view: "24",
   business: {
     name: "Bean & Brew Coffee",
     tagline: "A cup of home",
     shortDescription: "Specialty coffee, homemade pastries and a cosy place to relax.",
-    longDescription: "Bean & Brew is an independent coffee shop serving freshly roasted coffee, homemade cakes and light lunches.",
+    longDescription:
+      "Bean & Brew is an independent coffee shop serving freshly roasted coffee, homemade cakes and light lunches.",
     address: "25 High Street, Portsmouth PO1 3AB",
+    updatedAt: new Date("2026-08-01"),
+  },
+
+  tools: {
+    openingHours: true,
+    banner: false,
+    enquiries: false,
+    services: false,
+  },
+
+  openingHours: {
+    enabled: true,
+    schedule: [
+      {
+        day: "Monday",
+        closed: false,
+        periods: [
+          {
+            open: "08:00",
+            close: "17:00",
+          },
+        ],
+      },
+      {
+        day: "Tuesday",
+        closed: false,
+        periods: [
+          {
+            open: "08:00",
+            close: "17:00",
+          },
+        ],
+      },
+      {
+        day: "Wednesday",
+        closed: false,
+        periods: [
+          {
+            open: "08:00",
+            close: "17:00",
+          },
+        ],
+      },
+      {
+        day: "Thursday",
+        closed: false,
+        periods: [
+          {
+            open: "08:00",
+            close: "17:00",
+          },
+        ],
+      },
+      {
+        day: "Friday",
+        closed: false,
+        periods: [
+          {
+            open: "08:00",
+            close: "17:00",
+          },
+        ],
+      },
+      {
+        day: "Saturday",
+        closed: false,
+        periods: [
+          {
+            open: "09:00",
+            close: "16:00",
+          },
+        ],
+      },
+      {
+        day: "Sunday",
+        closed: true,
+        periods: [],
+      },
+    ],
+    updatedAt: new Date("2026-08-01"),
   },
 
   documents: [
@@ -37,6 +119,7 @@ export const demoPageBold = createDemoPage({
       "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
     ],
+    updatedAt: new Date("2026-08-01"),
   },
 
   contact: {
@@ -44,6 +127,7 @@ export const demoPageBold = createDemoPage({
     email: "hello@beanandbrew.co.uk",
     website: "https://beanandbrew.co.uk",
     whatsapp: "+44786212725",
+    updatedAt: new Date("2026-08-01"),
   },
 
   social: {
@@ -51,7 +135,8 @@ export const demoPageBold = createDemoPage({
     facebook: "beanandbrew",
     x: "",
     tiktok: "",
-    youtube: ""
+    youtube: "",
+    updatedAt: new Date("2026-08-01"),
   },
 
   faqts: [
@@ -85,20 +170,68 @@ export const demoPageBold = createDemoPage({
   publishing: {
     slug: "bean-and-brew",
     publicUrl: "https://faqt.app/bean-and-brew",
-    isPublished: false,
-    qrCodeUrl: ""
+    isPublished: true,
+    qrCodeUrl: "",
+    updatedAt: new Date("2026-08-01"),
   },
 });
 
 
 export const demoPageMinimal = createDemoPage({
+  view: "129",
   business: {
     name: "Harrison Legal",
     tagline: "Clear advice. Trusted guidance.",
     shortDescription: "Specialists in family, property and employment law.",
-    longDescription:  "Harrison Legal provides straightforward legal advice with a personal approach.",
+    longDescription:
+      "Harrison Legal provides straightforward legal advice with a personal approach.",
     address: "12 Guildhall Walk, Portsmouth PO1 2DD",
+    updatedAt: new Date("2026-08-01"),
   },
+
+  tools: {
+    openingHours: false,
+    banner: false,
+    enquiries: true,
+    services: false,
+  },
+
+  enquiries: [
+    {
+      id: "enquiry-1",
+      name: "Sarah Williams",
+      email: "sarah@example.com",
+      phone: "+447700111222",
+      title: "Property Consultation",
+      description:
+        "I would like advice regarding purchasing my first property and reviewing the legal documents.",
+      status: "new",
+      createdAt: new Date("2026-07-28"),
+      updatedAt: new Date("2026-07-28"),
+    },
+    {
+      id: "enquiry-2",
+      name: "Michael Brown",
+      email: "michael@example.com",
+      title: "Employment Advice",
+      description:
+        "I need advice regarding an employment contract and my workplace rights.",
+      status: "in-progress",
+      createdAt: new Date("2026-07-30"),
+      updatedAt: new Date("2026-08-01"),
+    },
+    {
+      id: "enquiry-3",
+      name: "Emma Jones",
+      phone: "+447700333444",
+      title: "Family Law Consultation",
+      description:
+        "Request for information about arranging an initial family law consultation.",
+      status: "resolved",
+      createdAt: new Date("2026-07-15"),
+      updatedAt: new Date("2026-07-20"),
+    },
+  ],
 
   branding: {
     selectedStyle: "minimal",
@@ -115,13 +248,24 @@ export const demoPageMinimal = createDemoPage({
       "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
     ],
+    updatedAt: new Date("2026-08-01"),
   },
 
   contact: {
     phone: "+442392123456",
     email: "hello@harrisonlegal.co.uk",
     website: "https://harrisonlegal.co.uk",
-    whatsapp: ""
+    whatsapp: "",
+    updatedAt: new Date("2026-08-01"),
+  },
+
+  social: {
+    instagram: "",
+    facebook: "",
+    x: "",
+    tiktok: "",
+    youtube: "",
+    updatedAt: new Date("2026-08-01"),
   },
 
   documents: [
@@ -137,35 +281,40 @@ export const demoPageMinimal = createDemoPage({
     },
   ],
 
- faqts: [
+  faqts: [
     {
       id: "1",
       question: "Do you offer free consultations?",
-      answer: "Yes. We offer a free 30-minute initial consultation to discuss your situation and how we can help.",
+      answer:
+        "Yes. We offer a free 30-minute initial consultation to discuss your situation and how we can help.",
       isPublished: true,
     },
     {
       id: "2",
       question: "What areas of law do you specialise in?",
-      answer: "We specialise in family law, residential property, wills and probate, and employment law.",
+      answer:
+        "We specialise in family law, residential property, wills and probate, and employment law.",
       isPublished: true,
     },
     {
       id: "3",
       question: "Can I sign documents online?",
-      answer: "Yes. Most documents can be securely signed electronically without visiting our office.",
+      answer:
+        "Yes. Most documents can be securely signed electronically without visiting our office.",
       isPublished: true,
     },
     {
       id: "4",
       question: "Do I need an appointment?",
-      answer: "Appointments are recommended to ensure a solicitor is available, although we will always try to accommodate walk-ins.",
+      answer:
+        "Appointments are recommended to ensure a solicitor is available, although we will always try to accommodate walk-ins.",
       isPublished: true,
     },
     {
       id: "5",
       question: "How much do your services cost?",
-      answer: "Fees vary depending on the service. We provide transparent pricing and a written quotation before any work begins.",
+      answer:
+        "Fees vary depending on the service. We provide transparent pricing and a written quotation before any work begins.",
       isPublished: true,
     },
   ],
@@ -173,27 +322,68 @@ export const demoPageMinimal = createDemoPage({
   publishing: {
     slug: "harrison-legal",
     publicUrl: "https://faqt.app/harrison-legal",
-    isPublished: false,
-    qrCodeUrl: ""
+    isPublished: true,
+    qrCodeUrl: "",
+    updatedAt: new Date("2026-08-01"),
   },
 });
 
 
-
 export const demoPageCard = createDemoPage({
+  view: "129",
   business: {
     name: "Casa Milano",
     tagline: "Authentic Italian Dining",
     shortDescription: "Fresh pasta, wood-fired pizza and handcrafted desserts.",
-    longDescription: "Casa Milano brings authentic Italian flavours to Portsmouth...",
+    longDescription:
+      "Casa Milano brings authentic Italian flavours to Portsmouth with traditional recipes, fresh ingredients and a warm dining experience.",
     address: "88 Albert Road, Southsea PO5 2SN",
+    updatedAt: new Date("2026-08-01"),
   },
+
+  tools: {
+    openingHours: false,
+    banner: false,
+    enquiries: false,
+    services: true,
+  },
+
+  services: [
+    {
+      id: "service-1",
+      name: "Lunch Dining Experience",
+      description:
+        "A selection of freshly prepared Italian dishes available during lunch hours.",
+      price: "From £15",
+      createdAt: new Date("2026-07-01"),
+      updatedAt: new Date("2026-08-01"),
+    },
+    {
+      id: "service-2",
+      name: "Private Event Booking",
+      description:
+        "Host birthdays, celebrations and private gatherings with customised menus.",
+      price: "Contact for pricing",
+      createdAt: new Date("2026-07-05"),
+      updatedAt: new Date("2026-08-01"),
+    },
+    {
+      id: "service-3",
+      name: "Takeaway Collection",
+      description:
+        "Order your favourite pizzas, pasta dishes and desserts for collection.",
+      price: "From £8",
+      createdAt: new Date("2026-07-10"),
+      updatedAt: new Date("2026-08-01"),
+    },
+  ],
 
   branding: {
     selectedStyle: "card",
     brandColor: "#A52A2A",
     logo: "https://images.unsplash.com/photo-1561070791-36c11767b26a?w=400",
-    coverImage: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+    coverImage:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
     gallery: [
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
       "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
@@ -204,6 +394,7 @@ export const demoPageCard = createDemoPage({
       "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
       "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
     ],
+    updatedAt: new Date("2026-08-01"),
   },
 
   documents: [
@@ -224,6 +415,7 @@ export const demoPageCard = createDemoPage({
     email: "bookings@casamilano.co.uk",
     website: "https://casamilano.co.uk",
     whatsapp: "+447700900123",
+    updatedAt: new Date("2026-08-01"),
   },
 
   social: {
@@ -231,38 +423,44 @@ export const demoPageCard = createDemoPage({
     facebook: "casamilanouk",
     tiktok: "casamilanouk",
     x: "",
-    youtube: ""
+    youtube: "",
+    updatedAt: new Date("2026-08-01"),
   },
 
   faqts: [
     {
       id: "1",
       question: "Do I need to book a table?",
-      answer: "Reservations are recommended, especially on evenings and weekends, but walk-ins are always welcome when tables are available.",
+      answer:
+        "Reservations are recommended, especially on evenings and weekends, but walk-ins are always welcome when tables are available.",
       isPublished: true,
     },
     {
       id: "2",
       question: "Do you have vegetarian or vegan options?",
-      answer: "Yes. Our menu includes a wide selection of vegetarian and vegan pasta, pizza, and dessert options.",
+      answer:
+        "Yes. Our menu includes a wide selection of vegetarian and vegan pasta, pizza, and dessert options.",
       isPublished: true,
     },
     {
       id: "3",
       question: "Can I order takeaway?",
-      answer: "Yes. All pizzas, pasta dishes, desserts, and drinks are available for takeaway collection.",
+      answer:
+        "Yes. All pizzas, pasta dishes, desserts, and drinks are available for takeaway collection.",
       isPublished: true,
     },
     {
       id: "4",
       question: "Do you cater for food allergies?",
-      answer: "Absolutely. Please inform a member of staff before ordering and we'll be happy to advise on allergens and suitable dishes.",
+      answer:
+        "Absolutely. Please inform a member of staff before ordering and we will be happy to advise on allergens and suitable dishes.",
       isPublished: true,
     },
     {
       id: "5",
       question: "Is parking available nearby?",
-      answer: "Yes. There is on-street parking and several public car parks within a short walk of the restaurant.",
+      answer:
+        "Yes. There is on-street parking and several public car parks within a short walk of the restaurant.",
       isPublished: true,
     },
   ],
@@ -278,18 +476,37 @@ export const demoPageCard = createDemoPage({
     slug: "casa-milano",
     publicUrl: "https://faqt.app/casa-milano",
     isPublished: false,
-    qrCodeUrl: ""
+    qrCodeUrl: "",
+    updatedAt: new Date("2026-08-01"),
   },
 });
 
+
 export const demoPageLight = createDemoPage({
+  view: "129",
   business: {
     name: "Willow & Bloom Studio",
     tagline: "Beautiful moments, thoughtfully designed",
-    shortDescription: "A creative floral studio crafting bespoke arrangements and event styling.",
+    shortDescription:
+      "A creative floral studio crafting bespoke arrangements and event styling.",
     longDescription:
       "Willow & Bloom creates elegant floral designs for weddings, celebrations, and everyday moments. Every arrangement is handcrafted with seasonal flowers and a personal touch.",
     address: "14 Castle Road, Southsea PO5 3AY",
+    updatedAt: new Date("2026-08-01"),
+  },
+
+  tools: {
+    openingHours: false,
+    banner: true,
+    enquiries: false,
+    services: false,
+  },
+
+  banner: {
+    enabled: true,
+    message: "Spring collection now available.",
+    type: "info",
+    showUntil: new Date("2026-09-01"),
   },
 
   branding: {
@@ -305,6 +522,7 @@ export const demoPageLight = createDemoPage({
       "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
       "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=1200",
     ],
+    updatedAt: new Date("2026-08-01"),
   },
 
   contact: {
@@ -312,6 +530,7 @@ export const demoPageLight = createDemoPage({
     email: "hello@willowandbloom.co.uk",
     website: "https://willowandbloom.co.uk",
     whatsapp: "+447700123456",
+    updatedAt: new Date("2026-08-01"),
   },
 
   social: {
@@ -320,6 +539,7 @@ export const demoPageLight = createDemoPage({
     x: "",
     tiktok: "willowandbloomstudio",
     youtube: "",
+    updatedAt: new Date("2026-08-01"),
   },
 
   documents: [
@@ -336,79 +556,177 @@ export const demoPageLight = createDemoPage({
   ],
 
   faqts: [
-  {
-    id: "1",
-    question: "What are your opening hours?",
-    answer: "We are open Monday to Saturday from 9am to 5pm. Our opening hours may vary on bank holidays and special occasions.",
-    isPublished: true,
-  },
-  {
-    id: "2",
-    question: "Do you offer same-day flower delivery?",
-    answer: "Yes. Same-day delivery is available for orders placed before our daily cut-off time, subject to availability.",
-    isPublished: true,
-  },
-  {
-    id: "3",
-    question: "Can I customise a bouquet?",
-    answer: "Absolutely. We can create personalised bouquets based on your preferred colours, flowers, occasion, and budget.",
-    isPublished: true,
-  },
-  {
-    id: "4",
-    question: "How long do fresh flowers last?",
-    answer: "With proper care, most fresh flowers can last between 5 and 10 days. We provide care advice with every arrangement.",
-    isPublished: true,
-  },
-  {
-    id: "5",
-    question: "Do you provide wedding flowers?",
-    answer: "Yes. We create bespoke wedding bouquets, buttonholes, table arrangements, and venue decorations tailored to your special day.",
-    isPublished: true,
-  },
-  {
-    id: "6",
-    question: "Can I order flowers for special occasions?",
-    answer: "Yes. We create arrangements for birthdays, anniversaries, sympathy, thank you gifts, celebrations, and other special moments.",
-    isPublished: true,
-  },
-  {
-    id: "7",
-    question: "Do you offer plant gifts?",
-    answer: "Yes. We offer a selection of indoor plants, planters, and green gifts suitable for homes, offices, and special occasions.",
-    isPublished: true,
-  },
-  {
-    id: "8",
-    question: "How do I care for my flowers?",
-    answer: "Keep flowers in fresh water, trim the stems regularly, remove wilted petals, and keep them away from direct sunlight and heat sources.",
-    isPublished: true,
-  },
-  {
-    id: "9",
-    question: "Do you deliver locally?",
-    answer: "Yes. We provide local delivery services within our delivery area. Please contact us with your address to confirm availability.",
-    isPublished: true,
-  },
-  {
-    id: "10",
-    question: "Can I visit your shop?",
-    answer: "Yes. You are welcome to visit our shop and explore our seasonal flowers, plants, and gift collections.",
-    isPublished: true,
-  },
-],
-
-  banner: {
-    enabled: true,
-    message: "Spring collection now available.",
-    type: "success",
-    showUntil: new Date("2026-09-01"),
-  },
+    {
+      id: "1",
+      question: "What are your opening hours?",
+      answer:
+        "We are open Monday to Saturday from 9am to 5pm. Our opening hours may vary on bank holidays and special occasions.",
+      isPublished: true,
+    },
+    {
+      id: "2",
+      question: "Do you offer same-day flower delivery?",
+      answer:
+        "Yes. Same-day delivery is available for orders placed before our daily cut-off time, subject to availability.",
+      isPublished: true,
+    },
+    {
+      id: "3",
+      question: "Can I customise a bouquet?",
+      answer:
+        "Absolutely. We can create personalised bouquets based on your preferred colours, flowers, occasion, and budget.",
+      isPublished: true,
+    },
+    {
+      id: "4",
+      question: "How long do fresh flowers last?",
+      answer:
+        "With proper care, most fresh flowers can last between 5 and 10 days. We provide care advice with every arrangement.",
+      isPublished: true,
+    },
+    {
+      id: "5",
+      question: "Do you provide wedding flowers?",
+      answer:
+        "Yes. We create bespoke wedding bouquets, buttonholes, table arrangements, and venue decorations tailored to your special day.",
+      isPublished: true,
+    },
+    {
+      id: "6",
+      question: "Can I order flowers for special occasions?",
+      answer:
+        "Yes. We create arrangements for birthdays, anniversaries, sympathy, thank you gifts, celebrations, and other special moments.",
+      isPublished: true,
+    },
+    {
+      id: "7",
+      question: "Do you offer plant gifts?",
+      answer:
+        "Yes. We offer a selection of indoor plants, planters, and green gifts suitable for homes, offices, and special occasions.",
+      isPublished: true,
+    },
+    {
+      id: "8",
+      question: "How do I care for my flowers?",
+      answer:
+        "Keep flowers in fresh water, trim the stems regularly, remove wilted petals, and keep them away from direct sunlight and heat sources.",
+      isPublished: true,
+    },
+    {
+      id: "9",
+      question: "Do you deliver locally?",
+      answer:
+        "Yes. We provide local delivery services within our delivery area. Please contact us with your address to confirm availability.",
+      isPublished: true,
+    },
+    {
+      id: "10",
+      question: "Can I visit your shop?",
+      answer:
+        "Yes. You are welcome to visit our shop and explore our seasonal flowers, plants, and gift collections.",
+      isPublished: true,
+    },
+  ],
 
   publishing: {
     slug: "willow-and-bloom",
     publicUrl: "https://faqt.app/willow-and-bloom",
     isPublished: false,
     qrCodeUrl: "",
+    updatedAt: new Date("2026-08-01"),
+  },
+});
+
+
+export const demoPageNewUser = createDemoPage({
+  business: {
+    name: "Harbour Wellness Studio",
+    tagline: "Helping you feel your best",
+    shortDescription: "A local wellness studio offering massage, yoga and wellbeing treatments.",
+    longDescription: "Harbour Wellness Studio provides relaxing treatments, wellness sessions and personalised support to help customers improve their wellbeing.",
+    address: "42 Elm Grove, Southsea PO5 1PX",
+    updatedAt: new Date("2026-08-01")
+  },
+
+  documents: [
+    {
+      id: "doc-1",
+      title: "Treatment Price List",
+      url: "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf",
+    },
+  ],
+
+  branding: {
+    selectedStyle: "minimal",
+    logo: "",
+    coverImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
+    brandColor: "#3EC7C4",
+    gallery: [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
+      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200",
+    ],
+    updatedAt: new Date("2026-08-01")
+  },
+
+
+  contact: {
+    phone: "+447700555111",
+    email: "hello@harbourwellness.co.uk",
+    website: "",
+    whatsapp: "+447700555111",
+    updatedAt: new Date("2026-08-01")
+  },
+
+
+  social: {
+    instagram: "",
+    facebook: "",
+    x: "",
+    tiktok: "",
+    youtube: "",
+    updatedAt: new Date("2026-08-01")
+  },
+
+
+  faqts: [
+    {
+      id: "1",
+      question: "What treatments do you offer?",
+      answer:
+        "We offer massage therapy, yoga sessions, relaxation treatments and personalised wellness packages.",
+      isPublished: true,
+    },
+    {
+      id: "2",
+      question: "Do I need to book an appointment?",
+      answer:
+        "Yes. Appointments are recommended so we can reserve the right time and treatment for you.",
+      isPublished: true,
+    },
+  ],
+
+
+  banner: {
+    enabled: false,
+    message: "New treatment packages coming soon.",
+    type: "info",
+    showUntil: new Date("2026-09-30"),
+  },
+
+
+  tools: {
+    openingHours: true,
+    services: false,
+    banner: true,
+    enquiries: false
+  },
+
+
+  publishing: {
+    slug: "harbour-wellness",
+    publicUrl: "https://faqt.app/harbour-wellness",
+    isPublished: false,
+    qrCodeUrl: "",
+    updatedAt: new Date("2026-08-01")
   },
 });

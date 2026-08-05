@@ -1,22 +1,119 @@
 import type { Banner } from "./Banner";
-import { BusinessDocument } from "./BusinessDocument";
-import { FaqtItem } from "./FaqtItem";
-import { Styles } from "./Styles";
+import type { BusinessDocument } from "./BusinessDocument";
+import type { FaqtItem } from "./FaqtItem";
+import type { Styles } from "./Styles";
+
 
 export type Page = {
   id: string;
+  view: string;
 
   business: BusinessSection;
   branding: BrandingSection;
-  banner?: Banner | null;
+
   contact: ContactSection;
   social: SocialSection;
+
   faqts: FaqtItem[];
   documents: BusinessDocument[];
+
+  tools: ToolsSection;
+
+  openingHours: OpeningHoursSection;
+  enquiries: Enquiry[];
+  services: Service[];
+
+  banner?: Banner | null;
+
   publishing: PublishingSection;
+
   createdAt: Date;
   updatedAt: Date;
 };
+
+
+
+/* -----------------------
+   TOOLS
+----------------------- */
+
+export type ToolsSection = {
+  openingHours: boolean;
+  banner: boolean;
+  enquiries: boolean;
+  services: boolean;
+};
+
+
+
+/* -----------------------
+   OPENING HOURS
+----------------------- */
+
+export type OpeningHoursSection = {
+  enabled: boolean;
+  schedule: OpeningHoursDay[];
+  updatedAt: Date;
+};
+
+
+export type OpeningHoursDay = {
+  day: | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
+  closed: boolean;
+  periods: OpeningPeriod[];
+};
+
+
+export type OpeningPeriod = {
+  open: string;
+  close: string;
+};
+
+
+
+/* -----------------------
+   ENQUIRIES
+----------------------- */
+
+export type Enquiry = {
+  id: string;
+
+  name: string;
+  email?: string;
+  phone?: string;
+
+  title: string;
+  description: string;
+
+  status: "new" | "in-progress" | "resolved";
+
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+
+
+/* -----------------------
+   SERVICES
+----------------------- */
+
+export type Service = {
+  id: string;
+
+  name: string;
+  description: string;
+
+  price?: string;
+
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+
+
+/* -----------------------
+   PAGE SECTIONS
+----------------------- */
 
 export type BusinessSection = {
   name: string;
@@ -24,21 +121,31 @@ export type BusinessSection = {
   shortDescription: string;
   longDescription: string;
   address: string;
+
+  updatedAt: Date;
 };
+
 
 export type BrandingSection = {
   selectedStyle: Styles;
+
   logo: string;
   coverImage: string;
+
   brandColor: string;
   gallery: string[];
+
+  updatedAt: Date;
 };
+
 
 export type ContactSection = {
   phone: string;
   email: string;
   website: string;
   whatsapp: string;
+
+  updatedAt: Date;
 };
 
 
@@ -48,18 +155,32 @@ export type SocialSection = {
   x: string;
   tiktok: string;
   youtube: string;
+
+  updatedAt: Date;
 };
+
 
 export type PublishingSection = {
   isPublished: boolean;
+
   slug: string;
   publicUrl: string;
   qrCodeUrl: string;
+
+  publishedAt?: Date | null;
+  updatedAt: Date;
 };
 
 
+
+/* -----------------------
+   EMPTY PAGE
+----------------------- */
+
 export const emptyPage: Page = {
+
   id: crypto.randomUUID(),
+  view: "0",
 
   business: {
     name: "",
@@ -67,7 +188,9 @@ export const emptyPage: Page = {
     shortDescription: "",
     longDescription: "",
     address: "",
+    updatedAt: new Date(),
   },
+
 
   branding: {
     selectedStyle: "minimal",
@@ -75,14 +198,18 @@ export const emptyPage: Page = {
     coverImage: "",
     brandColor: "#3EC7C4",
     gallery: [],
+    updatedAt: new Date(),
   },
+
 
   contact: {
     phone: "",
     email: "",
     website: "",
     whatsapp: "",
+    updatedAt: new Date(),
   },
+
 
   social: {
     instagram: "",
@@ -90,10 +217,30 @@ export const emptyPage: Page = {
     x: "",
     tiktok: "",
     youtube: "",
+    updatedAt: new Date(),
   },
 
+
   faqts: [],
+
   documents: [],
+
+
+  tools: {
+    openingHours: false,
+    banner: false,
+    enquiries: false,
+    services: false,
+  },
+
+  openingHours: {
+    enabled: false,
+    schedule: [],
+    updatedAt: new Date(),
+  },
+
+  enquiries: [],
+  services: [],
 
   banner: {
     enabled: false,
@@ -107,17 +254,21 @@ export const emptyPage: Page = {
     slug: "",
     publicUrl: "",
     qrCodeUrl: "",
+    publishedAt: null,
+    updatedAt: new Date(),
   },
 
   createdAt: new Date(),
   updatedAt: new Date(),
 };
 
-// Helper for debugging / sending data
+
+
 export const stringifyPage = (page: Page) => {
   return JSON.stringify(
     page,
     (key, value) => {
+
       if (value instanceof Date) {
         return value.toISOString();
       }
@@ -135,5 +286,3 @@ export const stringifyPage = (page: Page) => {
     2
   );
 };
-
-export { Banner };

@@ -8,45 +8,44 @@ import ContentMedia from "./sections/appearance/ContentMedia";
 import SocialMedia from "./sections/information/SocialLinksSection";
 import ContactsSection from "./sections/information/ContactsSection";
 import BusinessInfo from "./sections/information/BusinessInfo";
+import HomePage from "../../pages/dashboard/HomePage";
+import BusinessInfoPage from "../../pages/dashboard/BuisnessInfoPage";
 
 
 export default function DashboardContent(){
 
-    const { activeSection } = useDashboardUI();
-    switch(activeSection){
+    const { activeSubSection } = useDashboardUI();
+    switch(activeSubSection){
 
-        case "information":
-            return (
-                <div className="space-y-6">
-                    <BusinessInfo />
-                    <ContactsSection />
-                    <SocialMedia />
-                </div>
-            );
-
-        case "appearance":
-            return (
-                <div className="space-y-6">
-                    <PageStyleSection />
-                    <ContentMedia />
-                </div>
-            );
-
-        case "content":
-            return (
-                <div className="space-y-6">
-                    <BannerSection />
-                    <MediaSection />
-                    <FaqSection />
-                </div>
-            );
-
+        case "home":
+            return <HomePage />
+        case "business":
+            return   <BusinessInfoPage />
+        case "contact":
+            return <ContactsSection />
+        case "socials":
+            return <SocialMedia />
+        case "style":
+            return <PageStyleSection />
+        case "media-content":
+            return <ContentMedia />
+        case "banner":
+            return <BannerSection />
+        case "faqt":
+            return <FaqSection />
+        case "media":
+            return <MediaSection />
         case "share":
-            return (
-                <div className="space-y-6">
-                    <SharePageSection />
-                </div>
-            );
+            return <SharePageSection />
+        case "settings":
+            return null;
+        case "help":
+            return null;
+        case "account":
+        case "theme":
+        case "enquiry":
+        case "openingHours":
+        case "services": 
 
         default: return null;
     }

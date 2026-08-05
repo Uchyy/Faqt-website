@@ -10,6 +10,7 @@ type ButtonProps = {
   icon?: ReactNode;
   iconPosition?: "left" | "right";
   disabled?: boolean;
+  rounded?: boolean
 };
 
 export default function Button({
@@ -20,12 +21,12 @@ export default function Button({
   color = "black",
   className = "",
   icon,
+  rounded = true,
   disabled = false,
   iconPosition = "left",
 }: Readonly<ButtonProps>) {
 
-  const base =
-    "px-4 py-2 rounded-3xl text-sm font-medium transition inline-flex items-center justify-center gap-2";
+  const base = `px-4 py-2 ${rounded ? " rounded-3xl" : "rounded-xl"}  text-sm font-medium transition inline-flex items-center justify-center gap-2`;
 
   const styles = {
     black: {
