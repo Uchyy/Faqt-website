@@ -7,7 +7,6 @@ import SharePageSection from "./sections/share/SharePageSection";
 import ContentMedia from "./sections/appearance/ContentMedia";
 import SocialMedia from "./sections/information/SocialLinksSection";
 import ContactsSection from "./sections/information/ContactsSection";
-import BusinessInfo from "./sections/information/BusinessInfo";
 import HomePage from "../../pages/dashboard/HomePage";
 import BusinessInfoPage from "../../pages/dashboard/BuisnessInfoPage";
 

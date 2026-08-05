@@ -4,7 +4,6 @@ import Button from "../../components/ui/Button.tsx";
 import { useState } from "react";
 import ContactEditDialog from "../../components/layout/dashboard/business/ContactEditDialog.tsx";
 import BusinessEditDialog from "../../components/layout/dashboard/business/BusinessEditDialog.tsx";
-import { BusinessSection } from "../../model/Page.ts";
 import { timeAgo } from "../../utils/timeAgo.ts";
 import PageCompletion from "../../components/ui/PageCompletion.tsx";
 
