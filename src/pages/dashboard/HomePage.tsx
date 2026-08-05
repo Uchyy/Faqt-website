@@ -6,6 +6,7 @@ import Tools from "../../components/layout/dashboard/home/Tools.tsx";
 import PageSnapshot from "../../components/layout/dashboard/home/PageSnapshot.tsx";
 import { useDashboardData } from "../../context/DashBoardDataContext.tsx";
 import DashboardStats from "../../components/layout/dashboard/home/DashboardStatCard.tsx.tsx";
+import PublicPagePreview from "../../publicpage/PublicPagePreview.tsx";
 
 type EventType = "enquiry" | "improve" | "insight" | "team";
 
@@ -72,6 +73,7 @@ export default function HomePage() {
                 url={page.publishing.publicUrl} 
                 status={ page.publishing.isPublished ? "Published" : "Draft"} 
                 updatedAt= {page.updatedAt}
+                snapshot = <PublicPagePreview page={page}/>
             />
 
         </DashboardContentBase>

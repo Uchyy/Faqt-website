@@ -1,12 +1,18 @@
-import { createContext, useContext, ReactNode, useMemo, useState } from "react";
+import { createContext, useContext, ReactNode, useMemo, useState, useCallback } from "react";
 import { demoPageBold } from "../demo/demoPage";
 import { emptyPage, Page } from "../model/Page";
+import { canPublish, getPageCompletionDetails } from "../utils/pageCompletion";
 
 
 type DashboardDataContextType = {
     page: Page;
     loading: boolean;
-    updatePage: (updates: Partial<Page>) => void;
+
+    updatePage: (data: Partial<Page>) => Page;
+    resetPage: () => void;
+
+    completion: ReturnType<typeof getPageCompletionDetails>;
+    canPublish: boolean;
 };
 
 
@@ -15,36 +21,62 @@ const DashboardDataContext = createContext<DashboardDataContextType | undefined>
 );
 
 
-export function DashboardDataProvider({
-    children,
-}: Readonly<{ children: ReactNode }>) {
+
+export function DashboardDataProvider({ children,}: Readonly<{ children: ReactNode }>) {
 
 
     const [page, setPage] = useState<Page>(
-        demoPageBold ?? emptyPage
+        () => demoPageBold ?? emptyPage
     );
 
+    const updatePage = useCallback((data: Partial<Page>) => {
+        let updatedPage!: Page;
+        setPage((currentPage) => {
 
-    function updatePage(updates: Partial<Page>) {
+            updatedPage = {
+                ...currentPage,
+                ...data,
+                updatedAt: new Date(),
+            };
+            return updatedPage;
+        });
+        return updatedPage;
 
-        setPage((current) => ({
-            ...current,
-            ...updates,
-            updatedAt: new Date(),
-        }));
+    }, []);
 
-    }
 
+
+    const resetPage = useCallback(() => {
+        setPage(emptyPage);
+    }, []);
+
+    const completion = useMemo(
+        () => getPageCompletionDetails(page),
+        [page]
+    );
+
+    const publishable = useMemo(
+        () => canPublish(page),
+        [page]
+    );
 
     const value = useMemo(
         () => ({
             page,
             loading: false,
             updatePage,
+            resetPage,
+            completion,
+            canPublish: publishable,
         }),
-        [page]
+        [
+            page,
+            updatePage,
+            resetPage,
+            completion,
+            publishable,
+        ]
     );
-
 
     return (
         <DashboardDataContext.Provider value={value}>
@@ -52,6 +84,7 @@ export function DashboardDataProvider({
         </DashboardDataContext.Provider>
     );
 }
+
 
 
 export function useDashboardData() {
@@ -63,6 +96,5 @@ export function useDashboardData() {
             "useDashboardData must be used inside DashboardDataProvider"
         );
     }
-
     return context;
 }

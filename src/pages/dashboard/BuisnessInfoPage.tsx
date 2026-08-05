@@ -96,10 +96,11 @@ export default function BusinessInfoPage() {
                 open={contactEditOpen}
                 onOpenChange={setContactEditOpen}
                 contact={page.contact}
-                onSave={(contact) =>
+                business={page.business}
+                onSave={({ contact, business }) =>
                     updatePage({
                         contact,
-                        updatedAt: new Date()
+                        business,
                     })
                 }
             />

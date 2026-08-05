@@ -7,15 +7,37 @@ type Props = {
     open: boolean;
     onOpenChange: (open: boolean) => void;
     contact: Page["contact"];
-    onSave: (contact: Page["contact"]) => void;
+    business: Page["business"];
+    onSave: (data: {
+        contact: Page["contact"];
+        business: Page["business"];
+    }) => void;
 };
 
 
-export default function ContactEditDialog({ open, onOpenChange, contact: initialContact, onSave,}: Readonly<Props>) {
+export default function ContactEditDialog({ open, onOpenChange, contact: initialContact, onSave, business: initialBusiness,}: Readonly<Props>) {
+
     const [contact, setContact] = useState(initialContact);
-    useEffect(() => { setContact(initialContact);}, [initialContact]);
+    const [business, setBusiness] = useState(initialBusiness);
+    useEffect(() => {
+        setContact(initialContact);
+        setBusiness(initialBusiness);
+    }, [initialContact, initialBusiness]);
+
     function handleSave() {
-        onSave({ ...contact, updatedAt: new Date(),});
+
+        onSave({
+            contact: {
+                ...contact,
+                updatedAt: new Date(),
+            },
+
+            business: {
+                ...business,
+                updatedAt: new Date(),
+            },
+        });
+
         onOpenChange(false);
     }
 
@@ -29,12 +51,12 @@ export default function ContactEditDialog({ open, onOpenChange, contact: initial
 
             <div className="space-y-4">
                 <Input
-                    label="PHONE"
-                    value={contact.phone}
+                    label="ADDRESS"
+                    value={business.address}
                     onChange={(value) =>
-                        setContact({
-                            ...contact,
-                            phone: value,
+                        setBusiness({
+                            ...business,
+                            address: value,
                         })
                     }
                 />
@@ -62,12 +84,12 @@ export default function ContactEditDialog({ open, onOpenChange, contact: initial
                 />
 
                 <Input
-                    label="WHATSAPP"
-                    value={contact.whatsapp}
+                    label="PHONE"
+                    value={contact.phone}
                     onChange={(value) =>
                         setContact({
                             ...contact,
-                            whatsapp: value,
+                            phone: value,
                         })
                     }
                 />

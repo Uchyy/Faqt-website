@@ -1,12 +1,12 @@
 import { createContext, useState, useMemo, useCallback, type ReactNode } from "react";
 import { emptyPage, type Page } from "../model/Page";
-import { canPublish, getPageCompletion } from "../utils/pageCompletion";
+import { canPublish, getPageCompletionDetails } from "../utils/pageCompletion";
 
 type PageContextType = {
   page: Page;
   updatePage: (data: Partial<Page>) => Page;
   resetPage: () => void;
-  completion: ReturnType<typeof getPageCompletion>;
+  completion: ReturnType<typeof getPageCompletionDetails>;
   canPublish: boolean;
 };
 
@@ -41,9 +41,9 @@ export function PageProvider({ children, initialPage = null,}: Readonly<PageProv
   }, []);
 
   const completion = useMemo(
-    () => getPageCompletion(page),
-    [page]
-  );
+        () => getPageCompletionDetails(page),
+        [page]
+    );
 
   const publishable = useMemo(
     () => canPublish(page),
