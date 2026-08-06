@@ -5,7 +5,6 @@ import { useState } from "react";
 import ContactEditDialog from "../../components/layout/dashboard/business/ContactEditDialog.tsx";
 import BusinessEditDialog from "../../components/layout/dashboard/business/BusinessEditDialog.tsx";
 import { timeAgo } from "../../utils/timeAgo.ts";
-import PageCompletion from "../../components/ui/PageCompletion.tsx";
 
 type InfoProps = {
     title: string,
@@ -20,9 +19,7 @@ export default function BusinessInfoPage() {
     return (
         <DashboardContentBase
             title={"Business Information"}
-            label="Manage your business information and how customers can contact you">
-
-            <PageCompletion page={page}/>    
+            label="Manage your business information and how customers can contact you">  
 
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                 <BusinessCard 
@@ -58,6 +55,15 @@ export default function BusinessInfoPage() {
                         {
                             title: "Address",
                             value: page.business.address
+                                ? [
+                                    page.business.address.line1?.length ? page.business.address.line1 : "",
+                                    page.business.address.line2?.length ? page.business.address.line2 : "",
+                                    page.business.address.region?.length > 0 ? page.business.address.region : "-",
+                                    page.business.address.postcode?.length > 0 ? page.business.address.postcode : "-",
+                                  ]
+                                  .filter(Boolean)
+                                  .join(", ")
+                                : "-"
                         },
 
                         {
@@ -72,7 +78,12 @@ export default function BusinessInfoPage() {
 
                         {
                             title: "Website",
-                            value: page.contact.website.length > 0 ? page.contact.website : " Not added yet"
+                            value: page.contact.website.length > 0 ? page.contact.website : "-"
+                        },
+
+                        {
+                            title: "WhatsApp",
+                            value: page.contact.whatsapp.length > 0 ? page.contact.whatsapp : "-"
                         }
                     ]} 
                    editOnClick={() => setContactEditOpen(true)}/>
@@ -109,7 +120,6 @@ export default function BusinessInfoPage() {
         
     );
 }
-
 
 type BusinessCardProps = {
     title: string

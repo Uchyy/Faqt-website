@@ -190,3 +190,9 @@ html {
 .react-international-phone-input:focus {
   outline: none;
 }
+
+
+.CircularProgressbar-text {
+   dominant-baseline: middle;
+   text-anchor: middle;
+}

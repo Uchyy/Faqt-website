@@ -23,7 +23,7 @@ export default function BusinessInfo() {
     setBusinessName(context.page.business.name);
     setShortDescription(context.page.business.shortDescription);
     setLongDescription(context.page.business.longDescription);
-    setAddress(context.page.business.address);
+    //setAddress(context.page.business.address);
     setTagline(context.page.business.tagline);
 
   }, [context?.page]);
@@ -58,7 +58,7 @@ export default function BusinessInfo() {
     const updatedPage = context?.updatePage({
       business: {
         ...context.page.business,
-        address,
+        //address,
         tagline,
         shortDescription,
         longDescription,
@@ -79,8 +79,7 @@ export default function BusinessInfo() {
   return (
     <CollapsibleSection
       title="Business Info"
-      label="LET YOUR CUSTOMERS KNOW YOU"
-    >
+      label="LET YOUR CUSTOMERS KNOW YOU">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
 
         <Input

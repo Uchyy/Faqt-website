@@ -1,8 +1,7 @@
 import { Check, CircleAlert } from "lucide-react";
 import { getPageCompletionDetails } from "../../utils/pageCompletion";
 import { Page } from "../../model/Page";
-
-
+import { CircularProgressbar, buildStyles  } from 'react-circular-progressbar';
 
 type Props = {
     page: Page;
@@ -12,6 +11,7 @@ type Props = {
 export default function PageCompletion({ page }: Readonly<Props>) {
 
     const completion = getPageCompletionDetails(page);
+    const percentColor = completion.percentage < 40 ? "red" : "green"
     return (
         <div className="rounded-2xl border border-border bg-white p-5 shadow-lg mb-5">
 
@@ -41,9 +41,18 @@ export default function PageCompletion({ page }: Readonly<Props>) {
                         </p>
                     </div>
 
-                    <span className="font-grizzy text-xl font-bold text-accent">
-                        {completion.percentage}%
-                    </span>
+                   <div className="h-16 w-16 [&_.CircularProgressbar-text]:font-bold [&_.CircularProgressbar-text]:font-unica [&_.CircularProgressbar-text]:text-center ">
+                        <CircularProgressbar
+                            value={completion.percentage}
+                            text={`${completion.percentage}%`}
+                            styles={buildStyles({
+                                pathColor: percentColor,
+                                trailColor: "#E5E7EB",
+                                textColor: percentColor,
+                                textSize: "24px",
+                            })}
+                        />
+                    </div>
                 </div>
 
 
@@ -57,8 +66,7 @@ export default function PageCompletion({ page }: Readonly<Props>) {
                         {completion.missing.map((item) => (
                             <div
                                 key={item.label}
-                                className="flex items-center gap-2 rounded-full bg-yellow-100 px-3 py-1"
-                            >
+                                className="flex items-center gap-2 rounded-full bg-yellow-100 px-3 py-1" >
                                 <CircleAlert
                                     size={14}
                                     className="text-yellow-600"

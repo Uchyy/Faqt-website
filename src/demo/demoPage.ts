@@ -8,7 +8,14 @@ export const demoPageBold = createDemoPage({
     shortDescription: "Specialty coffee, homemade pastries and a cosy place to relax.",
     longDescription:
       "Bean & Brew is an independent coffee shop serving freshly roasted coffee, homemade cakes and light lunches.",
-    address: "25 High Street, Portsmouth PO1 3AB",
+    address: {
+      line1: "25 High Street",
+      line2: "",
+      region: "Portsmouth",
+      country: "Hampshire",
+      postcode: "PO1 3AB",
+      updatedAt: new Date(),
+  },
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -185,7 +192,14 @@ export const demoPageMinimal = createDemoPage({
     shortDescription: "Specialists in family, property and employment law.",
     longDescription:
       "Harrison Legal provides straightforward legal advice with a personal approach.",
-    address: "12 Guildhall Walk, Portsmouth PO1 2DD",
+    address: {
+      line1: "12 Market Square",
+      line2: "Unit 4",
+      region: "Portsmouth",
+      country: "Hampshire",
+      postcode: "PO1 2AB",
+      updatedAt: new Date(),
+    },
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -337,7 +351,14 @@ export const demoPageCard = createDemoPage({
     shortDescription: "Fresh pasta, wood-fired pizza and handcrafted desserts.",
     longDescription:
       "Casa Milano brings authentic Italian flavours to Portsmouth with traditional recipes, fresh ingredients and a warm dining experience.",
-    address: "88 Albert Road, Southsea PO5 2SN",
+    address: {
+      line1: "12 Market Square",
+      line2: "Unit 4",
+      region: "Portsmouth",
+      country: "Hampshire",
+      postcode: "PO1 2AB",
+      updatedAt: new Date(),
+    },
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -491,7 +512,14 @@ export const demoPageLight = createDemoPage({
       "A creative floral studio crafting bespoke arrangements and event styling.",
     longDescription:
       "Willow & Bloom creates elegant floral designs for weddings, celebrations, and everyday moments. Every arrangement is handcrafted with seasonal flowers and a personal touch.",
-    address: "14 Castle Road, Southsea PO5 3AY",
+    address: {
+      line1: "12 Market Square",
+      line2: "Unit 4",
+      region: "Portsmouth",
+      country: "Hampshire",
+      postcode: "PO1 2AB",
+      updatedAt: new Date(),
+    },
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -644,7 +672,14 @@ export const demoPageNewUser = createDemoPage({
     tagline: "Helping you feel your best",
     shortDescription: "A local wellness studio offering massage, yoga and wellbeing treatments.",
     longDescription: "Harbour Wellness Studio provides relaxing treatments, wellness sessions and personalised support to help customers improve their wellbeing.",
-    address: "42 Elm Grove, Southsea PO5 1PX",
+    address: {
+      line1: "12 Market Square",
+      line2: "Unit 4",
+      region: "Portsmouth",
+      country: "Hampshire",
+      postcode: "PO1 2AB",
+      updatedAt: new Date(),
+    },
     updatedAt: new Date("2026-08-01")
   },
 

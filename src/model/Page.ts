@@ -69,7 +69,15 @@ export type OpeningPeriod = {
   close: string;
 };
 
+export type AddressSection = {
+    line1?: string;
+    line2?: string;
+    region: string;
+    country: string;
+    postcode: string;
 
+    updatedAt: Date;
+};
 
 /* -----------------------
    ENQUIRIES
@@ -120,7 +128,7 @@ export type BusinessSection = {
   tagline: string;
   shortDescription: string;
   longDescription: string;
-  address: string;
+  address: AddressSection;
 
   updatedAt: Date;
 };
@@ -187,7 +195,14 @@ export const emptyPage: Page = {
     tagline: "",
     shortDescription: "",
     longDescription: "",
-    address: "",
+    address: {
+      line1: "",
+      line2: "",
+      region: "",
+      country: "",
+      postcode: "",
+      updatedAt: new Date(),
+  },
     updatedAt: new Date(),
   },
 

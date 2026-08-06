@@ -7,6 +7,7 @@ import PageSnapshot from "../../components/layout/dashboard/home/PageSnapshot.ts
 import { useDashboardData } from "../../context/DashBoardDataContext.tsx";
 import DashboardStats from "../../components/layout/dashboard/home/DashboardStatCard.tsx.tsx";
 import PublicPagePreview from "../../publicpage/PublicPagePreview.tsx";
+import PageCompletion from "../../components/ui/PageCompletion.tsx";
 
 type EventType = "enquiry" | "improve" | "insight" | "team";
 
@@ -35,10 +36,19 @@ export default function HomePage() {
             rightButtonText="Preview"
             onRightButtonClick={() => {}}>
 
-            <DashboardStats 
-                page={page}
-                enquiries={enquiries}
-            />
+
+            {   page.publishing.isPublished ? (
+                <DashboardStats 
+                    page={page}
+                    enquiries={enquiries}
+                />
+
+                ): (
+                    <PageCompletion page={page}/>  
+                )
+            }   
+
+           
 
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6">
                 

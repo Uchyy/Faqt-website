@@ -43,6 +43,7 @@ export default function DashboardStats({ page, enquiries = [],}: Readonly<Props>
     const getStats = (): DashboardStat[] => {
 
         // Unpublished page
+        /*
         if (!page.publishing.isPublished) {
 
             return [
@@ -82,6 +83,11 @@ export default function DashboardStats({ page, enquiries = [],}: Readonly<Props>
                         icon: <Globe />,
                     },
             ];
+        }
+        */
+        // Replaced by PageCompletion.tsx
+        if (!page.publishing.isPublished) {
+            return [];
         }
 
         // Published page
