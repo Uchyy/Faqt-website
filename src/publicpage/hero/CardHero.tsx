@@ -1,17 +1,16 @@
 import { useBrandTheme } from "../context/BrandThemeContext";
 import { HeroProps } from "../model/HeroProps";
-import Divider from "../ui/Divider";
-import { splitTagline } from "../utils/splitTagline";
+
+
 
 export default function CardHero({ shortDesc, longDesc, tagline, name,logo, }: Readonly<HeroProps>) {
   const theme = useBrandTheme();
-  const { firstLine, secondLine } = splitTagline(tagline);
 
   return (
     <section className="flex flex-col py-12 px-6 justify-items-center ">
         {/* Logo + Name */}
         <div className="flex gap-3 items-center justify-center mb-3">   
-            {logo}
+            {logo }
             <p className="font-unica text-lg tracking-[0.25em] p-2 rounded-2xl" style={{ color: theme.accent, background: theme.background }}>
             {name}
             </p>

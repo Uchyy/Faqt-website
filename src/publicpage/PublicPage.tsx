@@ -1,4 +1,3 @@
-import { useParams } from "@tanstack/react-router";
 import Bold from "./Bold";
 import { demoPageBold, demoPageCard, demoPageLight, demoPageMinimal,} from "../demo/demoPage";
 import BrandThemeProvider from "./context/BrandThemeContext";

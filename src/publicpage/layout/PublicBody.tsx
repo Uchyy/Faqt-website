@@ -1,12 +1,11 @@
-import { ContactSection, SocialSection } from "../../model/Page";
 import { FaqtItem } from "../../model/FaqtItem";
 import { useBrandTheme } from "../context/BrandThemeContext";
-import { Phone, Mail, Globe, MapPin, ChevronDown } from "lucide-react";
-import { Accordion, AccordionItem } from '@szhsin/react-accordion';
 import { Styles } from "../../model/Styles";
 import ContactBlock from "../ui/ContactBlock";
 import SocialBlock from "../ui/SocialBlock";
 import FaqtBlock from "../ui/FaqtBlock";
+import { SocialSection } from "../../model/Social";
+import { ContactSection } from "../../model/Contact";
 
 type PublicBodyProps = {
   contact: ContactSection;
@@ -18,10 +17,8 @@ type PublicBodyProps = {
 
 export default function PublicBody({  contact, social, faqts, address, style }: Readonly<PublicBodyProps>) {
 
-    const theme = useBrandTheme();
+  const theme = useBrandTheme();
     
-
-
   return (
     <section className="grid grid-cols-1 gap-10 px-6 py-12 md:grid-cols-12 md:px-10"
       style={{ background: theme.background,  color: theme.foreground,}} >

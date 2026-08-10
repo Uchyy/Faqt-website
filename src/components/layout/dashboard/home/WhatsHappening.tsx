@@ -52,7 +52,7 @@ export default function WhatsHappening({ page }: Readonly<Props>) {
 
 
     return (
-        <section className="rounded-2xl border border-border bg-accent/5 p-5 shadow-lg transition hover:shadow-md">
+        <section className="flex h-full flex-col rounded-2xl border border-border bg-accent/5 p-5 shadow-lg transition hover:shadow-md">
 
             <div className="mb-1">
 
@@ -78,12 +78,12 @@ export default function WhatsHappening({ page }: Readonly<Props>) {
                             key={index}
                             className="flex min-h-[90px] items-center gap-4 rounded-xl bg-background pr-4 py-3 pl-2 transition hover:bg-accent/5">
 
-                            <div className={`${style.style} flex h-11 w-11 shrink-0 items-center justify-center rounded-xl`}>
+                            <div className={`${style.style} flex h-2/3 w-fit shrink-0 items-center justify-center px-5 py-4`}>
                                 {style.icon}
                             </div>
 
 
-                            <div className="flex flex-1 flex-col">
+                            <div className="flex flex-1 flex-col gap-2">
 
                                 <span className="font-grizzy text-sm font-bold text-text">
                                     {event.title}

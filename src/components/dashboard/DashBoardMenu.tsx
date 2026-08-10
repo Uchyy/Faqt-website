@@ -47,7 +47,7 @@ export default function DashboardMenu(){
     return (
         <div className={` ${sidebarMode === "mobile" ? "fixed inset-0 z-[100]" : "relative"}`}>
 
-            {sidebarMode === "mobile" && (  <button aria-label="Close menu" color="white" onClick={closeMenu} className="absolute inset-0 bg-black/30 "/>
+            {sidebarMode === "mobile" && (  <button type="button" aria-label="Close menu" color="white" onClick={closeMenu} className="absolute inset-0 bg-black/30 "/>
             )}
 
             <aside className={`
@@ -60,7 +60,7 @@ export default function DashboardMenu(){
                 <div className={`flex items-center ${sidebarMode === "collapsed" ? "justify-center" : "justify-between"} border-b border-border pb-4`}>
                     {sidebarMode === "collapsed" ? ( <FaqtLogo/> ) : (  <FaqtLogoText /> )}
                     {sidebarMode === "mobile" && (
-                        <button onClick={closeMenu} className="rounded-xl p-2 hover:bg-black/5">
+                        <button type="button" onClick={closeMenu} className="rounded-xl p-2 hover:bg-black/5">
                             <X size={20} color="#ffffff"/>
                         </button>
                     )}
@@ -109,11 +109,11 @@ export default function DashboardMenu(){
                 <DropdownMenu.Root>
                     <DropdownMenu.Trigger asChild>
                         {collapsed ? (
-                            <button className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/10 hover:bg-black/20 transition">
+                            <button type="button" className="flex h-12 w-12 items-center justify-center rounded-2xl bg-black/10 hover:bg-black/20 transition">
                                 <UserCog size={20} color="#3EC7C4"/>
                             </button>
                         ) : (
-                            <button className="flex items-center justify-between w-full rounded-2xl bg-black/10 hover:bg-black/20 transition p-3">
+                            <button  type="button"className="flex items-center justify-between w-full rounded-2xl bg-black/10 hover:bg-black/20 transition p-3">
                                 <div className="flex items-center gap-3">
                                     <UserCog size={20} color="#3EC7C4"/>
                                     <span className="text-sm font-unica uppercase font-bold tracking-[0.2rem] text-white">Account & Settings</span>
@@ -185,7 +185,7 @@ function MenuGroup({title,children,active=false,icon,last=false,collapsed=false,
     return (
         <div className={`rounded-2xl p-3 transition ${active ? "bg-accent/10" : "bg-black"} ${last ? "mb-6" : "mb-2"}`}>
 
-            <button onClick={
+            <button type="button" onClick={
                 ()=>setOpen(v=>!v)
                 } 
                 className="flex items-center justify-between w-full">
@@ -212,6 +212,7 @@ function MenuButton({children,onClick,active=false,className=""}:Readonly<{
     children:React.ReactNode;  onClick?:()=>void; active?:boolean; className?:string; }>){
     return (
         <button
+            type="button"
             onClick={onClick}
             className={`flex items-center font-sm gap-3 w-full px-3 py-2.5 transition text-white hover:bg-accent/10 font-cinzel tracking-[0.02rem] ${active ? "border-l-4 border-accent text-accent font-bold " : ""} ${className}`}>
             {children}
@@ -227,6 +228,7 @@ function OverviewButton({ active, collapsed, onClick,}: Readonly<{ active: boole
         <div className={`rounded-2xl p-3 mb-2 transition ${ active ? "bg-accent/10" : "bg-black" }`}>
             {collapsed ? (
                 <button
+                    type="button"
                     onClick={onClick}
                     data-tooltip-id="sidebar-tooltip"
                     data-tooltip-content="Overview"
@@ -234,7 +236,7 @@ function OverviewButton({ active, collapsed, onClick,}: Readonly<{ active: boole
                     <Home size={18} color="#3EC7C4" />
                 </button>
             ) : (
-                <button onClick={onClick} className="flex items-center justify-between w-full">
+                <button type="button" onClick={onClick} className="flex items-center justify-between w-full">
                     <div className="flex items-center gap-3">
                         <Home size={18} color="#3EC7C4" />
                         <span className="text-sm font-bold uppercase font-unica tracking-[0.2rem] text-white">

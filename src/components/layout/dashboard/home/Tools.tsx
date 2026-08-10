@@ -1,5 +1,6 @@
-import {  ChevronRight,  Clock3, MessageCircleQuestion, Megaphone,  BriefcaseBusiness } from "lucide-react";
+import {  ChevronRight,  Clock3, MessageCircleQuestion, Megaphone,  BriefcaseBusiness, Calendar1 } from "lucide-react";
 import { Page } from "../../../../model/Page";
+import { DashboardSection, DashboardSubSection, useDashboardUI } from "../../../../context/DashboardUIContext";
 
 
 type Props = {
@@ -8,6 +9,17 @@ type Props = {
 
 
 export default function Tools({ page }: Readonly<Props>) {
+
+    const { setActiveSection, setActiveSubSection } = useDashboardUI();
+
+    const navigateSection = (section:DashboardSection, subSection:DashboardSubSection)=>{
+        setActiveSection(section);
+        setActiveSubSection(subSection);
+
+        setTimeout(()=>{
+            document.getElementById(subSection)?.scrollIntoView({behavior:"smooth",block:"start"});
+        },100);
+    };
 
     const tools = [
         {
@@ -30,6 +42,11 @@ export default function Tools({ page }: Readonly<Props>) {
             icon: <Clock3 size={18} />,
             enabled: page.tools.openingHours,
         },
+        {
+            name: "Updates",
+            icon: <Calendar1 size={18} />,
+            enabled: page.tools.updates
+        }
     ];
 
 
@@ -62,7 +79,7 @@ export default function Tools({ page }: Readonly<Props>) {
 
             <div className="mt-4 h-px bg-border" />
 
-            <button className="flex w-full items-center gap-3 rounded-xl py-2 text-left transition hover:bg-accent/5" onClick={() => {}}>
+            <button type="button" className="flex w-full items-center gap-3 rounded-xl py-2 text-left transition hover:bg-accent/5" onClick={() => {navigateSection("tools", "tools")}}>
 
                 <span className="font-blackOps text-sm font-bold text-accent">
                     Manage all tools

@@ -5,10 +5,10 @@ import FaqSection from "./sections/content/FaqtSection";
 import BannerSection from "./sections/content/BannerSection";
 import SharePageSection from "./sections/share/SharePageSection";
 import ContentMedia from "./sections/appearance/ContentMedia";
-import SocialMedia from "./sections/information/SocialLinksSection";
 import ContactsSection from "./sections/information/ContactsSection";
 import HomePage from "../../pages/dashboard/HomePage";
 import BusinessInfoPage from "../../pages/dashboard/BuisnessInfoPage";
+import SocialMedia from "../../pages/dashboard/SocialMedia";
 
 
 export default function DashboardContent(){

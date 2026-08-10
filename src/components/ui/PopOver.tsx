@@ -14,6 +14,7 @@ export default function SidebarPopoverGroup({ title, icon, active = false, child
         <Popover.Root>
             <Popover.Trigger asChild>
                 <button
+                    type="button"
                     className={`flex h-12 w-12 m-2 items-center justify-center rounded-2xl transition hover:bg-accent/20 ${
                         active  ? "bg-accent/10 "  : ""
                     }`} >

@@ -1,5 +1,6 @@
 import * as AlertDialogPrimitive from "@radix-ui/react-alert-dialog";
 import { ReactNode } from "react";
+import {X} from "lucide-react";
 
 type AlertDialogProps = {
     trigger?: ReactNode;
@@ -15,18 +16,7 @@ type AlertDialogProps = {
 };
 
 
-export default function AlertDialog({
-    trigger,
-    title,
-    description,
-    children,
-    cancelText = "Cancel",
-    actionText = "Continue",
-    stickyFooter = false,
-    onAction,
-    open,
-    onOpenChange,
-}: Readonly<AlertDialogProps>) {
+export default function AlertDialog({ trigger, title, description, children, cancelText = "Cancel", actionText = "Continue",stickyFooter = false, onAction, open, onOpenChange, }: Readonly<AlertDialogProps>) {
 
     function handleAction(
         e: React.MouseEvent<HTMLButtonElement>
@@ -54,19 +44,31 @@ export default function AlertDialog({
                 <AlertDialogPrimitive.Overlay className=" fixed inset-0 z-[50] bg-black/40 backdrop-blur-sm "/>
 
                 <AlertDialogPrimitive.Content
-                    className=" fixed left-1/2 top-1/2 z-[60] flex w-[80%] max-w-2xl max-h-[85vh] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
+                    className=" fixed left-1/2 top-1/2 z-[60] flex w-[80%] h-[70%] max-w-2xl max-h-[85vh] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-xl">
 
                     {/* HEADER */}
-                    <div className=" shrink-0 border-b border-border bg-accent/10">
-                        <AlertDialogPrimitive.Title className=" px-6 py-4 font-heading text-xl font-semibold text-text">
-                            {title}
-                        </AlertDialogPrimitive.Title>
+                    <div className="flex items-center justify-between px-6 py-4">
 
-                        {description && (
-                            <AlertDialogPrimitive.Description className=" px-6 pb-4 text-sm text-muted-foreground">
-                                {description}
-                            </AlertDialogPrimitive.Description>
-                        )}
+                        {/* LEFT SIDE*/}
+                        <div className="flex flex-col items-start justify-start text-left">
+
+                            <AlertDialogPrimitive.Title className="font-heading text-base font-bold text-text md:text-2xl lg:text-3xl">
+                                {title}
+                            </AlertDialogPrimitive.Title>
+
+                            {description && (
+                                <AlertDialogPrimitive.Description className="font-unica text-sm leading-relaxed text-muted-foreground lg:text-base">
+                                    {description}
+                                </AlertDialogPrimitive.Description>
+                            )}
+
+                        </div>
+
+                         {/*RIGHT SIDE */}
+                            <AlertDialogPrimitive.Cancel className="rounded-3xlborder px-4 py-2hover:bg-black/5">
+                                <X size={20}/>
+                            </AlertDialogPrimitive.Cancel>
+
 
                     </div>
 
@@ -84,10 +86,6 @@ export default function AlertDialog({
                     {stickyFooter && (
                         <div className=" shrink-0 flex justify-end gap-3 border-t bg-white p-6 bg-accent/10">
 
-                            <AlertDialogPrimitive.Cancel className="rounded-3xlborder px-4 py-2hover:bg-black/5">
-                                {cancelText}
-                            </AlertDialogPrimitive.Cancel>
-
                             <AlertDialogPrimitive.Action
                                 onClick={handleAction}
                                 className=" rounded-3xl bg-black px-4 py-2 text-white hover:bg-black/80">
@@ -99,15 +97,11 @@ export default function AlertDialog({
 
 
                     {!stickyFooter && (
-                        <div className=" flex justify-end gap-3 p-6 pt-3 bg-accent/10">
-                            <AlertDialogPrimitive.Cancel
-                                className=" rounded-3xl border px-4 py-2 hover:bg-black/5">
-                                {cancelText}
-                            </AlertDialogPrimitive.Cancel>
-
+                        <div className=" flex justify-end gap-3 p-6 pt-3">
+                            
                             <AlertDialogPrimitive.Action
                                 onClick={handleAction}
-                                className=" rounded-3xl bg-black px-4 py-2 text-white hover:bg-black/80">
+                                className="bg-accent bg-radial-[at_15%_35%] from-black to-accent-900 to-75% px-2 py-2 font-unica text-sm font-bold uppercase tracking-[0.05rem] text-white shadow-lg transition hover:opacity-90 md:px-4">
                                 {actionText}
                             </AlertDialogPrimitive.Action>
 

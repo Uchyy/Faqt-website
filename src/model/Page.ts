@@ -1,12 +1,21 @@
 import type { Banner } from "./Banner";
+import { BrandingSection } from "./Branding";
 import type { BusinessDocument } from "./BusinessDocument";
+import { BusinessSection } from "./BusinessInfo";
+import { ContactSection } from "./Contact";
+import { Enquiry } from "./Enquiries";
 import type { FaqtItem } from "./FaqtItem";
-import type { Styles } from "./Styles";
+import { PublishingSection } from "./Publishing";
+import { Service } from "./Services";
+import { SocialSection } from "./Social";
+import { ToolsSection } from "./ToolsSection";
+import { OpeningHoursSection } from "./OpeningHours";
+import { Updates } from "./Update";
 
 
 export type Page = {
   id: string;
-  view: string;
+  view: number;
 
   business: BusinessSection;
   branding: BrandingSection;
@@ -26,158 +35,12 @@ export type Page = {
   banner?: Banner | null;
 
   publishing: PublishingSection;
+  updates: Updates []
 
   createdAt: Date;
   updatedAt: Date;
 };
 
-
-
-/* -----------------------
-   TOOLS
------------------------ */
-
-export type ToolsSection = {
-  openingHours: boolean;
-  banner: boolean;
-  enquiries: boolean;
-  services: boolean;
-};
-
-
-
-/* -----------------------
-   OPENING HOURS
------------------------ */
-
-export type OpeningHoursSection = {
-  enabled: boolean;
-  schedule: OpeningHoursDay[];
-  updatedAt: Date;
-};
-
-
-export type OpeningHoursDay = {
-  day: | "Monday" | "Tuesday" | "Wednesday" | "Thursday" | "Friday" | "Saturday" | "Sunday";
-  closed: boolean;
-  periods: OpeningPeriod[];
-};
-
-
-export type OpeningPeriod = {
-  open: string;
-  close: string;
-};
-
-export type AddressSection = {
-    line1?: string;
-    line2?: string;
-    region: string;
-    country: string;
-    postcode: string;
-
-    updatedAt: Date;
-};
-
-/* -----------------------
-   ENQUIRIES
------------------------ */
-
-export type Enquiry = {
-  id: string;
-
-  name: string;
-  email?: string;
-  phone?: string;
-
-  title: string;
-  description: string;
-
-  status: "new" | "in-progress" | "resolved";
-
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-
-
-/* -----------------------
-   SERVICES
------------------------ */
-
-export type Service = {
-  id: string;
-
-  name: string;
-  description: string;
-
-  price?: string;
-
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-
-
-/* -----------------------
-   PAGE SECTIONS
------------------------ */
-
-export type BusinessSection = {
-  name: string;
-  tagline: string;
-  shortDescription: string;
-  longDescription: string;
-  address: AddressSection;
-
-  updatedAt: Date;
-};
-
-
-export type BrandingSection = {
-  selectedStyle: Styles;
-
-  logo: string;
-  coverImage: string;
-
-  brandColor: string;
-  gallery: string[];
-
-  updatedAt: Date;
-};
-
-
-export type ContactSection = {
-  phone: string;
-  email: string;
-  website: string;
-  whatsapp: string;
-
-  updatedAt: Date;
-};
-
-
-export type SocialSection = {
-  instagram: string;
-  facebook: string;
-  x: string;
-  tiktok: string;
-  youtube: string;
-
-  updatedAt: Date;
-};
-
-
-export type PublishingSection = {
-  isPublished: boolean;
-
-  slug: string;
-  publicUrl: string;
-  qrCodeUrl: string;
-
-  publishedAt?: Date | null;
-  updatedAt: Date;
-};
 
 
 
@@ -188,7 +51,7 @@ export type PublishingSection = {
 export const emptyPage: Page = {
 
   id: crypto.randomUUID(),
-  view: "0",
+  view: 0,
 
   business: {
     name: "",
@@ -204,6 +67,9 @@ export const emptyPage: Page = {
       updatedAt: new Date(),
   },
     updatedAt: new Date(),
+    established: "",
+    industry: "other",
+    businessType: ""
   },
 
 
@@ -216,6 +82,7 @@ export const emptyPage: Page = {
     updatedAt: new Date(),
   },
 
+  updates: [],
 
   contact: {
     phone: "",
@@ -232,7 +99,20 @@ export const emptyPage: Page = {
     x: "",
     tiktok: "",
     youtube: "",
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     updatedAt: new Date(),
+   
   },
 
 
@@ -241,11 +121,13 @@ export const emptyPage: Page = {
   documents: [],
 
 
+
   tools: {
     openingHours: false,
     banner: false,
     enquiries: false,
     services: false,
+    updates: false
   },
 
   openingHours: {

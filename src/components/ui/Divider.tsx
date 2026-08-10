@@ -7,5 +7,5 @@ export default function Divider({
   color = "bg-border",
   className = ""
 }: Readonly<DividerProps>) {
-  return <div className={`w-full h-px my-6 ${color} ${className}`} />;
+  return <div className={`w-full h-1 ${color} ${className}`} />;
 }

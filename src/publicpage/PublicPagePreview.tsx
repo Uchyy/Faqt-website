@@ -1,67 +1,43 @@
 import { Page } from "../model/Page";
+import BrandThemeProvider from "./context/BrandThemeContext";
+import Bold from "./Bold";
+import Card from "./Card";
+import Minimal from "./Minimal";
 
 type Props = {
     page: Page;
 };
 
-
 export default function PublicPagePreview({ page }: Readonly<Props>) {
 
-    return (
-        <div className="h-full w-full overflow-hidden" style={{background: page.branding.brandColor}}>
+    if (
+        !page.branding.brandColor ||
+        !page.business.shortDescription ||
+        !page.business.name ||
+        !page.business.tagline
+    ) {
+        return null;
+    }
 
-            {/* Cover */}
-            {page.branding.coverImage ? (
-                <img
-                    alt=""
-                    src={page.branding.coverImage}
-                    className="h-24 w-full object-cover"
-                />
-            ) : (
-                <div />
+    const hero = (
+        <>
+            {page.branding.selectedStyle === "minimal" && (
+                <Minimal page={page}/>
             )}
 
+            {page.branding.selectedStyle === "bold" && (
+                <Bold page={page}/>
+            )}
 
-            <div className="p-4">
+            {page.branding.selectedStyle === "card" && (
+                <Card page={page}/>
+            )}
+        </>
+    );
 
-                {/* Logo */}
-                {page.branding.logo && (
-                    <img
-                        alt=""
-                        src={page.branding.logo}
-                        className="h-12 w-12 rounded-full object-cover"
-                    />
-                )}
-
-
-                <h2 className="mt-3 font-heading font-bold text-lg">
-                    {page.business.name || "Your Business"}
-                </h2>
-
-
-                <p className="mt-1 text-xs text-muted-foreground">
-                    {page.business.shortDescription ||
-                        "Your business description will appear here"}
-                </p>
-
-
-                <div className="mt-4 space-y-2">
-
-                    {page.faqts.slice(0,3).map((faqt)=>(
-                        <div
-                            key={faqt.id}
-                            className="rounded-lg bg-accent/5 p-2"
-                        >
-                            <p className="text-xs font-bold">
-                                {faqt.question}
-                            </p>
-                        </div>
-                    ))}
-
-                </div>
-
-            </div>
-
-        </div>
+    return (
+        <BrandThemeProvider color={page.branding.brandColor} >
+            {hero}
+        </BrandThemeProvider>
     );
 }

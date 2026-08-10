@@ -1,6 +1,6 @@
 import { useBrandTheme } from "../context/BrandThemeContext";
 
-type CircleAvatarProps = {
+export type CircleAvatarProps = {
   initials: string;
   isRounded?: boolean;
 };

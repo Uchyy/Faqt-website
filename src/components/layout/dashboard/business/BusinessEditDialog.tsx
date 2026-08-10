@@ -73,7 +73,8 @@ export default function BusinessEditDialog({ open, onOpenChange, business: initi
             open={open}
             onOpenChange={onOpenChange}
             title="Edit Business Information"
-            actionText="Save"
+            actionText="Save changes"
+            description="This information will appear on your public page"
             onAction={handleSave} >
 
             <div className="space-y-4">

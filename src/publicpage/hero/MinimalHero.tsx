@@ -11,7 +11,7 @@ export default function MinimalHero({ shortDesc, longDesc, tagline, name,logo, }
         {/* Logo + Name */}
         <div className="mt-auto flex flex-col items-center gap-3 ">
             <Divider w="w-12 md:w-20" h="h-1" bgColor={theme.muted}/>
-            {logo}
+             {logo }
 
             <p className="font-unica text-lg tracking-[0.25em]"
             style={{

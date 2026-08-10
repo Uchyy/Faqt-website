@@ -1,7 +1,7 @@
 import { createDemoPage } from "../utils/createDemoPage";
 
 export const demoPageBold = createDemoPage({
-  view: "24",
+  view: 24,
   business: {
     name: "Bean & Brew Coffee",
     tagline: "A cup of home",
@@ -15,7 +15,10 @@ export const demoPageBold = createDemoPage({
       country: "Hampshire",
       postcode: "PO1 3AB",
       updatedAt: new Date(),
-  },
+    },
+    established: "2003",
+    industry: "food-and-beverage",
+    businessType:"coffee-shop",
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -24,7 +27,10 @@ export const demoPageBold = createDemoPage({
     banner: false,
     enquiries: false,
     services: false,
+    updates: false
   },
+
+  updates: [],
 
   openingHours: {
     enabled: true,
@@ -143,6 +149,18 @@ export const demoPageBold = createDemoPage({
     x: "",
     tiktok: "",
     youtube: "",
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -185,7 +203,7 @@ export const demoPageBold = createDemoPage({
 
 
 export const demoPageMinimal = createDemoPage({
-  view: "129",
+  view: 129,
   business: {
     name: "Harrison Legal",
     tagline: "Clear advice. Trusted guidance.",
@@ -200,6 +218,9 @@ export const demoPageMinimal = createDemoPage({
       postcode: "PO1 2AB",
       updatedAt: new Date(),
     },
+    established: "2013",
+    industry: "legal-and-consulting",
+    businessType: "legal-consultant",
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -208,7 +229,11 @@ export const demoPageMinimal = createDemoPage({
     banner: false,
     enquiries: true,
     services: false,
+    updates: false
   },
+
+  updates: [],
+  
 
   enquiries: [
     {
@@ -279,6 +304,18 @@ export const demoPageMinimal = createDemoPage({
     x: "",
     tiktok: "",
     youtube: "",
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -344,7 +381,7 @@ export const demoPageMinimal = createDemoPage({
 
 
 export const demoPageCard = createDemoPage({
-  view: "129",
+  view: 12,
   business: {
     name: "Casa Milano",
     tagline: "Authentic Italian Dining",
@@ -359,6 +396,10 @@ export const demoPageCard = createDemoPage({
       postcode: "PO1 2AB",
       updatedAt: new Date(),
     },
+    established: "2003",
+    industry: "food-and-beverage",
+    businessType:"restaurant",
+    
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -367,7 +408,11 @@ export const demoPageCard = createDemoPage({
     banner: false,
     enquiries: false,
     services: true,
+    updates: false
   },
+
+  updates: [],
+  
 
   services: [
     {
@@ -440,6 +485,18 @@ export const demoPageCard = createDemoPage({
   },
 
   social: {
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     instagram: "casamilanouk",
     facebook: "casamilanouk",
     tiktok: "casamilanouk",
@@ -504,7 +561,7 @@ export const demoPageCard = createDemoPage({
 
 
 export const demoPageLight = createDemoPage({
-  view: "129",
+  view: 38,
   business: {
     name: "Willow & Bloom Studio",
     tagline: "Beautiful moments, thoughtfully designed",
@@ -520,6 +577,9 @@ export const demoPageLight = createDemoPage({
       postcode: "PO1 2AB",
       updatedAt: new Date(),
     },
+    established: "2003",
+    industry: "agriculture-and-farming",
+    businessType:"florist",
     updatedAt: new Date("2026-08-01"),
   },
 
@@ -528,7 +588,10 @@ export const demoPageLight = createDemoPage({
     banner: true,
     enquiries: false,
     services: false,
+    updates: false
   },
+
+  updates: [],
 
   banner: {
     enabled: true,
@@ -562,6 +625,18 @@ export const demoPageLight = createDemoPage({
   },
 
   social: {
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     instagram: "willowandbloomstudio",
     facebook: "willowandbloomstudio",
     x: "",
@@ -667,6 +742,7 @@ export const demoPageLight = createDemoPage({
 
 
 export const demoPageNewUser = createDemoPage({
+  view: 0,
   business: {
     name: "Harbour Wellness Studio",
     tagline: "Helping you feel your best",
@@ -680,6 +756,9 @@ export const demoPageNewUser = createDemoPage({
       postcode: "PO1 2AB",
       updatedAt: new Date(),
     },
+    established: "2003",
+    industry:  "beauty-and-personal-care",
+    businessType:"spa",
     updatedAt: new Date("2026-08-01")
   },
 
@@ -714,6 +793,18 @@ export const demoPageNewUser = createDemoPage({
 
 
   social: {
+    linkedin: "",
+    pinterest: "",
+    twitch: "",
+    github: "",
+    threads: "",
+    snapchat: "",
+    patreon: "",
+    behance: "",
+    dribbble: "",
+    gitlab: "",
+    codepen: "",
+    stackoverflow: "",
     instagram: "",
     facebook: "",
     x: "",
@@ -753,9 +844,11 @@ export const demoPageNewUser = createDemoPage({
     openingHours: true,
     services: false,
     banner: true,
-    enquiries: false
+    enquiries: false,
+    updates: false
   },
 
+  updates: [],
 
   publishing: {
     slug: "harbour-wellness",

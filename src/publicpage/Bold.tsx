@@ -11,6 +11,7 @@ import BoldDocuments from "./layout/PublicDocument";
 import PublicFooter from "./layout/PublicFooter";
 import { PublicStyleProps } from "./model/HeroProps";
 import LogoAvatar from "./ui/LogoAvatar";
+import getFullAddress from "../utils/getFullAddress";
 
 export default function Bold( {page}: Readonly<PublicStyleProps>) {
   const theme = useBrandTheme();
@@ -42,7 +43,7 @@ export default function Bold( {page}: Readonly<PublicStyleProps>) {
         name={page.business.name}
         desc={page.business.shortDescription}
         phone={page.contact.phone}
-        address={page.business.address}
+        address={getFullAddress(page.business.address.region, page.business.address.country, page.business.address.line2,  page.business.address.line2)}
       />
  
       {/* HERO CONTENT */}
@@ -57,7 +58,7 @@ export default function Bold( {page}: Readonly<PublicStyleProps>) {
       <PublicBody
         style={page.branding.selectedStyle}
         contact={page.contact}
-        address={page.business.address}
+        address={getFullAddress(page.business.address.region, page.business.address.country, page.business.address.line2,  page.business.address.line2)}
         social={page.social}
         faqts={page.faqts}
       />

@@ -9,7 +9,7 @@ export default function BoldHero({ shortDesc, longDesc, tagline, name,logo, }: R
     <section className="flex flex-col gap-8 px-6 py-12 md:px-12 md:ml-5 ">
       {/* Logo + Name */}
       <div className="ml-auto flex items-center gap-3 ">
-        {logo}
+         {logo }
 
         <p className="font-unica text-lg tracking-[0.25em]"
           style={{
