@@ -35,14 +35,14 @@ export const socialPlatforms: SocialPlatform[] = [
         label: "TikTok",
         category: "Social",
         network: "tiktok",
-        baseUrl: "https://tiktok.com/@",
+        baseUrl: "https://tiktok.com/",
     },
     {
         key: "threads",
         label: "Threads",
         category: "Social",
         network: "threads",
-        baseUrl: "https://threads.net/@",
+        baseUrl: "https://threads.net/",
     },
     {
         key: "snapchat",
@@ -56,7 +56,7 @@ export const socialPlatforms: SocialPlatform[] = [
         label: "YouTube",
         category: "Video & Streaming",
         network: "youtube",
-        baseUrl: "https://youtube.com/@",
+        baseUrl: "https://youtube.com/",
     },
     {
         key: "twitch",
