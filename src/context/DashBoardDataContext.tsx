@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useMemo, useState, useCallback } from "react";
-import { demoPageBold } from "../demo/demoPage";
+import { demoPageBold, demoPageMinimal } from "../demo/demoPage";
 import { emptyPage, Page } from "../model/Page";
 import { canPublish, getPageCompletionDetails } from "../utils/pageCompletion";
 
@@ -10,6 +10,7 @@ type DashboardDataContextType = {
 
     updatePage: (data: Partial<Page>) => Page;
     resetPage: () => void;
+    publishPage: () => void;
 
     completion: ReturnType<typeof getPageCompletionDetails>;
     canPublish: boolean;
@@ -25,9 +26,7 @@ const DashboardDataContext = createContext<DashboardDataContextType | undefined>
 export function DashboardDataProvider({ children,}: Readonly<{ children: ReactNode }>) {
 
 
-    const [page, setPage] = useState<Page>(
-        () => demoPageBold ?? emptyPage
-    );
+    const [page, setPage] = useState<Page>(  () => demoPageMinimal ?? emptyPage);
 
     const updatePage = useCallback((data: Partial<Page>) => {
         let updatedPage!: Page;
@@ -36,6 +35,7 @@ export function DashboardDataProvider({ children,}: Readonly<{ children: ReactNo
             updatedPage = {
                 ...currentPage,
                 ...data,
+                status: "draft",
                 updatedAt: new Date(),
             };
             return updatedPage;
@@ -60,12 +60,24 @@ export function DashboardDataProvider({ children,}: Readonly<{ children: ReactNo
         [page]
     );
 
+    const publishPage = useCallback(() => {
+        setPage((currentPage) => ({
+            ...currentPage,
+            status: "published",
+            publishing: {
+                ...currentPage.publishing,
+                lastPublishedAt: new Date(),
+            },
+        }));
+    }, []);
+
     const value = useMemo(
         () => ({
             page,
             loading: false,
             updatePage,
             resetPage,
+            publishPage,
             completion,
             canPublish: publishable,
         }),

@@ -196,3 +196,357 @@ html {
    dominant-baseline: middle;
    text-anchor: middle;
 }
+
+.embla {
+  
+  position: relative;
+  width: 0;
+  min-width: 100%;
+  max-width: 100%;
+  --slide-height: 100vh;
+  --slide-spacing: 10px;
+  --slide-size: 90%;
+  --slide-size-md: 70%;
+  --slide-size-lg: 34%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+  align-items: stretch;
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-right: var(--slide-spacing);
+}
+
+
+@media (min-width: 768px) {
+  .embla__slide {
+    flex: 0 0 var(--slide-size-md);
+  }
+}
+
+@media (min-width: 1024px) {
+    .embla__slide {
+        flex: 0 0 var(--slide-size-lg);
+    }
+}
+
+.embla__prev,
+.embla__next {
+    position: absolute;
+    top: 50%;
+    z-index: 20;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border: 1px solid hsl(var(--border));
+    border-radius: 9999px;
+
+    background: black;
+    color: whitesmoke;
+
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+
+    transform: translateY(-50%);
+
+    cursor: pointer;
+
+    transition:  opacity 0.2s ease,  background-color 0.2s ease;
+}
+
+.embla__prev {
+    left: 12px;
+}
+
+.embla__next {
+    right: 12px;
+}
+
+.embla__prev:disabled,
+.embla__next:disabled {
+    opacity: 0;
+    pointer-events: none;
+}
+
+
+
+/* =========================================================
+   SKELETONIZED PAGE
+   ========================================================= */
+
+.skeletonized-page {
+    position: relative;
+    width: 100%;
+    height: 25vh;
+
+    overflow: hidden;
+
+    pointer-events: none;
+    user-select: none;
+
+    background: #ffffff;
+    filter: grayscale(1);
+    opacity: 0.85;
+}
+
+.skeletonized-page__content {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 100vh;
+    transform: translateX(-50%) scale(0.20);
+    transform-origin: top center;
+}
+
+
+/* =========================================================
+   REMOVE REAL TEXT
+   ========================================================= */
+
+.skeletonized-page h1,
+.skeletonized-page h2,
+.skeletonized-page h3,
+.skeletonized-page h4,
+.skeletonized-page h5,
+.skeletonized-page h6,
+.skeletonized-page p,
+.skeletonized-page span,
+.skeletonized-page a,
+.skeletonized-page button,
+.skeletonized-page label {
+    color: transparent !important;
+
+    /*
+     * Removes text shadows and other visual details.
+     */
+    text-shadow: none !important;
+}
+
+
+/* =========================================================
+   TEXT SKELETONS
+   ========================================================= */
+
+.skeletonized-page h1,
+.skeletonized-page h2,
+.skeletonized-page h3,
+.skeletonized-page h4,
+.skeletonized-page h5,
+.skeletonized-page h6 {
+    background: #dfe3e8 !important;
+
+    border-radius: 0.35rem;
+
+    /*
+     * Prevent the background from covering huge areas.
+     */
+    min-height: 0.7em;
+}
+
+
+.skeletonized-page div {
+    color: transparent !important;
+    background: #edf0f2 !important;
+    border-radius: 4px;
+}
+
+.skeletonized-page p {
+    background: #edf0f2 !important;
+
+    border-radius: 0.25rem;
+
+    min-height: 0.55em;
+}
+
+
+/* =========================================================
+   LINKS / BUTTONS
+   ========================================================= */
+
+.skeletonized-page a,
+.skeletonized-page button {
+    background: #e3e7ea !important;
+
+    border-color: transparent !important;
+
+    border-radius: 0.5rem;
+
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   IMAGES
+   ========================================================= */
+
+.skeletonized-page img {
+    /*
+     * Hide the actual image.
+     */
+    opacity: 0 !important;
+
+    /*
+     * Give the image container a skeleton-like appearance
+     * where possible.
+     */
+    background: #e3e7ea !important;
+}
+
+
+/* =========================================================
+   SVG / ICONS
+   ========================================================= */
+
+.skeletonized-page svg {
+    color: #dfe3e8 !important;
+
+    fill: #dfe3e8 !important;
+
+    stroke: #dfe3e8 !important;
+}
+
+
+/* =========================================================
+   BORDERS
+   ========================================================= */
+
+.skeletonized-page * {
+    /*
+     * Remove colourful borders.
+     */
+    border-color: #edf0f2 !important;
+
+    /*
+     * Remove actual shadows from the preview.
+     */
+    text-shadow: none !important;
+}
+
+
+/* =========================================================
+   CARDS / SURFACES
+   ========================================================= */
+
+.skeletonized-page [class*="card"],
+.skeletonized-page [class*="Card"],
+.skeletonized-page [class*="surface"],
+.skeletonized-page [class*="Surface"] {
+    background-color: #f5f6f7 !important;
+
+    border-color: #e7eaed !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   COLOURED BACKGROUNDS
+   ========================================================= */
+
+.skeletonized-page [class*="bg-"] {
+    /*
+     * Override Tailwind background colours.
+     *
+     * !important is necessary because many Tailwind
+     * utilities have generated specificity.
+     */
+    background-color: #f1f3f5 !important;
+}
+
+
+/* =========================================================
+   INPUTS / FORM ELEMENTS
+   ========================================================= */
+
+.skeletonized-page input,
+.skeletonized-page textarea,
+.skeletonized-page select {
+    background: #edf0f2 !important;
+
+    border-color: #e3e7ea !important;
+
+    color: transparent !important;
+
+    box-shadow: none !important;
+}
+
+
+/* =========================================================
+   OVERLAY
+   ========================================================= */
+
+.skeletonized-page::after {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    /*
+     * Softens the whole thumbnail.
+     */
+    background: rgba(255, 255, 255, 0.18);
+}
+
+
+/* =========================================================
+   OPTIONAL SHIMMER
+   ========================================================= */
+
+.skeletonized-page::before {
+    content: "";
+
+    position: absolute;
+
+    z-index: 50;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 100%;
+
+    pointer-events: none;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.35),
+        transparent
+    );
+
+    animation: skeletonized-page-shimmer 2.5s infinite;
+}
+
+
+@keyframes skeletonized-page-shimmer {
+    100% {
+        left: 150%;
+    }
+}
+
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}

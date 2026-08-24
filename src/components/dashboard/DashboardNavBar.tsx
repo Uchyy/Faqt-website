@@ -4,14 +4,15 @@ import Button from "../ui/Button";
 import { Rocket, Eye, Menu, } from "lucide-react";
 import { useDashboardUI } from "../../context/DashboardUIContext";
 import FaqtLogo from "../ui/FaqtLogo";
+import { useDashboardData } from "../../context/DashBoardDataContext";
 
 function DashboardNavBar() {
     const navigate = useNavigate();
     const [animating,] = useState(false);
     const { sidebarMode, openMenu } = useDashboardUI();
-
+    const { page, publishPage } = useDashboardData();
+    
     const openPreview = () => window.open("/preview", "_blank");
-    const publishPage = () => console.log("publish");
     const goHome = () => navigate({ to: "/" });
     
 
@@ -22,13 +23,13 @@ function DashboardNavBar() {
 
                     <div className="flex items-center gap-3">
                         {sidebarMode === "mobile" && (
-                        <button  onClick={openMenu} className="rounded-xl p-2 hover:bg-black/5">
+                        <button  type="button" onClick={openMenu} className="rounded-xl p-2 hover:bg-black/5">
                             <Menu size={22}/>
                         </button>
                         )}
 
                         { sidebarMode === "mobile" ?
-                        <button onClick={goHome} >
+                        <button type="button" onClick={goHome} >
                            <FaqtLogo/>
                         </button>
                         : <p className="text-xs uppercase tracking-[0.25em] text-muted-foreground">
@@ -39,12 +40,12 @@ function DashboardNavBar() {
                     </div>
 
 
-                    <div className="flex items-center gap-2">
-                        <Button onClick={openPreview} className="py-3 px-1">
+                    <div className="flex items-center  gap-2">
+                        <Button onClick={openPreview} disabled= {page.status === "unpublished"} rounded={false} className="py-3 px-1 ">
                             <Eye  height={20} width={15}/>
                         </Button>
 
-                        <Button onClick={publishPage} className="py-3 px-1">
+                        <Button onClick={publishPage}  disabled= {page.status == "published"} rounded={false} className="py-3 px-1">
                             <Rocket height={20} width={15}/>
                         </Button>
                     </div>

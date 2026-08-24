@@ -13,6 +13,7 @@ import { OpeningHoursSection } from "./OpeningHours";
 import { Updates } from "./Update";
 
 
+type PageStatus = "published" | "draft" | "unpublished";
 export type Page = {
   id: string;
   view: number;
@@ -25,6 +26,7 @@ export type Page = {
 
   faqts: FaqtItem[];
   documents: BusinessDocument[];
+  status: PageStatus;
 
   tools: ToolsSection;
 
@@ -52,7 +54,7 @@ export const emptyPage: Page = {
 
   id: crypto.randomUUID(),
   view: 0,
-
+  status: "unpublished",
   business: {
     name: "",
     tagline: "",
@@ -75,9 +77,9 @@ export const emptyPage: Page = {
 
   branding: {
     selectedStyle: "minimal",
-    logo: "",
-    coverImage: "",
-    brandColor: "#3EC7C4",
+    logo: {url: "", name: ""},
+    coverImage:  {url: "", name: ""},
+    brandColor: { hex: "#3EC7C4"},
     gallery: [],
     updatedAt: new Date(),
   },

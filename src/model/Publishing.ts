@@ -8,3 +8,4 @@ export type PublishingSection = {
   publishedAt?: Date | null;
   updatedAt: Date;
 };
+

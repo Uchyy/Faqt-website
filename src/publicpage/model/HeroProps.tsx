@@ -11,4 +11,6 @@ export type HeroProps = {
 
 export type PublicStyleProps = {
   page: Page
+  skeleton?: boolean
+
 }

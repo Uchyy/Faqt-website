@@ -8,17 +8,18 @@ import { useDashboardData } from "../../context/DashBoardDataContext.tsx";
 import DashboardStats from "../../components/layout/dashboard/home/DashboardStatCard.tsx.tsx";
 import PublicPagePreview from "../../publicpage/PublicPagePreview.tsx";
 import PageCompletion from "../../components/ui/PageCompletion.tsx";
-import { DashboardSection, DashboardSubSection, useDashboardUI } from "../../context/DashboardUIContext.tsx";
+import { useDashboardUI } from "../../context/DashboardUIContext.tsx";
+import { DashboardSection, DashboardSubSection } from "../../model/DashBoardSections.ts";
 
 export default function HomePage() {
     const { page } = useDashboardData();
     const enquiries = page.enquiries;
 
     const quickActions = [
-        { icon: <MessageCircleQuestionMark size={24} />, label: "Add a New FAQ", onClick: () => {navigateSection("content", "faqt")}, index:1 },
+        { icon: <MessageCircleQuestionMark size={24} />, label: "Add a New FAQ", onClick: () => {navigateSection("content", "faqs")}, index:1 },
         { icon: <Scissors size={24} />, label: "Add a new service", onClick: () => {navigateSection("tools", "services")}, index:2},
         { icon: <Megaphone size={24} />, label: "Create announcement", onClick: () => {navigateSection("tools", "banner")}, index: 3},
-        { icon: <File size={24} />, label: "Upload a document", onClick: () => {navigateSection("content", "media-content")}, index:4 },
+        { icon: <File size={24} />, label: "Upload a document", onClick: () => {navigateSection("content", "media")}, index:4 },
     ];
 
     const greeting = () => {

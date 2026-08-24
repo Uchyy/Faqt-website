@@ -1,4 +1,7 @@
 import { motion } from "framer-motion";
+import { useDashboardData } from "../../context/DashBoardDataContext";
+import { AlertCircle, Upload } from "lucide-react";
+
 
 type Props = {
     title: string;
@@ -17,6 +20,9 @@ type Props = {
 
 export default function DashboardContentBase({ title, label, rightButtonText, onRightButtonClick, saveButtonText, onSaveButtonClick, children, isEmpty = false, isEmptyText, }: Readonly<Props>) {
 
+    const { page, publishPage } = useDashboardData();
+    const hasUnpublishedChanges = page.status === "draft";
+
     return (
         <motion.section
             className="mb-6 bg-transparent px-2 lg:px-0"
@@ -26,6 +32,45 @@ export default function DashboardContentBase({ title, label, rightButtonText, on
                 duration: 0.35,
                 ease: "easeOut",
             }}>
+
+            {/* PUBLISH REMINDER */}
+            {hasUnpublishedChanges && (
+                <motion.div
+                    className="mb-4 flex items-center justify-between gap-4 rounded-xl border border-accent/20 bg-accent/10 px-4 py-3 "
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                        duration: 0.25,
+                        ease: "easeOut",
+                    }}>
+                    <div className="flex min-w-0 items-center gap-3">
+                        <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-accent/20">
+                            <AlertCircle
+                                size={17}
+                                className="text-accent"
+                            />
+                        </div>
+
+                        <div className="min-w-0">
+                            <p className="font-heading text-sm font-semibold text-text">
+                                You have unpublished changes
+                            </p>
+
+                            <p className="hidden text-xs text-muted-foreground sm:block">
+                                Publish your changes to make them visible to your customers.
+                            </p>
+                        </div>
+                    </div>
+
+                    <button
+                        type="button"
+                        onClick={publishPage}
+                        className="flex shrink-0 items-center gap-2 rounded-lg bg-black px-3 py-2 font-unica text-xs font-bold uppercase tracking-[0.08rem] text-white transition hover:opacity-80">
+                        <Upload size={14} />
+                        <span>Publish</span>
+                    </button>
+                </motion.div>
+            )}
 
             {/* HEADER */}
             <motion.div
@@ -46,9 +91,9 @@ export default function DashboardContentBase({ title, label, rightButtonText, on
                     </h1>
 
                     {label && (
-                        <p className="font-grizzy text-sm font-semibold leading-relaxed text-muted-foreground lg:text-lg">
+                        <span className="text-sm text-black font-unica font-bold mt-1 tracking-3">
                             {label}
-                        </p>
+                        </span>
                     )}
 
                 </div>
@@ -58,7 +103,7 @@ export default function DashboardContentBase({ title, label, rightButtonText, on
                         onClick={onRightButtonClick}
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.97 }}
-                        className="bg-accent bg-radial-[at_15%_35%] from-black to-accent-900 to-75% px-2 py-2 font-unica text-sm font-bold uppercase tracking-[0.15rem] text-white shadow-lg transition hover:opacity-90 md:px-4">
+                        className="bg-accent bg-radial-[at_15%_35%] from-black to-accent-900 to-75% px-2 py-2 font-unica text-sm font-bold uppercase tracking-[0.15rem] text-white shadow-lg transition hover:opacity-90 md:px-4 ">
                         {rightButtonText}
                     </motion.button>
                 )}

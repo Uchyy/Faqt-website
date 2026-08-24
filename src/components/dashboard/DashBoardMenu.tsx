@@ -1,5 +1,5 @@
 import { X, Settings, CircleHelp, LogOut, ChevronDown, Building2, Palette, FileText, Share2, CircleUserRound, UserCog, Home, Wrench } from "lucide-react";
-import { DashboardSection, DashboardSubSection, useDashboardUI } from "../../context/DashboardUIContext";
+import {  useDashboardUI } from "../../context/DashboardUIContext";
 import { useEffect, useState } from "react";
 import FaqtLogoText from "../ui/FaqtLogoText";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
@@ -7,6 +7,7 @@ import { useNavigate } from "@tanstack/react-router";
 import { useMediaQuery } from "../../utils/useScreenSize";
 import FaqtLogo from "../ui/FaqtLogo";
 import PopOver from "../ui/PopOver";
+import { DashboardSection, DashboardSubSection } from "../../model/DashBoardSections";
 
 export default function DashboardMenu(){
     const isDesktop = useMediaQuery("(min-width:1024px)");
@@ -74,23 +75,22 @@ export default function DashboardMenu(){
                         onClick={() => navigateSection("home", "home")}
                     />
 
-                    <MenuGroup title="Information" icon={<Building2 size={18} color="#3EC7C4"/>} active={activeSection==="information"} collapsed={collapsed}>
-                        <MenuButton active={activeSubSection==="business"} onClick={()=>navigateSection("information","business")}>Business Information</MenuButton>
-                        <MenuButton active={activeSubSection==="contact"} onClick={()=>navigateSection("information","contact")}>Contact Information</MenuButton>
-                        <MenuButton active={activeSubSection==="socials"} onClick={()=>navigateSection("information","socials")}>Social Media</MenuButton>
+                    <MenuGroup title="Information" icon={<Building2 size={18} color="#3EC7C4"/>} active={activeSection==="business"} collapsed={collapsed}>
+                        <MenuButton active={activeSubSection==="business-information"} onClick={()=>navigateSection("business","business-information")}>Business Information</MenuButton>
+                        <MenuButton active={activeSubSection==="socials"} onClick={()=>navigateSection("business","socials")}>Social Media</MenuButton>
                     </MenuGroup>
 
 
                     <MenuGroup title="Appearance" icon={<Palette size={18} color="#3EC7C4"/>} active={activeSection==="appearance"} collapsed={collapsed}>
                         <MenuButton active={activeSubSection==="theme"} onClick={()=>navigateSection("appearance","theme")}>Themes</MenuButton>
 
-                        <MenuButton active={activeSubSection==="media-content"} onClick={()=>navigateSection("appearance","media-content")}>Media</MenuButton>
+                        <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("appearance","media")}>Media</MenuButton>
                     </MenuGroup>
 
 
                     <MenuGroup title="Content" icon={<FileText size={18} color="#3EC7C4"/>} active={activeSection==="content"} collapsed={collapsed}>
                         <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("content","media")}>Resources</MenuButton>
-                        <MenuButton active={activeSubSection==="faqt"} onClick={()=>navigateSection("content","faqt")}>Faqt </MenuButton>
+                        <MenuButton active={activeSubSection==="faqs"} onClick={()=>navigateSection("content","faqs")}>Faqt </MenuButton>
                     </MenuGroup>
 
 
@@ -99,9 +99,9 @@ export default function DashboardMenu(){
                     </MenuGroup>
 
                     <MenuGroup title="Tools" icon={<Wrench size={18} color="#3EC7C4"/>} active={activeSection==="tools"} collapsed={collapsed}>
-                        <MenuButton active={activeSubSection==="openingHours"} onClick={()=>navigateSection("tools","openingHours")}>Opening Hours </MenuButton>
+                        <MenuButton active={activeSubSection==="opening-hours"} onClick={()=>navigateSection("tools","opening-hours")}>Opening Hours </MenuButton>
                         <MenuButton active={activeSubSection==="services"} onClick={()=>navigateSection("home","services")}>Services</MenuButton>
-                        <MenuButton active={activeSubSection==="enquiry"} onClick={()=>navigateSection("home","enquiry")}>Enquiry</MenuButton>
+                        <MenuButton active={activeSubSection==="enquiries"} onClick={()=>navigateSection("home","enquiries")}>Enquiry</MenuButton>
                         <MenuButton active={activeSubSection==="banner"} onClick={()=>navigateSection("home","banner")}>Banner</MenuButton>
                     </MenuGroup>
 

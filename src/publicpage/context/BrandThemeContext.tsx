@@ -2,13 +2,15 @@ import { createContext, useContext,useMemo, } from "react";
 
 import { createBrandTheme } from "../utils/createBrandTheme";
 import { BrandTheme } from "../../model/BrandTheme";
+import { BrandColor } from "../../model/BrandColour";
 
 const BrandThemeContext = createContext<BrandTheme | null>(null);
 
-type Props = {  color: string;  children: React.ReactNode;};
+type Props = {  color: BrandColor; children: React.ReactNode;};
 
 export default function BrandThemeProvider({color,children,}: Readonly<Props>) {
-  const theme = useMemo( () => createBrandTheme(color), [color] );
+  const brandColor = color.alpha != null  ? hexToRgba(color.hex, color.alpha)  : color.hex;
+  const theme = useMemo( () => createBrandTheme(brandColor), [color] );
 
   return (
     <BrandThemeContext.Provider value={theme}>

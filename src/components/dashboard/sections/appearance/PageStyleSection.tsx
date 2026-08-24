@@ -73,6 +73,7 @@ export default function PageStyle(){
 
                     {styles.map((style)=>(
                         <button
+                            type="button"
                             key={style.id}
                             onClick={()=>setSelectedStyle(style.id)}
                             className={`

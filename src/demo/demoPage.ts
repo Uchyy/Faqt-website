@@ -2,6 +2,7 @@ import { createDemoPage } from "../utils/createDemoPage";
 
 export const demoPageBold = createDemoPage({
   view: 24,
+  status: "published",
   business: {
     name: "Bean & Brew Coffee",
     tagline: "A cup of home",
@@ -119,18 +120,42 @@ export const demoPageBold = createDemoPage({
 
   branding: {
     selectedStyle: "bold",
-    logo: "",
-    coverImage: "",
-    brandColor: "#6B8E5A",
+    logo: {url: ""},
+    coverImage: {url: ""},
+    brandColor: { hex: "#6B8E5A"},
     gallery: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
-      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+      {
+        url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+        name: "",
+      },
     ],
     updatedAt: new Date("2026-08-01"),
   },
@@ -204,6 +229,7 @@ export const demoPageBold = createDemoPage({
 
 export const demoPageMinimal = createDemoPage({
   view: 129,
+  status: "published",
   business: {
     name: "Harrison Legal",
     tagline: "Clear advice. Trusted guidance.",
@@ -274,18 +300,42 @@ export const demoPageMinimal = createDemoPage({
 
   branding: {
     selectedStyle: "minimal",
-    brandColor: "#1E3A5F",
-    logo: "",
-    coverImage: "",
+    brandColor: { hex: "#1E3A5F"},
+    logo: {url: ""},
+    coverImage: {url: ""},
     gallery: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
-      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+      {
+        url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+        name: "",
+      },
     ],
     updatedAt: new Date("2026-08-01"),
   },
@@ -382,6 +432,7 @@ export const demoPageMinimal = createDemoPage({
 
 export const demoPageCard = createDemoPage({
   view: 12,
+  status: "published",
   business: {
     name: "Casa Milano",
     tagline: "Authentic Italian Dining",
@@ -446,21 +497,50 @@ export const demoPageCard = createDemoPage({
 
   branding: {
     selectedStyle: "card",
-    brandColor: "#A52A2A",
-    logo: "https://images.unsplash.com/photo-1561070791-36c11767b26a?w=400",
-    coverImage:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+    brandColor: { hex: "#A52A2A"},
+    logo: {
+      url: "https://images.unsplash.com/photo-1561070791-36c11767b26a?w=400",
+      name: "",
+    },
+    coverImage: {
+      url: "",
+      name: "",
+    },
     gallery: [
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
-      "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
-      "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
-      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
-      "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+      {
+        url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+        name: "",
+      },
     ],
-    updatedAt: new Date("2026-08-01"),
+    updatedAt: new Date(),
   },
 
   documents: [
@@ -562,6 +642,7 @@ export const demoPageCard = createDemoPage({
 
 export const demoPageLight = createDemoPage({
   view: 38,
+  status: "published",
   business: {
     name: "Willow & Bloom Studio",
     tagline: "Beautiful moments, thoughtfully designed",
@@ -602,16 +683,42 @@ export const demoPageLight = createDemoPage({
 
   branding: {
     selectedStyle: "card",
-    logo: "",
-    coverImage:
-      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
-    brandColor: "#D8B4FE",
+    logo: {url: ""},
+    coverImage:{ url:"https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200"},
+    brandColor: { hex: "#D8B4FE"},
     gallery: [
-      "https://images.unsplash.com/photo-1497250681960-ef046c08a56e?w=1200",
-      "https://images.unsplash.com/photo-1526047932273-341f2a7631f9?w=1200",
-      "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1200",
-      "https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=1200",
-      "https://images.unsplash.com/photo-1523438885200-e635ba2c371e?w=1200",
+      {
+        url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+        name: "",
+      },
     ],
     updatedAt: new Date("2026-08-01"),
   },
@@ -772,12 +879,42 @@ export const demoPageNewUser = createDemoPage({
 
   branding: {
     selectedStyle: "minimal",
-    logo: "",
-    coverImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
-    brandColor: "#3EC7C4",
+    logo: {url: ""},
+    coverImage: { url: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200"},
+    brandColor: { hex: "#3EC7C4"},
     gallery: [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
-      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200",
+      {
+        url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1528605248644-14dd04022da1?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1556740749-887f6717d7e4?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1515169067868-5387ec356754?w=1200",
+        name: "",
+      },
+      {
+        url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1200",
+        name: "",
+      },
     ],
     updatedAt: new Date("2026-08-01")
   },

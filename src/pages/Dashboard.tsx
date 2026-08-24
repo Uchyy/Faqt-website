@@ -24,14 +24,11 @@ function DashboardLayout(){
     return (
         <div className="flex min-h-screen bg-accent/5 ">
             <DashboardMenu />
-            <div className={`
-                flex-1
-                transition-all duration-300
-                ${sidebarMode === "mobile" ? "w-full" : ""} `}>
+            <div className={`min-w-0 flex-1 transition-all duration-300 ${sidebarMode === "mobile" ? "w-full" : ""} `}>
 
                 <DashboardNavbar />
-                <main className="w-full px-2 justify-center">
-                    <section className="w-full px-4 py-6 ">
+                <main className=" min-w-0 w-full px-2 items-center justify-center">
+                    <section className=" min-w-0 w-full px-4 py-6 ">
                         <DashboardContent />
                     </section>
                 </main>

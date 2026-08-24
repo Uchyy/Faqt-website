@@ -1,8 +1,7 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
+import { DashboardSection, DashboardSubSection } from "../model/DashBoardSections";
 
 export type SidebarMode = "expanded" | "collapsed" | "mobile";
-export type DashboardSection = "home" | "information" | "appearance" | "content" | "share" | "account" | "tools";
-export type DashboardSubSection = "home" | "business" | "contact" | "socials" | "style" | "banner" | "faqt" | "media" | "share"  | "settings" | "help" | "account" | "theme" | "media-content" | "services" | "openingHours" | "enquiry" | "tools" | "updates";
 
 export type DashboardUIContextType = {
     menuOpen: boolean;
@@ -24,7 +23,7 @@ export function DashboardUIProvider({ children }: Readonly<{ children: ReactNode
 
     const [menuOpen, setMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState<DashboardSection>("home");
-    const [activeSubSection, setActiveSubSection] = useState<DashboardSubSection>("home");
+    const [activeSubSection, setActiveSubSection] = useState<DashboardSubSection>("business-information");
     const [sidebarMode, setSidebarMode] = useState<SidebarMode>("expanded");
 
     const openMenu = () => setMenuOpen(true);

@@ -1,51 +1,70 @@
 import { useDashboardUI } from "../../context/DashboardUIContext";
-import PageStyleSection from "./sections/appearance/PageStyleSection";
-import MediaSection from "./sections/content/MediaSection" ;
-import FaqSection from "./sections/content/FaqtSection";
-import BannerSection from "./sections/content/BannerSection";
-import SharePageSection from "./sections/share/SharePageSection";
-import ContentMedia from "./sections/appearance/ContentMedia";
-import ContactsSection from "./sections/information/ContactsSection";
+
 import HomePage from "../../pages/dashboard/HomePage";
 import BusinessInfoPage from "../../pages/dashboard/BuisnessInfoPage";
 import SocialMedia from "../../pages/dashboard/SocialMedia";
 
+import PageStyleSection from "./sections/appearance/PageStyleSection";
 
-export default function DashboardContent(){
+import FaqSection from "./sections/content/FaqtSection";
+import MediaSection from "./sections/content/MediaSection";
 
+
+import SharePageSection from "./sections/share/SharePageSection";
+import AppearancePage from "../../pages/dashboard/Appearance.";
+import ContentMedia from "./sections/appearance/ContentMedia";
+import Media from "../../pages/dashboard/Media";
+
+export default function DashboardContent() {
     const { activeSubSection } = useDashboardUI();
-    switch(activeSubSection){
 
+    switch (activeSubSection) {
+        case "business-information":
+            return <BusinessInfoPage />;
+        
         case "home":
-            return <HomePage />
-        case "business":
-            return   <BusinessInfoPage />
-        case "contact":
-            return <ContactsSection />
+            return <HomePage />;
+
         case "socials":
-            return <SocialMedia />
-        case "style":
-            return <PageStyleSection />
-        case "media-content":
-            return <ContentMedia />
-        case "banner":
-            return <BannerSection />
-        case "faqt":
-            return <FaqSection />
+            return <SocialMedia />;
+
+        case "theme":
+            return <AppearancePage />;
+
+        case "branding":
+            return <PageStyleSection />;
+
+        case "faqs":
+            return <FaqSection />;
+
+        case "services":
+            return null;
+
         case "media":
-            return <MediaSection />
+            return <Media />;
+
+        case "opening-hours":
+            return null;
+
+        case "enquiries":
+            return null;
+
+        case "updates":
+            return null;
+
         case "share":
-            return <SharePageSection />
+            return <SharePageSection />;
+
         case "settings":
             return null;
+
+        case "account":
+            return null;
+
         case "help":
             return null;
-        case "account":
-        case "theme":
-        case "enquiry":
-        case "openingHours":
-        case "services": 
 
-        default: return null;
+        default:
+            return null;
     }
 }
