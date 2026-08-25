@@ -351,7 +351,6 @@ function MediaSection({ title, description, current, fileUpload, onChange, recom
             </div>
 
             <div className=" grid grid-cols-1 lg:grid-cols-2 gap:4 lg:gap-10 w-full lg:w-7xl">
-                    
                 {current ? ( <div className="flex justify-center items-center px-4 py-7 rounded-3xl border border-black/10 p-4 w-full">
                     {current}
                 </div>

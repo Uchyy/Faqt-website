@@ -9,9 +9,9 @@ import PageStyleSection from "./sections/appearance/PageStyleSection";
 import FaqSection from "./sections/content/FaqtSection";
 import SharePageSection from "./sections/share/SharePageSection";
 import AppearancePage from "../../pages/dashboard/Appearance.";
-import ContentMedia from "./sections/appearance/ContentMedia";
 import Media from "../../pages/dashboard/Media";
-import Documents from "./sections/content/MediaSection";
+import DocumentPage from "../../pages/dashboard/DocumentsPage";
+import FaqsPage from "../../pages/dashboard/Faqs";
 
 export default function DashboardContent() {
     const { activeSubSection } = useDashboardUI();
@@ -33,7 +33,7 @@ export default function DashboardContent() {
             return <PageStyleSection />;
 
         case "faqs":
-            return <FaqSection />;
+            return <FaqsPage />;
 
         case "services":
             return null;
@@ -42,7 +42,7 @@ export default function DashboardContent() {
             return <Media />;
 
         case "documents":
-            return <Documents />;
+            return <DocumentPage />;
 
         case "opening-hours":
             return null;

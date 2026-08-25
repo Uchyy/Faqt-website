@@ -9,7 +9,7 @@ type Props = {
 
     rightButtonText?: string;
     onRightButtonClick?: () => void;
-
+    rightButton?: React.ReactNode;
     saveButtonText?: string;
     onSaveButtonClick?: () => void;
 
@@ -18,7 +18,7 @@ type Props = {
     isEmptyText?: string;
 };
 
-export default function DashboardContentBase({ title, label, rightButtonText, onRightButtonClick, saveButtonText, onSaveButtonClick, children, isEmpty = false, isEmptyText, }: Readonly<Props>) {
+export default function DashboardContentBase({ title, label, rightButtonText, onRightButtonClick, saveButtonText, onSaveButtonClick, children, isEmpty = false, isEmptyText, rightButton}: Readonly<Props>) {
 
     const { page, publishPage } = useDashboardData();
     const hasUnpublishedChanges = page.status === "draft";
@@ -98,16 +98,18 @@ export default function DashboardContentBase({ title, label, rightButtonText, on
 
                 </div>
 
-                {rightButtonText && (
-                    <motion.button
-                        onClick={onRightButtonClick}
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.97 }}
-                        className="bg-accent bg-radial-[at_15%_35%] from-black to-accent-900 to-75% px-2 py-2 font-unica text-sm font-bold uppercase tracking-[0.15rem] text-white shadow-lg transition hover:opacity-90 md:px-4 ">
-                        {rightButtonText}
-                    </motion.button>
-                )}
-
+                {rightButton || rightButtonText ? (
+                    rightButton ?? (
+                        <motion.button
+                            onClick={onRightButtonClick}
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.97 }}
+                            className="bg-accent bg-radial-[at_15%_35%] from-black to-accent-900 to-75% px-2 py-2 font-unica text-sm font-bold uppercase tracking-[0.15rem] text-white shadow-lg transition hover:opacity-90 md:px-4" >
+                            {rightButtonText}
+                        </motion.button>
+                    )
+                ) : null}
+       
             </motion.div>
 
 
