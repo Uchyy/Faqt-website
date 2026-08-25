@@ -3,7 +3,14 @@ import { useDashboardData } from "../../context/DashBoardDataContext";
 import { pageStyles } from "../../model/PageStyle.ts";
 import HorizontalCarousel from "../../components/ui/HorizontalCarousel.tsx";
 import hexToRgba from "../../utils/hexToRgba.tsx"
-import { SketchPicker, type ColorResult } from 'react-color';
+// react-color does not ship TypeScript declarations.
+// @ts-expect-error Missing declaration file for the JavaScript package.
+import { SketchPicker } from "react-color";
+
+type ColorResult = {
+    hex: string;
+    rgb: { a?: number };
+};
 
 export default function AppearancePage() {
     const { page, updatePage } = useDashboardData();

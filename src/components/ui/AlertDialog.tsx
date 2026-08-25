@@ -45,7 +45,7 @@ export default function AlertDialog({ trigger, title, description, children, typ
                 <AlertDialogPrimitive.Overlay className=" fixed inset-0 z-[50] bg-black/40 backdrop-blur-sm "/>
 
                 <AlertDialogPrimitive.Content
-                    className= {`fixed left-1/2 top-1/2 z-[60] flex ${type === "delete" ? "h-fit w-fit" : "max-w-2xl max-h-[85vh] w-[80%]"} -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-xl`}>
+                    className= {`fixed left-1/2 top-1/2 z-[60] flex w-[80%] md:w-[60%] lg:w-[40%] -translate-x-1/2 -translate-y-1/2 flex-col overflow-hidden rounded-2xl bg-white shadow-xl`}>
 
                     {/* HEADER */}
                     <div className="flex items-center justify-between px-6 py-4">

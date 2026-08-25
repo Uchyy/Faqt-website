@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode, useMemo, useState, useCallback } from "react";
-import { demoPageBold, demoPageMinimal } from "../demo/demoPage";
+import { demoPageBold, demoPageCard, demoPageMinimal } from "../demo/demoPage";
 import { emptyPage, Page } from "../model/Page";
 import { canPublish, getPageCompletionDetails } from "../utils/pageCompletion";
 
@@ -22,12 +22,9 @@ const DashboardDataContext = createContext<DashboardDataContextType | undefined>
 );
 
 
-
 export function DashboardDataProvider({ children,}: Readonly<{ children: ReactNode }>) {
 
-
-    const [page, setPage] = useState<Page>(  () => demoPageMinimal ?? emptyPage);
-
+    const [page, setPage] = useState<Page>(  () => demoPageCard ?? emptyPage);
     const updatePage = useCallback((data: Partial<Page>) => {
         let updatedPage!: Page;
         setPage((currentPage) => {

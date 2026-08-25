@@ -89,7 +89,7 @@ export default function DashboardMenu(){
 
 
                     <MenuGroup title="Content" icon={<FileText size={18} color="#3EC7C4"/>} active={activeSection==="content"} collapsed={collapsed}>
-                        <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("content","media")}>Resources</MenuButton>
+                        <MenuButton active={activeSubSection==="media"} onClick={()=>navigateSection("content","documents")}>Documents</MenuButton>
                         <MenuButton active={activeSubSection==="faqs"} onClick={()=>navigateSection("content","faqs")}>Faqt </MenuButton>
                     </MenuGroup>
 

@@ -2,10 +2,11 @@ import { ReactNode, useRef, useState } from "react";
 import Button from "../../components/ui/Button";
 import { useDashboardData } from "../../context/DashBoardDataContext";
 import DashboardContentBase from "../../components/ui/DashboardContentBase";
-import FileUpload, {
-    type FileUploadRef,
-} from "../../components/ui/upload/FileUpload";
-import { useMediaQuery } from "../../utils/useScreenSize";
+import FileUpload, { type FileUploadRef, } from "../../components/ui/upload/FileUpload";
+import { Trash2, X, FilePlus} from "lucide-react"
+import HorizontalCarousel from "../../components/ui/HorizontalCarousel";
+import AlertDialog from "../../components/ui/AlertDialog";
+import { useNotification } from "../../context/NotificationContext";
 
 async function uploadFile(file: File): Promise<string> {
     console.log("Uploading file:", file);
@@ -22,16 +23,57 @@ export default function Media() {
     const coverUploadRef = useRef<FileUploadRef>(null);
     const galleryUploadRef = useRef<FileUploadRef>(null);
 
-    const [uploading, setUploading] = useState<MediaType | null>(null);
 
-    const uploadMedia = async (
-        type: MediaType,
-        files: File[],
-    ) => {
+    const [deleteLogo, setDeleteLogo] = useState(false);
+    const [deleteCoverImage, setDeleteCoverImage] = useState(false);
+    const [deleteImage, setDeleteImage] = useState<string | null>(null);
+    const {showNotification}=useNotification();
+
+    const deleteMedia = (type: MediaType, url?: string) => {
+        if (type === "logo") {
+            updatePage({
+                branding: {
+                    ...page.branding,
+                    logo: { url: "", name: "" },
+                },
+            });
+
+            showNotification({
+                message:"Logo deleted successfully",
+                type:"success"
+            });
+            return;
+        }
+
+        if (type === "cover") {
+            updatePage({
+                branding: {
+                    ...page.branding,
+                    coverImage: { url: "", name: "" },
+                },
+            });
+
+            showNotification({
+                message:"Cover image deleted successfully",
+                type:"success"
+            });
+            return;
+        }
+
+        updatePage({
+            branding: {
+                ...page.branding,
+                gallery: page.branding.gallery.filter(
+                    (image) => image.url !== url
+                ),
+            },
+        });
+    };
+
+    const uploadMedia = async ( type: MediaType, files: File[],) => {
         if (files.length === 0) return;
 
         try {
-            setUploading(type);
 
             if (type === "logo") {
                 const file = files[0];
@@ -46,6 +88,11 @@ export default function Media() {
                             name: file.name,
                         },
                     },
+                });
+
+                showNotification({
+                    message:"Logo uploaded successfully",
+                    type:"success"
                 });
 
                 return;
@@ -66,60 +113,74 @@ export default function Media() {
                     },
                 });
 
+                showNotification({
+                    message:"Cover image uploaded successfully",
+                    type:"success"
+                });
+
                 return;
             }
 
             const gallery = await Promise.all(
-                files.slice(0, 5).map(async (file) => {
-                    const url = await uploadFile(file);
-
-                    return {
-                        url,
-                        name: file.name,
-                    };
-                }),
+                files.map(async (file) => ({
+                    url: await uploadFile(file),
+                    name: file.name,
+                })),
             );
 
             updatePage({
                 branding: {
                     ...page.branding,
-                    gallery,
+                    gallery: [...page.branding.gallery, ...gallery],
                 },
             });
+
+            showNotification({
+                message:"Gallery updated successfully",
+                type:"success"
+            });
         } catch (error) {
+            showNotification({
+                message:"Uploading failed",
+                type:"error"
+            });
             console.error(`Failed to upload ${type}:`, error);
-        } finally {
-            setUploading(null);
+        } 
+    };
+
+    const handleDeleteOpenChange = (open: boolean, type: string) => {
+        if (type === "cover") {
+            if (!page.branding.coverImage.url) return;
+            setDeleteCoverImage(open);
+            return;
         }
+
+        if (!page.branding.logo.url) return;
+        setDeleteLogo(open);
     };
 
     return (
         <DashboardContentBase
             title="MEDIA"
             label="ADD IMAGES THAT REPRESENT YOUR BUSINESS">
-            <div className="mt-5 space-y-6">
+            <div className="mt-5 space-y-6 overflow-hidden">
 
                 <MediaSection
                     title="Logo"
-                    description="Used as your business identity."
-                    current={
-                        page.branding.logo?.url
-                            ? (
-                                <img
-                                    src={page.branding.logo.url}
-                                    alt="Current logo"
-                                    className="h-20 w-20 object-contain"
-                                />
-                            )
-                            : null
+                    description="This logo represents your business on your public page."
+                    current={ page.branding.logo?.url
+                        ? (
+                            <img
+                                src={page.branding.logo.url}
+                                alt="Current logo"
+                                className="h-30 w-30 object-contain rounded-full"
+                            />
+                        )  : null
                     }
-                    currentLabel="Current logo"
-                    changeLabel="Change logo"
+                    disabled={!page.branding.logo?.url}
                     uploadRef={logoUploadRef}
-                    uploading={uploading === "logo"}
-                    onChange={() => logoUploadRef.current?.open()}>
-
-                    <FileUpload
+                    onDelete={() => handleDeleteOpenChange(true, "logo")}
+                    fileUpload = { <FileUpload
                         ref={logoUploadRef}
                         label="UPLOAD LOGO"
                         accept="image/png,image/jpeg,image/webp"
@@ -127,162 +188,204 @@ export default function Media() {
                         onSelect={(files) =>
                             uploadMedia("logo", files)
                         }
-                    />
-
-                    <p className="text-xs text-muted-foreground">
-                        Recommended: use a PNG or WebP with a transparent
-                        background. Square logos work best.
-                    </p>
+                    />}
+                    recommendation="Recommended: use a PNG or WebP with a transparent background. Square logos work best."
+                    onChange={() => logoUploadRef.current?.open()}>
                 </MediaSection>
 
                 <MediaSection
                     title="Cover Image"
-                    description="The main image customers see first."
-                    current={
-                        page.branding.coverImage?.url
-                            ? (
-                                <img
-                                    src={page.branding.coverImage.url}
-                                    alt="Current cover"
-                                    className="h-48 w-full rounded-2xl object-cover"
-                                />
-                            )
-                            : null
+                    description="This image is used as the hero background on your public page."
+                    disabled={!page.branding.coverImage?.url}
+                    current={ page.branding.coverImage?.url  
+                        ? (
+                            <img
+                                src={page.branding.coverImage.url}
+                                alt="Current cover"
+                                className="h-48 w-full rounded-2xl object-cover"
+                            />
+                        )
+                        : null
                     }
-                    currentLabel="Current cover image"
-                    changeLabel="Change cover"
                     uploadRef={coverUploadRef}
-                    uploading={uploading === "cover"}
                     onChange={() => coverUploadRef.current?.open()}
-                    currentRounded={false}>
-                    <FileUpload
+                    onDelete={() => handleDeleteOpenChange(true, "cover")}
+                    fileUpload = {  <FileUpload
                         ref={coverUploadRef}
                         label="UPLOAD COVER IMAGE"
                         accept="image/png,image/jpeg,image/webp"
                         multiple={false}
-                        onSelect={(files) =>
-                            uploadMedia("cover", files)
-                        }
-                    />
-
-                    <p className="text-xs text-muted-foreground">
-                        Recommended: use a wide image with enough space
-                        around the main subject.
-                    </p>
+                        onSelect={(files) => uploadMedia("cover", files) }
+                    />}
+                    recommendation="Recommended: Use a wide, high-quality image with enough space around the main subject for a clean banner.">
                 </MediaSection>
 
-                <MediaSection
-                    title="Gallery"
-                    description="Add up to 5 images for your page."
-                    uploadRef={galleryUploadRef}
-                    uploading={uploading === "gallery"}
-                    onChange={() => galleryUploadRef.current?.open()}
-                    currentRounded={false}>
 
-                    <FileUpload
-                        ref={galleryUploadRef}
-                        label="GALLERY"
-                        accept="image/png,image/jpeg,image/webp"
-                        multiple
-                        onSelect={(files) => uploadMedia("gallery", files)}
-                    />
+                <div className="flex flex-col gap-2 rounded-2xl border border-border bg-white p-5">
+                    <div className="flex flex-row justify-between items-center h-fit">
 
-                    <p className="text-xs text-muted-foreground">
-                        You can upload up to 5 images. PNG, JPEG and WebP
-                        are supported.
-                    </p>
-                </MediaSection>
+                        <div className="flex flex-col mb-3 gap-1 sm:max-w-2xl mr-3">
+                            <span className="font-heading text-sm md:text-lg font-bold"> Gallery </span>
+                            <span className="font-unica uppercase text-xs md:text-base "> Showcase your business with images of your space services and more </span>
+                        </div>
+
+                        <Button 
+                            variant="solid"
+                            className="w-fit p-2 items-center"
+                            onClick={() => galleryUploadRef.current?.open()}
+                            icon={<FilePlus color="white" width={"fit"} size={20}/>}
+                            rounded={false}>    
+                                <span className="hidden font-bold text-white text-xs md:text-sm">Add Image</span>
+                        </Button>
+
+                    </div>
+
+                    { page.branding.gallery ? (
+                        <HorizontalCarousel className=" overflow-hidden mb-3">
+                            {page.branding.gallery.map((image) => (
+                                <div key={`${image.url}-${image.name}`} className="relative overflow-hidden rounded-2xl">
+                                    <img
+                                        src={image.url}
+                                        alt=""
+                                        className="h-32 w-full object-cover"
+                                    />
+
+                                    <button
+                                        type="button"
+                                        onClick={() => setDeleteImage(image.url)}
+                                        className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/70 text-white hover:bg-red-600">
+                                        <X size={16} />
+                                    </button>
+
+                                    <div className="hidden">
+                                        <FileUpload
+                                            ref={galleryUploadRef}
+                                            label="UPLOAD IMAGE"
+                                            accept="image/png,image/jpeg,image/webp"
+                                            multiple
+                                            onSelect={(files) => uploadMedia("gallery", files)}
+                                        />
+                                    </div>
+                                </div>
+                            ))}
+                        </HorizontalCarousel>
+                    ) : (
+                        <div className="flex h-full items-center justify-center border border-border w-full p-10 rounded-3xl">
+                            <span className="font-heading font-bold ">
+                                No gallery.
+                            </span>
+                        </div>
+                    )}
+
+                    <p className="mt-2 text-xs font-medium bg-accent/10 text-black/50 p-3 rounded-xl"> Recommended: Use clear, high-quality images that showcase your business, products, services, or space. </p>
+
+                </div>
 
             </div>
+
+
+            {/* DELETE CONFIRMATIONS */}
+            <AlertDialog
+                open={deleteCoverImage}
+                onOpenChange={(open) => handleDeleteOpenChange(open, "cover")}
+                title={ "Delete Cover Image"}
+                actionText="Delete"
+                onAction= {() => deleteMedia("cover",)}
+                type="delete">
+                    <span className="text-center font-red/500"> This action will remove your <strong> cover image 
+                        </strong> from your public page.</span>
+            </AlertDialog>
+
+            <AlertDialog
+                open={!!deleteImage}
+                onOpenChange={(open) => { if (!open) setDeleteImage(null); }}
+                title="Delete Image from Gallery"
+                actionText="Delete"
+                onAction={() => {
+                    deleteMedia("gallery", deleteImage ?? undefined);
+                    setDeleteImage(null);
+                }}
+                type="delete">
+                <span className="text-center">
+                    This action will remove this image from your public page.
+                </span>
+            </AlertDialog>
+
+            <AlertDialog
+                open={deleteLogo}
+                onOpenChange={(open) => handleDeleteOpenChange(open, "logo")}
+                title={ "Delete Logo"}
+                actionText="Delete"
+                onAction= {() => deleteMedia("logo", )}
+                type="delete">
+                    <span className="text-center font-red/500"> This action will remove your <strong> logo 
+                        </strong> from your public page.</span>
+            </AlertDialog>
         </DashboardContentBase>
     );
 }
 
 
+
+
 type MediaSectionProps = {
     title: string;
     description: string;
+    recommendation?: string;
     current?: ReactNode;
-    currentLabel?: string;
-    changeLabel?: string;
+    fileUpload: ReactNode;
+    onChange: (() => void)
+    onDelete: (() => void)
     uploadRef: React.RefObject<FileUploadRef | null>;
-    uploading: boolean;
-    onChange: () => void;
-    currentRounded?: boolean;
-    children: ReactNode;
+    disabled: boolean
 };
 
-function MediaSection({ title, description, current, currentLabel = "Current image", changeLabel = "Change image", uploading, onChange, currentRounded = true, children, }: Readonly<MediaSectionProps>) {
+function MediaSection({ title, description, current, fileUpload, onChange, recommendation, uploadRef, onDelete, disabled }: Readonly<MediaSectionProps>) {
         
-    const isDesktop = useMediaQuery("(min-width:1024px)");
-
     return (
-        <div className="rounded-2xl border border-border bg-white p-5">
+        <div className="flex flex-col gap-2 rounded-2xl border border-border bg-white p-5">
 
-            <h3 className="font-heading font-semibold">
-                {title}
-            </h3>
+            <div className="flex flex-col mb-3 gap-1">
+                <span className="font-heading text-sm md:text-lg font-bold"> {title} </span>
+                <span className="font-unica uppercase text-xs md:text-base "> {description} </span>
+            </div>
 
-            <p className="mt-1 mb-4 text-sm text-muted-foreground">
-                {description}
-            </p>
-
-            <div className={ current && uploading === false  ? "grid grid-cols-1 gap-4 lg:grid-cols-2"  : ""}>
-                {current && (
-                    <CurrentSection
-                        label={currentLabel}
-                        image={current}
-                        buttonText={ uploading ? "Uploading..." : changeLabel }
-                        onChange={onChange}
-                        rounded={currentRounded}
-                    />
+            <div className=" grid grid-cols-1 lg:grid-cols-2 gap:4 lg:gap-10 w-full lg:w-7xl">
+                    
+                {current ? ( <div className="flex justify-center items-center px-4 py-7 rounded-3xl border border-black/10 p-4 w-full">
+                    {current}
+                </div>
+                ) : (
+                    fileUpload
                 )}
 
-                <div className="flex flex-col gap-4">
-                    {children}
+                <div className=" flex flex-col mt-3 lg:mt-0 lg:flex-col gap-4 lg:gap-6 items-center justify-center w-full lg:w-[40%]">
+                    <Button 
+                        variant="dashboard"
+                        className="w-full items-center text-xs md:text-xs"
+                        onClick={onChange}
+                        icon={<FilePlus color="white" size={17}/>}
+                        rounded={false}>                                
+                            <span className="font-bold text-white text-xs md:text-xs">Change Image</span>
+                    </Button>
 
-                    {uploading && (
-                        <p className="text-xs font-medium text-accent">
-                            Uploading...
-                        </p>
-                    )}
+                    <Button 
+                        variant="outline"
+                        className="w-full"
+                        color="red"
+                        icon={<Trash2 size={17}/>}
+                        onClick={onDelete}
+                        disabled = {disabled}
+                        rounded={false}>                                
+                            <span className="font-bold text-red/10 uppercase">Remove Image</span>
+                    </Button>
                 </div>
+
+                {current && <div className="hidden">{fileUpload}</div>}
             </div>
+
+            <p className="mt-2 text-xs font-medium bg-accent/10 text-black/50 p-3 rounded-xl"> {recommendation} </p>
         </div>
     );
 }
 
-type CurrentSectionProps = {
-    label: string;
-    image?: ReactNode;
-    onChange: () => void;
-    buttonText: string;
-    rounded?: boolean;
-};
-
-function CurrentSection({ label, image, onChange, buttonText, rounded = true,}: Readonly<CurrentSectionProps>) {
-    return (
-        <div className="flex flex-col gap-4 rounded-3xl border border-black/10 p-4">
-
-            <span className="self-start font-unica text-sm font-bold uppercase">
-                {label}
-            </span>
-
-            {image ? ( <div className={`mx-auto p-1 ${  rounded ? "rounded-full" : ""}`}>
-                    {image}
-                </div>
-            ) : (
-                <div className="mx-auto flex h-30 w-fit items-center justify-center rounded-full bg-accent/10 p-3 text-sm text-muted-foreground">
-                    No image uploaded
-                </div>
-            )}
-
-            <Button
-                variant="outline"
-                className="mx-auto w-[30%] rounded-2xl"
-                onClick={onChange}>
-                {buttonText}
-            </Button>
-        </div>
-    );
-}

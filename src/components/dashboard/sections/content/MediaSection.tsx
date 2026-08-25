@@ -6,7 +6,7 @@ import { stringifyPage } from "../../../../model/Page";
 import { BusinessDocument } from "../../../../model/BusinessDocument";
 import DocumentUpload from "../../../ui/upload/DocumentUpload";
 
-export default function BusinessInfo() {
+export default function Documents() {
 
     const [documents, setDocuments] = useState<BusinessDocument[]>([]);
     const [errors, setErrors] = useState<{ documents?: string }>({});
