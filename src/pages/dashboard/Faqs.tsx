@@ -1,10 +1,8 @@
 import { Plus, Trash2, Pencil, BadgeQuestionMark, EllipsisVertical } from "lucide-react";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "../../components/ui/Button";
 import FaqtDialog from "../../components/ui/FaqtDialog";
-import { PageContext } from "../../context/PageContext";
 import { FaqtItem, emptyFaqtItem } from "../../model/FaqtItem";
-import { stringifyPage } from "../../model/Page";
 import DashboardContentBase from "../../components/ui/DashboardContentBase";
 import AlertDialog from "../../components/ui/AlertDialog";
 import { createPortal } from "react-dom";

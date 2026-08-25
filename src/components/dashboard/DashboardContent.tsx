@@ -6,7 +6,6 @@ import SocialMedia from "../../pages/dashboard/SocialMedia";
 
 import PageStyleSection from "./sections/appearance/PageStyleSection";
 
-import FaqSection from "./sections/content/FaqtSection";
 import SharePageSection from "./sections/share/SharePageSection";
 import AppearancePage from "../../pages/dashboard/Appearance.";
 import Media from "../../pages/dashboard/Media";

@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "../../components/ui/Button";
 import DocumentUpload from "../../components/ui/upload/DocumentUpload";
 import { PageContext } from "../../context/PageContext";
 import { BusinessDocument } from "../../model/BusinessDocument";
-import { stringifyPage } from "../../model/Page";
 import DashboardContentBase from "../../components/ui/DashboardContentBase";
 
 export default function DocumentPage() {
@@ -37,19 +35,7 @@ export default function DocumentPage() {
         return Object.keys(newErrors).length === 0;
     };
 
-    const handleSave = () => {
-        if(!validate()) return;
-        if(!context){
-            console.log("No PageContext available");
-            return;
-        }
-        const updatedPage = context.updatePage({
-            documents, updatedAt: new Date()
-        });
 
-        console.log("UPDATED PAGE:", updatedPage);
-        if(updatedPage){ console.log( "Page updated:", stringifyPage(updatedPage) ); }
-    };
 
     return (
 
