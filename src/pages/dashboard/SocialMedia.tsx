@@ -195,7 +195,7 @@ export default function HomePage() {
                 onAction={confirmDeleteSocial}
                 type="delete">
 
-                    <span className="text-center font-red/500"> This action will remove your { selectedSocial?.label ?? "social media"} link from your public page.</span>
+                    <span className="text-center font-red/500"> This action will remove your <strong>{ selectedSocial?.label ?? "social media"}</strong> link from your public page.</span>
 
             </AlertDialog>
             
@@ -210,20 +210,26 @@ export default function HomePage() {
 function SocialActions({ platform, isDesktop, isTablet,onEdit, onDelete,}: Readonly<{ platform: SocialPlatform; isDesktop: boolean; isTablet: boolean; onEdit: () => void; onDelete: () => void; }>) {
     
     const [open, setOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         if (!open) return;
 
         const handleClickOutside = (event: MouseEvent) => {
-            if ( buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+            const target = event.target as Node;
+            if (
+                !buttonRef.current?.contains(target) &&
+                !menuRef.current?.contains(target)
+            ) {
                 setOpen(false);
             }
         };
 
         document.addEventListener("mousedown", handleClickOutside);
-
-        return () => { document.removeEventListener("mousedown", handleClickOutside); };
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
     }, [open]);
 
     /**
@@ -300,7 +306,8 @@ function SocialActions({ platform, isDesktop, isTablet,onEdit, onDelete,}: Reado
 
             {open &&
                 createPortal(
-                    <div className="fixed z-50 w-32 rounded-xl border border-border bg-white p-1 shadow-lg"
+                    <div ref={menuRef}
+                        className="fixed z-50 w-32 rounded-xl border border-border bg-white p-1 shadow-lg"
                         style={{
                             top: buttonRef.current ? buttonRef.current.getBoundingClientRect().bottom + 8 : 0,
                             left: buttonRef.current ? buttonRef.current.getBoundingClientRect().right - 128 : 0,

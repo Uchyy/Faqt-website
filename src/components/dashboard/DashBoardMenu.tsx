@@ -52,11 +52,11 @@ export default function DashboardMenu(){
             )}
 
             <aside className={`
-                sticky top-0 h-screen h-screen bg-black border-r rounded-br-4xl border-border shadow-xl p-6 flex flex-col
-                transition-all duration-300
-                ${sidebarMode === "expanded" && "w-80"}
+                sticky top-0 h-screen bg-black border-r rounded-br-4xl border-border shadow-xl p-6 flex flex-col
+                transition-all duration-300  
+                ${sidebarMode === "expanded" && "w-80 "}
                 ${sidebarMode === "collapsed" && "w-30 p-4"}
-                ${sidebarMode === "mobile" && "absolute left-0 top-0 w-80"}`}>
+                ${sidebarMode === "mobile" && "absolute left-0 top-0 w-80 "}`}>
 
                 <div className={`flex items-center ${sidebarMode === "collapsed" ? "justify-center" : "justify-between"} border-b border-border pb-4`}>
                     {sidebarMode === "collapsed" ? ( <FaqtLogo/> ) : (  <FaqtLogoText /> )}
@@ -67,7 +67,7 @@ export default function DashboardMenu(){
                     )}
                 </div>
 
-                <nav className="mt-8 flex-1 overflow-y-auto space-y-3 pr-2">
+                <nav className="no-scrollbar mt-8 flex-1 overflow-y-auto space-y-3 pr-2">
                     
                     <OverviewButton
                         active={activeSection === "home"}

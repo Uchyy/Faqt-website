@@ -195,18 +195,21 @@ export const demoPageBold = createDemoPage({
       question: "What are your opening hours?",
       answer: "We are open Monday to Saturday from 8am to 5pm.",
       isPublished: true,
+      position: 1
     },
     {
       id: "2",
       question: "Do you offer takeaway?",
       answer: "Yes, all drinks and food items are available for takeaway.",
       isPublished: true,
+      position: 2
     },
     {
       id: "3",
       question: "Do you have WiFi?",
       answer: "Yes, free WiFi is available for customers.",
       isPublished: true,
+      position: 3
     },
   ],
 
@@ -389,6 +392,7 @@ export const demoPageMinimal = createDemoPage({
       answer:
         "Yes. We offer a free 30-minute initial consultation to discuss your situation and how we can help.",
       isPublished: true,
+      position: 1
     },
     {
       id: "2",
@@ -396,6 +400,7 @@ export const demoPageMinimal = createDemoPage({
       answer:
         "We specialise in family law, residential property, wills and probate, and employment law.",
       isPublished: true,
+      position: 2
     },
     {
       id: "3",
@@ -403,6 +408,7 @@ export const demoPageMinimal = createDemoPage({
       answer:
         "Yes. Most documents can be securely signed electronically without visiting our office.",
       isPublished: true,
+      position: 3
     },
     {
       id: "4",
@@ -410,6 +416,7 @@ export const demoPageMinimal = createDemoPage({
       answer:
         "Appointments are recommended to ensure a solicitor is available, although we will always try to accommodate walk-ins.",
       isPublished: true,
+      position: 4
     },
     {
       id: "5",
@@ -417,6 +424,7 @@ export const demoPageMinimal = createDemoPage({
       answer:
         "Fees vary depending on the service. We provide transparent pricing and a written quotation before any work begins.",
       isPublished: true,
+      position: 5
     },
   ],
 
@@ -592,6 +600,7 @@ export const demoPageCard = createDemoPage({
       answer:
         "Reservations are recommended, especially on evenings and weekends, but walk-ins are always welcome when tables are available.",
       isPublished: true,
+      position: 1
     },
     {
       id: "2",
@@ -599,6 +608,7 @@ export const demoPageCard = createDemoPage({
       answer:
         "Yes. Our menu includes a wide selection of vegetarian and vegan pasta, pizza, and dessert options.",
       isPublished: true,
+      position: 2
     },
     {
       id: "3",
@@ -606,6 +616,7 @@ export const demoPageCard = createDemoPage({
       answer:
         "Yes. All pizzas, pasta dishes, desserts, and drinks are available for takeaway collection.",
       isPublished: true,
+      position: 3
     },
     {
       id: "4",
@@ -613,6 +624,7 @@ export const demoPageCard = createDemoPage({
       answer:
         "Absolutely. Please inform a member of staff before ordering and we will be happy to advise on allergens and suitable dishes.",
       isPublished: true,
+      position: 4
     },
     {
       id: "5",
@@ -620,6 +632,7 @@ export const demoPageCard = createDemoPage({
       answer:
         "Yes. There is on-street parking and several public car parks within a short walk of the restaurant.",
       isPublished: true,
+      position: 5
     },
   ],
 
@@ -772,6 +785,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "We are open Monday to Saturday from 9am to 5pm. Our opening hours may vary on bank holidays and special occasions.",
       isPublished: true,
+      position: 1
     },
     {
       id: "2",
@@ -779,6 +793,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. Same-day delivery is available for orders placed before our daily cut-off time, subject to availability.",
       isPublished: true,
+      position: 2
     },
     {
       id: "3",
@@ -786,6 +801,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Absolutely. We can create personalised bouquets based on your preferred colours, flowers, occasion, and budget.",
       isPublished: true,
+      position: 3
     },
     {
       id: "4",
@@ -793,6 +809,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "With proper care, most fresh flowers can last between 5 and 10 days. We provide care advice with every arrangement.",
       isPublished: true,
+      position: 4
     },
     {
       id: "5",
@@ -800,6 +817,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. We create bespoke wedding bouquets, buttonholes, table arrangements, and venue decorations tailored to your special day.",
       isPublished: true,
+      position: 5
     },
     {
       id: "6",
@@ -807,6 +825,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. We create arrangements for birthdays, anniversaries, sympathy, thank you gifts, celebrations, and other special moments.",
       isPublished: true,
+      position: 6
     },
     {
       id: "7",
@@ -814,6 +833,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. We offer a selection of indoor plants, planters, and green gifts suitable for homes, offices, and special occasions.",
       isPublished: true,
+      position: 7
     },
     {
       id: "8",
@@ -821,6 +841,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Keep flowers in fresh water, trim the stems regularly, remove wilted petals, and keep them away from direct sunlight and heat sources.",
       isPublished: true,
+      position: 8
     },
     {
       id: "9",
@@ -828,6 +849,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. We provide local delivery services within our delivery area. Please contact us with your address to confirm availability.",
       isPublished: true,
+      position: 9
     },
     {
       id: "10",
@@ -835,6 +857,7 @@ export const demoPageLight = createDemoPage({
       answer:
         "Yes. You are welcome to visit our shop and explore our seasonal flowers, plants, and gift collections.",
       isPublished: true,
+      position: 10
     },
   ],
 
@@ -958,6 +981,7 @@ export const demoPageNewUser = createDemoPage({
       answer:
         "We offer massage therapy, yoga sessions, relaxation treatments and personalised wellness packages.",
       isPublished: true,
+      position: 1
     },
     {
       id: "2",
@@ -965,6 +989,7 @@ export const demoPageNewUser = createDemoPage({
       answer:
         "Yes. Appointments are recommended so we can reserve the right time and treatment for you.",
       isPublished: true,
+      position: 2
     },
   ],
 

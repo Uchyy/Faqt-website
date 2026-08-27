@@ -235,7 +235,7 @@ export default function Media() {
                             onClick={() => galleryUploadRef.current?.open()}
                             icon={<FilePlus color="white" width={"fit"} size={20}/>}
                             rounded={false}>    
-                                <span className="hidden font-bold text-white text-xs md:text-sm">Add Image</span>
+                                <span className="hidden md:inline font-bold text-white text-xs md:text-sm">Add Image</span>
                         </Button>
 
                     </div>

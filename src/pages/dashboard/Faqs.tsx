@@ -1,5 +1,9 @@
-import { Plus, Trash2, Pencil, BadgeQuestionMark, EllipsisVertical } from "lucide-react";
+import { Plus, Trash2, Pencil, BadgeQuestionMark, EllipsisVertical, GripVertical } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { DndContext, closestCenter, type DragEndEvent,} from "@dnd-kit/core";
+import { SortableContext, verticalListSortingStrategy, useSortable, arrayMove, } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+
 import Button from "../../components/ui/Button";
 import FaqtDialog from "../../components/ui/FaqtDialog";
 import { FaqtItem, emptyFaqtItem } from "../../model/FaqtItem";
@@ -11,8 +15,7 @@ import { useDashboardData } from "../../context/DashBoardDataContext";
 
 export default function FaqsPage() {
     const { page, updatePage } = useDashboardData();
-    const faqts = page.faqts
-
+    const faqts = page.faqts;
 
     const [newFaqt, setNewFaqt] = useState<FaqtItem>(emptyFaqtItem);
     const [editingFaqt, setEditingFaqt] = useState<FaqtItem | null>(null);
@@ -21,10 +24,12 @@ export default function FaqsPage() {
     const [faqtErrors, setFaqtErrors] = useState<Partial<FaqtItem>>({});
 
     const isDesktop = useMediaQuery("(min-width:1024px)");
-    const isTablet = useMediaQuery("(min-width:768px)");
+
+    const sortedFaqts = sortFaqts(faqts);
 
     const addFaqt = () => {
         const errors: Partial<FaqtItem> = {};
+
         if (!newFaqt.question.trim()) {
             errors.question = "Question is required";
         }
@@ -39,6 +44,7 @@ export default function FaqsPage() {
         const faqtToAdd: FaqtItem = {
             ...newFaqt,
             id: crypto.randomUUID(),
+            position: faqts.length,
         };
 
         updatePage({
@@ -55,6 +61,7 @@ export default function FaqsPage() {
         if (!editingFaqt) return false;
 
         const errors: Partial<FaqtItem> = {};
+
         if (!editingFaqt.question.trim()) {
             errors.question = "Question is required";
         }
@@ -74,10 +81,34 @@ export default function FaqsPage() {
 
         setEditingFaqt(null);
         setFaqtErrors({});
+
         return true;
     };
 
+    const handleDragEnd = ({ active, over }: DragEndEvent) => {
+        if (!over || active.id === over.id) return;
 
+        const oldIndex = sortedFaqts.findIndex(
+            (faqt) => faqt.id === active.id
+        );
+
+        const newIndex = sortedFaqts.findIndex(
+            (faqt) => faqt.id === over.id
+        );
+
+        const reorderedFaqts = arrayMove(
+            sortedFaqts,
+            oldIndex,
+            newIndex
+        ).map((faqt, index) => ({
+            ...faqt,
+            position: index,
+        }));
+
+        updatePage({
+            faqts: reorderedFaqts,
+        });
+    };
 
     return (
         <DashboardContentBase
@@ -98,10 +129,12 @@ export default function FaqsPage() {
                     onSave={addFaqt}
                     trigger={
                         <Button
-                            className="sm: px-3 py-4 rounded-none mr-2"
+                            className="sm:px-3 py-4 rounded-none mr-2"
                             variant="dashboard"
                             icon={<Plus size={18} />}>
-                                <span className="hidden">Add FAQ</span>
+                            <span className="hidden md:inline">
+                                Add FAQ
+                            </span>
                         </Button>
                     }
                 />
@@ -123,38 +156,30 @@ export default function FaqsPage() {
                     </p>
                 </div>
             ) : (
-                <div className="no-scrollbar mt-4 max-h-[60vh] space-y-4 overflow-y-auto pr-2 ">
-                    {faqts.map((faqt, index) => (
-                        <div
-                            key={faqt.id}
-                            className="mb-4 rounded-2xl border border-border bg-white p-4">
+                <DndContext
+                    collisionDetection={closestCenter}
+                    onDragEnd={handleDragEnd}>
 
-                            <div className="flex items-start justify-between max-w-lg md:max-w-2xl lg:max-w-5xl">
-                                <div className="flex flex-col text-left">
-                                    <p className="font-heading font-bold text-text">
-                                        {faqt.question || `FAQ ${index + 1}`}
-                                    </p>
-
-                                    <p className="mt-2 text-sm text-muted-foreground">
-                                        {faqt.answer || "No answer added yet"}
-                                    </p>
-                                </div>
-
-                                <FaqActions
+                    <SortableContext
+                        items={sortedFaqts.map((faqt) => faqt.id)}
+                        strategy={verticalListSortingStrategy}>
+                        <div className="no-scrollbar mt-4 max-h-[70vh] space-y-4 overflow-y-auto pr-2">
+                            {sortedFaqts.map((faqt, index) => (
+                                <SortableFaq
+                                    key={faqt.id}
+                                    faqt={faqt}
+                                    index={index}
                                     isDesktop={isDesktop}
-                                    isTablet={isTablet}
                                     onEdit={() => {
                                         setEditingFaqt({ ...faqt });
                                         setEditOpen(true);
                                     }}
                                     onDelete={() => setDeleteFaqt(faqt)}
                                 />
-
-                                
-                            </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
+                    </SortableContext>
+                </DndContext>
             )}
 
             {editingFaqt && (
@@ -188,68 +213,135 @@ export default function FaqsPage() {
                     if (!open) setDeleteFaqt(null);
                 }}
                 title="Delete FAQ"
-                actionText="Delete"
+                actionText="Confirm delete"
                 onAction={() => {
                     if (!deleteFaqt) return;
 
                     updatePage({
-                        faqts: faqts.filter((faqt) => faqt !== deleteFaqt),
+                        faqts: faqts.filter(
+                            (faqt) => faqt.id !== deleteFaqt.id
+                        ),
                     });
 
                     setDeleteFaqt(null);
                 }}
                 type="delete">
-                    <div>
 
-                        <span className="text-left font-bold">
-                            This action will remove this FAQ from your public page.
+                <div>
+                    <span className="text-left font-bold">
+                        This action will remove this FAQ from your public page.
+                    </span>
+
+                    <div className="mt-5 flex flex-col gap-3 border border-accent/10 bg-black/10 px-2 py-4">
+                        <span className="text-left text-black">
+                            <strong>Q:</strong>{" "}
+                            {deleteFaqt?.question ?? ""}
                         </span>
 
-                        <div className="border border-accent/10 py-4 px-2 mt-5 flex flex-col bg-black/10 gap-3">
-                            <span className="text-left text-black"> <strong > Q:  </strong>  {deleteFaqt?.question ?? ""}</span>
-
-                            <span className="text-left text-black"> <strong > A:   </strong> {deleteFaqt?.answer ?? ""}  </span>
-                        </div>
+                        <span className="text-left text-black">
+                            <strong>A:</strong>{" "}
+                            {deleteFaqt?.answer ?? ""}
+                        </span>
                     </div>
+                </div>
             </AlertDialog>
-
         </DashboardContentBase>
     );
 }
 
+function sortFaqts(faqts: FaqtItem[]) {
+    return [...faqts].sort(
+        (a, b) => a.position - b.position
+    );
+}
 
+function SortableFaq({faqt,index, isDesktop, onEdit, onDelete, }: Readonly<{ faqt: FaqtItem; index: number; isDesktop: boolean; onEdit: () => void; onDelete: () => void; }>) {
+    const {
+        attributes,
+        listeners,
+        setNodeRef,
+        transform,
+        transition,
+    } = useSortable({
+        id: faqt.id,
+    });
 
-/**
- * Social action buttons.
- */
-function FaqActions({ isDesktop, isTablet,onEdit, onDelete,}: Readonly<{ isDesktop: boolean; isTablet: boolean; onEdit: () => void; onDelete: () => void; }>) {
-    
+    const style = {
+        transform: CSS.Transform.toString(transform),
+        transition,
+    };
+
+    return (
+        <div
+            ref={setNodeRef}
+            style={style}
+            className="mb-4 rounded-2xl border border-border bg-white p-4">
+            <div className="flex max-w-lg items-start justify-between md:max-w-2xl lg:max-w-5xl">
+                <div className="flex items-start gap-3">
+                    <button
+                        type="button"
+                        {...attributes}
+                        {...listeners}
+                        className="mt-0.5 cursor-grab touch-none text-muted-foreground hover:text-text active:cursor-grabbing"
+                        aria-label="Drag FAQ"
+                    >
+                        <GripVertical size={20} />
+                    </button>
+
+                    <div className="flex flex-col text-left">
+                        <p className="font-heading font-bold text-text">
+                            {faqt.question || `FAQ ${index + 1}`}
+                        </p>
+
+                        <p className="mt-2 text-sm text-muted-foreground">
+                            {faqt.answer || "No answer added yet"}
+                        </p>
+                    </div>
+                </div>
+
+                <FaqActions
+                    isDesktop={isDesktop}
+                    onEdit={onEdit}
+                    onDelete={onDelete}
+                />
+            </div>
+        </div>
+    );
+}
+
+function FaqActions({isDesktop,onEdit,onDelete, }: Readonly<{isDesktop: boolean;onEdit: () => void;onDelete: () => void; }>) {
     const [open, setOpen] = useState(false);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         if (!open) return;
 
         const handleClickOutside = (event: MouseEvent) => {
-            if ( buttonRef.current && !buttonRef.current.contains(event.target as Node)) {
+            const target = event.target as Node;
+
+            if (
+                !buttonRef.current?.contains(target) &&
+                !menuRef.current?.contains(target)
+            ) {
                 setOpen(false);
             }
         };
 
         document.addEventListener("mousedown", handleClickOutside);
 
-        return () => { document.removeEventListener("mousedown", handleClickOutside); };
+        return () => {
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+        };
     }, [open]);
 
-    /**
-     * TABLET
-     */
     if (isDesktop) {
         return (
             <div className="flex items-center gap-2">
-                <Button
-                    variant="outline"
-                    onClick={onEdit}>
+                <Button variant="outline" onClick={onEdit}>
                     <Pencil size={17} />
                 </Button>
 
@@ -257,18 +349,12 @@ function FaqActions({ isDesktop, isTablet,onEdit, onDelete,}: Readonly<{ isDeskt
                     variant="outline"
                     onClick={onDelete}
                     className="border border-red-500">
-                    <Trash2
-                        size={17}
-                        color="red"
-                    />
+                    <Trash2 size={17} color="red" />
                 </Button>
             </div>
         );
     }
 
-    /**
-     * MOBILE
-     */
     return (
         <div>
             <button
@@ -281,11 +367,17 @@ function FaqActions({ isDesktop, isTablet,onEdit, onDelete,}: Readonly<{ isDeskt
 
             {open &&
                 createPortal(
-                    <div className="fixed z-50 w-32 rounded-xl border border-border bg-white p-1 shadow-lg"
+                    <div
+                        ref={menuRef}
+                        className="fixed z-50 w-32 rounded-xl border border-border bg-white p-1 shadow-lg"
                         style={{
-                            top: buttonRef.current ? buttonRef.current.getBoundingClientRect().bottom + 8 : 0,
-                            left: buttonRef.current ? buttonRef.current.getBoundingClientRect().right - 128 : 0,
-                        }} >
+                            top: buttonRef.current
+                                ? buttonRef.current.getBoundingClientRect().bottom + 8
+                                : 0,
+                            left: buttonRef.current
+                                ? buttonRef.current.getBoundingClientRect().right - 128
+                                : 0,
+                        }}>
 
                         <button
                             type="button"
@@ -308,7 +400,6 @@ function FaqActions({ isDesktop, isTablet,onEdit, onDelete,}: Readonly<{ isDeskt
                             <Trash2 size={15} />
                             Delete
                         </button>
-
                     </div>,
                     document.body
                 )}
