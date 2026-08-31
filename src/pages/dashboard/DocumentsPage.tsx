@@ -13,7 +13,8 @@ export default function DocumentPage() {
     useEffect(() => {
         if (!context?.page) return;
         setDocuments(context.page.documents ?? []);
-
+  
+        
     }, [context?.page]);
 
 
